@@ -16,6 +16,10 @@ import axios from "axios";
     const response = await axios.post(API.AUTHEN.SIGN_UP, user);
     return response.data;
   },
+  forgotPassword: async (email) => {
+    const response = await axios.post(API.AUTHEN.FORGOT_PASSWORD, email);
+    return response.data;
+  },
 };
 
 export default authenServices;

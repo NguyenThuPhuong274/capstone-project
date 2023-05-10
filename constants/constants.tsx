@@ -1,12 +1,10 @@
 export const APP_CONSTANTS = {
+    GOOGLE_CLIENT_ID : "790769126717-o3usrjk4jboct43090kr0es97v5d1v0r.apps.googleusercontent.com",
     HOME_TITLE : "Chào mừng đến với ",
     EMAIL: "Email",
     PASSWORD: "Mật khẩu",
 }
 
-export const HOME_CONSTANTS = {
-    TITLE : "",
-}
 
 export const CONTACT_CONSTANTS = {
     TOP_HEADER: "Liên hệ",

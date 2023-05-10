@@ -1,4 +1,3 @@
-import React from "react";
 import thunk from "redux-thunk";
 
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
