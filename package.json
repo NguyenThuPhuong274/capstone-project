@@ -1,5 +1,5 @@
 {
-  "name": "japanese-e-learning",
+  "name": "startup-nextjs-template",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,28 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.37",
-    "@types/react-dom": "18.0.11",
-    "autoprefixer": "10.4.14",
-    "axios": "^1.3.6",
-    "bcrypt": "^5.1.0",
-    "bootstrap": "^5.2.3",
-    "eslint": "8.38.0",
-    "eslint-config-next": "13.3.0",
-    "next": "13.3.0",
-    "next-auth": "^4.22.1",
-    "postcss": "8.4.22",
+    "@next/font": "13.1.6",
+    "eslint": "8.33.0",
+    "eslint-config-next": "13.1.6",
+    "next": "13.1.6",
+    "next-themes": "^0.2.1",
     "react": "18.2.0",
-    "react-bootstrap": "^2.7.4",
     "react-dom": "18.2.0",
-    "react-icons": "^4.8.0",
-    "react-player": "^2.12.0",
-    "swr": "^2.1.4",
-    "tailwindcss": "3.3.1",
-    "typescript": "5.0.4"
+    "react-modal-video": "^1.2.10"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0"
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.34",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.3",
+    "prettier-plugin-tailwindcss": "^0.2.2",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^5.0.4"
   }
 }
