@@ -1,8 +1,24 @@
+"use-client"
+
 import { APP_CONSTANTS, SIGNIN_CONSTANTS, SIGNUP_CONSTANTS } from "@/constants/constants";
 import { ROUTE_CONSTANTS } from "@/constants/route.constants";
+import authenSlice from "@/redux/authenSlice";
 import Link from "next/link";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SigninPage = () => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const authenState = useSelector((state) => state.authen);
+  const { signOut } = authenSlice.actions;
+
+
   return (
     <>
       <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
