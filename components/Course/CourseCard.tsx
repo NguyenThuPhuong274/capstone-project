@@ -1,34 +1,43 @@
-const PricingBox = (props: {
-  price: string;
-  duration: string;
-  packageName: string;
-  subtitle: string;
-  children: React.ReactNode;
-}) => {
-  const { price, duration, packageName, subtitle, children } = props;
+import { Course } from "@/types/course";
+import Image from "next/image";
 
+const CourseCard = (props: Course) => {
+  const { price, duration, level, img_url } = props;
+  const formattedPrice = price.toLocaleString('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  });
   return (
-    <div className="w-full">
+    <div  className="w-full h-full">
       <div
-        className="wow fadeInUp relative z-10 rounded-md bg-white px-8 py-10 shadow-signUp dark:bg-[#1D2144]"
+        className="wow h-fit fadeInUp relative z-10 rounded-md bg-white px-8 py-10 shadow-signUp dark:bg-[#1D2144]"
         data-wow-delay=".1s"
       >
-        <div className="flex items-center justify-between">
-          <h3 className="price mb-2 text-3xl font-bold text-black dark:text-white">
-            $<span className="amount">{price}</span>
-            <span className="time text-body-color">/{duration}</span>
+        <div  className="flex mb-5 items-center justify-between">
+          <h3 className="price mb-2 text-2xl font-bold text-black dark:text-white">
+            <span className="amount">{formattedPrice}</span>
+            <span className="time text-lg text-body-color"> / {duration} tháng</span>
           </h3>
-          <h4 className="mb-2 text-xl font-bold text-dark dark:text-white">
-            {packageName}
+          <h4 className="mb-2 rounded-3xl text-center p-2  bg-primary border-2 text-xl font-bold text-white dark:text-white">
+            N{level}
           </h4>
         </div>
-        <p className="mb-7 text-base text-body-color">{subtitle}</p>
-        <div className="mb-8 border-b border-body-color border-opacity-10 pb-8 dark:border-white dark:border-opacity-10">
-          <button className="flex w-full items-center justify-center rounded-md bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-            Start Free Trial
+      <Image
+        src={img_url}
+        alt="course image"
+       
+        width={500}
+        height={500}        
+      />
+
+        <div className="mb-1 mt-7 border-b flex row border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">
+          <button className="flex w-full mr-3 items-center justify-center rounded-md bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+           Chi tiết
+          </button>
+          <button className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+          Mua khóa học
           </button>
         </div>
-        <div>{children}</div>
         <div className="absolute bottom-0 right-0 z-[-1]">
           <svg
             width="179"
@@ -78,4 +87,4 @@ const PricingBox = (props: {
   );
 };
 
-export default PricingBox;
+export default CourseCard;

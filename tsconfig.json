@@ -23,6 +23,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "app/signin/page.js", "app/signup/page.js"],
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "app/signin/page.js", "app/signup/page.js", "components/Contact/index.js"],
   "exclude": ["node_modules"]
 }

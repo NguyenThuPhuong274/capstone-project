@@ -5,28 +5,28 @@ import SingleTestimonial from "./SingleTestimonial";
 const testimonialData: Testimonial[] = [
   {
     id: 1,
-    name: "Musharof Chy",
-    designation: "Founder @TailGrids",
+    name: "Trần Tuyết Lan",
+    designation: "Học viên tiếng nhật",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
-    image: "/images/testimonials/auth-01.png",
+      "Em thực sự rất hài lòng với khóa học tiếng Nhật này. Giảng viên rất chuyên nghiệp và nhiệt tình giúp đỡ các học viên. Nội dung bài học được thiết kế rất tốt và phù hợp với nhu cầu của mỗi học viên. Em đã học được rất nhiều từ vựng mới và khả năng giao tiếp của tôi đã được cải thiện đáng kể sau khi hoàn thành khóa học này. Em chắc chắn sẽ tiếp tục học tiếng Nhật tại đây.",
+    image: "/images/blog/author-01.png",
     star: 5,
   },
   {
     id: 2,
-    name: "Devid Weilium",
-    designation: "Founder @UIdeck",
+    name: "Nguyễn Thành Lâm",
+    designation: "Học viên tiếng nhật",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+      "Em rất thích cách giảng dạy của cô. Cô sử dụng các phương pháp giảng dạy độc đáo và thú vị, giúp tôi học tiếng Nhật một cách dễ dàng và hiệu quả. Nội dung khóa học rất phong phú, bao gồm cả luyện nghe, nói, đọc và viết.  Em đã học được nhiều về văn hóa và lịch sử của Nhật Bản trong quá trình học tiếng Nhật ở đây. Em thật sự rất vui khi đã tham gia khóa học này.",
     image: "/images/testimonials/auth-02.png",
     star: 5,
   },
   {
     id: 3,
-    name: "Lethium Frenci",
-    designation: "Founder @Lineicons",
+    name: "Hoàng Việt Hùng",
+    designation: "Học viên tiếng nhật",
     content:
-      "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+      "Em đã học tiếng Nhật ở nhiều nơi khác nhau, nhưng khóa học này là tốt nhất mà em từng tham gia. Giáo viên rất giỏi và nhiệt tình, họ luôn sẵn sàng giúp đỡ và trả lời các câu hỏi của tôi. Em rất thích cách giảng dạy linh hoạt và tùy chỉnh theo nhu cầu của mỗi học viên. Nội dung bài học rất rõ ràng và dễ hiểu, giúp em học tiếng Nhật một cách hiệu quả và nhanh chóng.",
     image: "/images/testimonials/auth-03.png",
     star: 5,
   },
@@ -37,8 +37,8 @@ const Testimonials = () => {
     <section className="relative z-10 bg-primary/[.03] py-16 md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="What Our Users Says"
-          paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+          title="Phản Hồi Của Học Viên"
+          paragraph="Dưới đây là những đánh giá khóa học của các bạn học viên"
           center
         />
 

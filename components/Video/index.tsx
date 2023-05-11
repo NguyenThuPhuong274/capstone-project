@@ -13,8 +13,8 @@ const Video = () => {
     <section className="relative z-10 py-16 md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="We are ready to help"
-          paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+          title="Chúng Tôi Giúp Bạn Học Tốt Tiếng Nhật"
+          paragraph="Hãy chăm chỉ và kiên trì trong việc học tiếng Nhật, đừng sợ mắc sai lầm, hãy học từ những lỗi của mình, cố gắng khắc phục chúng"
           center
           mb="80px"
         />
@@ -53,13 +53,13 @@ const Video = () => {
         autoplay={true}
         start={true}
         isOpen={isOpen}
-        videoId="L61p2uyiMSo"
+        videoId="zWI5jp-abTk"
         onClose={() => setOpen(false)}
       />
-
-      <div className="absolute bottom-0 left-0 right-0 z-[-1]">
+       <div className="absolute bottom-0 left-0 right-0 z-[-1]">
         <img src="/images/video/shape.svg" alt="shape" className="w-full" />
       </div>
+     
     </section>
   );
 };
