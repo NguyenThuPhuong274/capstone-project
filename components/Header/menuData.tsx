@@ -32,28 +32,23 @@ const menuData: Menu[] = [
     submenu: [
       {
         id: 43,
-        title: "Blog Grid Page",
+        title: "Kinh nghiệm học tiếng Nhật",
         path: "/blog",
         newTab: false,
       },
       {
         id: 44,
-        title: "Blog Sidebar Page",
-        path: "/blog-sidebar",
+        title: "Văn hóa Nhật Bản",
+        path: "/blog",
         newTab: false,
       },
       {
         id: 45,
-        title: "Blog Details Page",
-        path: "/blog-details",
+        title: "Tin tức sự kiện",
+        path: "/blog",
         newTab: false,
       },
-      {
-        id: 48,
-        title: "Error Page",
-        path: "/error",
-        newTab: false,
-      },
+      
     ],
   },
 ];

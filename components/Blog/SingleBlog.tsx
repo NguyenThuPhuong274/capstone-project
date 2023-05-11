@@ -3,18 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 const SingleBlog = ({ blog }: { blog: Blog }) => {
-  const { title, image, paragraph, author, tags, publishDate } = blog;
+  const { title, image, paragraph, tags, category, publishDate } = blog;
   return (
     <>
       <div
-        className="wow fadeInUp relative overflow-hidden rounded-md bg-white shadow-one dark:bg-dark"
+        className="wow fadeInUp relative overflow-hidden rounded-md h-full bg-white shadow-one dark:bg-dark"
         data-wow-delay=".1s"
       >
-        <Link href="/" className="relative block h-[220px] w-full">
+        <Link href="/" className="relative block h-[260px] w-full">
          
           <Image src={image} alt="image" fill />
         </Link>
-        <div className="p-6 sm:p-8 md:py-8 md:px-6 lg:p-8 xl:py-8 xl:px-5 2xl:p-8">
+        <div className="p-6 h-full  sm:p-8 md:py-8 md:px-6 lg:p-8 xl:py-8 xl:px-5 2xl:p-8">
           <h3>
             <Link
               href="/"
@@ -23,17 +23,22 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
               {title}
             </Link>
           </h3>
-          <p className="mb-6 border-b border-body-color border-opacity-10 pb-6 text-base font-medium text-body-color dark:border-white dark:border-opacity-10">
+          <p className="mb-6 border-b overflow-auto max-h-40 h-40 border-body-color border-opacity-10 pb-6 text-base font-medium text-body-color dark:border-white dark:border-opacity-10">
             {paragraph}
-          </p>
-          <div className="flex items-center">
            
-            <div className="inline-block">
-              <h4 className="mb-1 text-sm font-medium text-dark dark:text-white">
+          </p>
+          <div className="flex flex-row items-center justify-between">
+          <h4 className="mb-1 text-sm font-medium text-dark dark:text-white">
               {publishDate}
               </h4>
-             
-            </div>
+              <Link href={"/"} className="bg-lime text-black font-medium rounded-full py-2 px-4">
+            {category}
+          </Link>
+          </div>
+          <div className="mt-6  w-full ">
+            <button className=" w-full items-center rounded-md bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+            Xem chi tiết
+            </button>
           </div>
         </div>
       </div>

@@ -22,6 +22,8 @@ const Course = () => {
         {coursesData.map((course) => (
                <CourseCard
                id={course.id}
+               description={course.description}
+               title={course.title}
                level={course.level}
                price={course.price}
                duration={course.duration}

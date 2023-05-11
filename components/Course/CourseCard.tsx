@@ -1,8 +1,9 @@
 import { Course } from "@/types/course";
 import Image from "next/image";
+import Link from "next/link";
 
 const CourseCard = (props: Course) => {
-  const { price, duration, level, img_url } = props;
+  const { price, duration, description, title, level, img_url } = props;
   const formattedPrice = price.toLocaleString('vi-VN', {
     style: 'currency',
     currency: 'VND',
@@ -10,26 +11,33 @@ const CourseCard = (props: Course) => {
   return (
     <div  className="w-full h-full">
       <div
-        className="wow h-fit fadeInUp relative z-10 rounded-md bg-white px-8 py-10 shadow-signUp dark:bg-[#1D2144]"
+        className="wow h-full fadeInUp relative z-10 rounded-md bg-white px-8 py-10 shadow-signUp dark:bg-[#1D2144]"
         data-wow-delay=".1s"
       >
-        <div  className="flex mb-5 items-center justify-between">
+        <div className="flex mb-5 items-center justify-between">
           <h3 className="price mb-2 text-2xl font-bold text-black dark:text-white">
             <span className="amount">{formattedPrice}</span>
             <span className="time text-lg text-body-color"> / {duration} tháng</span>
           </h3>
-          <h4 className="mb-2 rounded-3xl text-center p-2  bg-primary border-2 text-xl font-bold text-white dark:text-white">
+          <Link href={"/"} className="mb-2 rounded-3xl text-center p-2  bg-lime  text-xl font-bold text-black dark:text-white">
             N{level}
-          </h4>
+          </Link>
         </div>
-      <Image
-        src={img_url}
-        alt="course image"
-       
-        width={500}
-        height={500}        
-      />
-
+        <Link href="/" className="relative block h-[260px] w-full mb-5">    
+          <Image src={img_url} alt="image" fill />
+        </Link>
+        <h3>
+            <Link
+              href="/"
+              className="mb-4 block text-xl font-bold text-black hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl"
+            >
+              {title}
+            </Link>
+          </h3>
+        <p className="mb-6 border-b overflow-auto max-h-20 h-20 border-body-color border-opacity-10 pb-6 text-base font-medium text-body-color dark:border-white dark:border-opacity-10">
+            {description}
+           
+          </p>
         <div className="mb-1 mt-7 border-b flex row border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">
           <button className="flex w-full mr-3 items-center justify-center rounded-md bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
            Chi tiết
