@@ -10,7 +10,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
         className="wow fadeInUp relative overflow-hidden rounded-md h-full bg-white shadow-one dark:bg-dark"
         data-wow-delay=".1s"
       >
-        <Link href="/" className="relative block h-[260px] w-full">
+        <Link href="/" className="relative block h-[230px] w-full">
          
           <Image src={image} alt="image" fill />
         </Link>
@@ -23,7 +23,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
               {title}
             </Link>
           </h3>
-          <p className="mb-6 border-b overflow-auto max-h-40 h-40 border-body-color border-opacity-10 pb-6 text-base font-medium text-body-color dark:border-white dark:border-opacity-10">
+          <p className="mb-6 border-b overflow-auto max-h-36 h-36 border-body-color border-opacity-10 pb-6 text-base font-medium text-body-color dark:border-white dark:border-opacity-10">
             {paragraph}
            
           </p>
@@ -31,7 +31,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
           <h4 className="mb-1 text-sm font-medium text-dark dark:text-white">
               {publishDate}
               </h4>
-              <Link href={"/"} className="bg-lime text-black font-medium rounded-full py-2 px-4">
+              <Link href={"/"} className="bg-lime text-black text-sm font-medium rounded-full py-2 px-4">
             {category}
           </Link>
           </div>

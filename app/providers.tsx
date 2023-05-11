@@ -4,6 +4,7 @@ import store from "../redux/store";
 import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
 import { toast, ToastContainer } from 'react-toastify';
+import 'flowbite';
 import 'react-toastify/dist/ReactToastify.css';
 
 export function Providers({ children }: { children: React.ReactNode }) {

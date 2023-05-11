@@ -4,6 +4,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/flowbite/**/*.js"
   ],
   darkMode: "class",
   theme: {
@@ -19,6 +20,7 @@ module.exports = {
       dark: "#1D2144",
       primary: "#4A6CF7",
       lime: "#d9f99d",
+      teal: "#2dd4bf",
       yellow: "#FBB040",
       "body-color": "#959CB1",
     },
@@ -49,5 +51,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 };
