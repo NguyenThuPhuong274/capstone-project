@@ -1,28 +1,20 @@
-import AboutSectionOne from "@/components/About/AboutSectionOne";
-import AboutSectionTwo from "@/components/About/AboutSectionTwo";
-import Blog from "@/components/Blog";
-import ScrollUp from "@/components/Common/ScrollUp";
-import Contact from "@/components/Contact";
-import Features from "@/components/Features";
-import Hero from "@/components/Hero";
-import Course from "@/components/Course";
-import Testimonials from "@/components/Testimonials";
-import Video from "@/components/Video";
+
+"use client"
 import { Inter } from "@next/font/google";
+import React from "react";
+import HomePage from "./home/page";
+import DashboardPage from "./admin/dashboard/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
+  const [role, setRole] = React.useState("admin");
+  
+
   return (
-    <>
-      <ScrollUp />
-      <Hero />
-      <Features />
-      <Video />
-      <Course />
-      <Blog />
-      <Testimonials />
-      <Contact />
-    </>
+   <>
+   {role != "admin" ? <HomePage /> : <DashboardPage />}
+   </>
   );
 }

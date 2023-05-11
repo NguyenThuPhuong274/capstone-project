@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -11,6 +11,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+
+  const [role, setRole] = React.useState("admin");
+
+  // React.useEffect(() => {
+  //   sessionStorage.getItem("name");
+  //   setRole(sessionStorage.getItem("role"));
+  // },[role]);
   return (
     <html suppressHydrationWarning lang="en">
       {/*
@@ -21,14 +29,21 @@ export default function RootLayout({
 
       <body className="dark:bg-black">
         <Providers>
-          <Header />
+         
+         {role == "admin"? <TopNav /> : <Header />} 
+         {role == "admin"? <SideNav /> : <></>} 
+          
           {children}
-          <Footer />
-          <ScrollToTop />
-        </Providers>
+          {role != "admin"? <Footer /> : <></>} 
+          <ScrollToTop /> 
+       </Providers>
       </body>
     </html>
   );
 }
 
 import { Providers } from "./providers";
+import { AdminLayout } from "@/layouts/dashboard/layout";
+import { TopNav } from "@/layouts/dashboard/top-nav";
+import { SideNav } from "@/layouts/dashboard/side-nav";
+

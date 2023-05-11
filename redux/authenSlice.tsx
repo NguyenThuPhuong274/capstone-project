@@ -48,6 +48,7 @@ const authenSlice = createSlice({
       state.user = user;
       state.token = accessToken;
       sessionStorage.setItem("token", accessToken);
+
       localStorage.setItem("currentPage", "Dashboard");
 
       console.log("login successfully", action.payload);
