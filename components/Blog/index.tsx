@@ -50,7 +50,7 @@ const Blog = () => {
     <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
     {pageList.map((pageNumber) => (
             <div key={pageNumber} >
-              <button type="button" className="w-3 h-3 bg-lime rounded-full transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp" aria-current="true" aria-label={"Slide " + pageNumber} data-carousel-slide-to={pageNumber}></button>
+              <button type="button" className="w-3 h-3 bg-black rounded-full transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp" aria-current="true" aria-label={"Slide " + pageNumber} data-carousel-slide-to={pageNumber}></button>
             </div>
           ))}
     </div>

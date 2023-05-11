@@ -20,7 +20,7 @@ module.exports = {
       dark: "#1D2144",
       primary: "#4A6CF7",
       lime: "#d9f99d",
-      teal: "#2dd4bf",
+      cteal: "#2dd4bf",
       yellow: "#FBB040",
       "body-color": "#959CB1",
     },

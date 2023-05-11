@@ -2,9 +2,12 @@ import RelatedPost from "@/components/Blog/RelatedPost";
 import SharePost from "@/components/Blog/SharePost";
 import TagButton from "@/components/Blog/TagButton";
 import NewsLatterBox from "@/components/Contact/Information";
+import { Blog } from "@/types/blog";
 import Image from "next/image";
 
-const BlogSidebarPage = () => {
+const BlogDetailsPage = (blog : Blog) => {
+
+  const {id, title, image, category, publishDate, tags} = blog;
   return (
     <>
       <section className="overflow-hidden pt-[180px] pb-[120px]">
@@ -13,28 +16,11 @@ const BlogSidebarPage = () => {
             <div className="w-full px-4 lg:w-8/12">
               <div>
                 <h2 className="mb-8 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight">
-                  10 amazing sites to download stock photos & digital assets for
-                  free
+                  {title}
                 </h2>
                 <div className="mb-10 flex flex-wrap items-center justify-between border-b border-body-color border-opacity-10 pb-4 dark:border-white dark:border-opacity-10">
                   <div className="flex flex-wrap items-center">
-                    <div className="mr-10 mb-5 flex items-center">
-                      <div className="mr-4">
-                        <div className="relative h-10 w-10 overflow-hidden rounded-full">
-                          <Image
-                            src="/images/blog/author-02.png"
-                            alt="author"
-                            fill
-                          />
-                        </div>
-                      </div>
-                      <div className="w-full">
-                        <h4 className="mb-1 text-base font-medium text-body-color">
-                          By
-                          <span> Musharof Chy</span>
-                        </h4>
-                      </div>
-                    </div>
+                    
                     <div className="mb-5 flex items-center">
                       <p className="mr-5 flex items-center text-base font-medium text-body-color">
                         <span className="mr-3">
@@ -458,4 +444,4 @@ const BlogSidebarPage = () => {
   );
 };
 
-export default BlogSidebarPage;
+export default BlogDetailsPage;
