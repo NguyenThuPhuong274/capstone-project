@@ -24,8 +24,6 @@ const data = [
     lessons: 12,
     level: 1,
         status: true,
-
-    status: true,
     price: 1230000,
     avatar: '/assets/avatars/avatar-carson-darrin.png',
     createdAt: subDays(subHours(now, 7), 1).getTime(),
@@ -227,6 +225,7 @@ const handleCloseModal = ()  => {
               onSelectOne={coursesSelection.handleSelectOne}
               page={page}
               rowsPerPage={rowsPerPage}
+              
               selected={coursesSelection.selected}
             />
           </Stack>
@@ -234,9 +233,9 @@ const handleCloseModal = ()  => {
       </Box>
 
 
-      <Dialog maxWidth={1500} open={isOpenModal} onClose={handleCloseModal}>
+      <Dialog  maxWidth open={isOpenModal} onClose={handleCloseModal}>
         <DialogTitle >THÊM MỚI KHÓA HỌC</DialogTitle>
-        <DialogContent dividers>
+        <DialogContent sx={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'}} dividers>
        <Box >
        <Container className='mt-10' maxWidth="lg">
         <Stack spacing={3}>
@@ -261,6 +260,14 @@ const handleCloseModal = ()  => {
                 <CourseProfileDetails />
               </Grid>
             </Grid>
+          </div>
+          <div className='w-full flex justify-end'>
+          <Button variant="contained" className='bg-cteal mr-3' onClick={handleCloseModal}>
+         Hủy
+        </Button>
+          <Button variant="contained" className='bg-primary'>
+          Lưu
+        </Button>
           </div>
         </Stack>
       </Container>

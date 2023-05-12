@@ -10,6 +10,10 @@ import {
   TextField,
   Unstable_Grid2 as Grid
 } from '@mui/material';
+import AppInput from '../AppInput/AppInput';
+import AppSelect from '../AppInput/AppSelect';
+import AppCheckBox from '../AppInput/AppCheckBox';
+import AppTextArea from '../AppInput/AppTextArea';
 
 const states = [
   {
@@ -58,107 +62,56 @@ export const CourseProfileDetails = () => {
   );
 
   return (
-    <Card sx={{ ml: 2 }}>
+    <Card sx={{ ml: 2, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;' }} >
       
-        <CardContent sx={{ pt: 4}}>
-          
-          <Box sx={{ m: -1.5 }}>
+      <CardContent sx={{ pb: 5}} >
+        <CardHeader title="Thông tin khóa học" />
+      <Grid
+            container
+            spacing={3}
+          >
             <Grid
-              container
-              spacing={3}
+            
+              xs={12}
+              md={6}
             >
-              <Grid
-                xs={12}
-                md={6}
-              >
-               
-              </Grid>
-              <Grid
-                xs={12}
-                md={6}
-              >
-                <TextField
-                  fullWidth
-                  label="Last name"
-                  name="lastName"
-                  
-                  onChange={handleChange}
-                  required
-                  value={values.lastName}
-                />
-              </Grid>
-              <Grid
-                xs={12}
-                md={6}
-              >
-                <TextField
-                  fullWidth
-                  label="Email Address"
-                  name="email"
-                  onChange={handleChange}
-                  required
-                  value={values.email}
-                />
-              </Grid>
-              <Grid
-                xs={12}
-                md={6}
-              >
-                <TextField
-                  fullWidth
-                  label="Phone Number"
-                  name="phone"
-                  onChange={handleChange}
-                  type="number"
-                  value={values.phone}
-                />
-              </Grid>
-              <Grid
-                xs={12}
-                md={6}
-              >
-                <TextField
-                  fullWidth
-                  label="Country"
-                  name="country"
-                  onChange={handleChange}
-                  required
-                  value={values.country}
-                />
-              </Grid>
-              <Grid
-                xs={12}
-                md={6}
-              >
-                <TextField
-                  fullWidth
-                  label="Select State"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  select
-                  SelectProps={{ native: true }}
-                  value={values.state}
-                >
-                  {states.map((option) => (
-                    <option
-                      key={option.value}
-                      value={option.value}
-                    >
-                      {option.label}
-                    </option>
-                  ))}
-                </TextField>
-              </Grid>
+             <AppInput placeholder={"Tên khóa học"} />
             </Grid>
-          </Box>
-        </CardContent>
-        <Divider />
-        <CardActions sx={{ justifyContent: 'flex-end' }}>
-          <Button variant="contained">
-            Save details
-          </Button>
-        </CardActions>
-      </Card>
+            <Grid
+              xs={12}
+              md={6}
+            >
+            <AppSelect data={[1, 2, 3, 4, 5]} placeholder="Chọn cấp độ" />
+            </Grid>
+            <Grid
+              xs={12}
+              md={6}
+            >
+             <AppInput placeholder={"Thời gian học (tháng)"} />
+            </Grid>
+            <Grid
+              xs={12}
+              md={6}
+            >
+              <AppInput placeholder={"Giá (vnd)"} />
+            </Grid>
+            <Grid
+              xs={12}
+              md={6}
+            >
+              <AppInput placeholder={"Mô tả khóa học"} />
+            </Grid>
+            <Grid
+              xs={12}
+              md={6}
+            >
+              <AppCheckBox />
+            </Grid>
+           
+          </Grid>
+      </CardContent>
+      <Divider />
+    </Card>
+     
   );
 };
