@@ -42,6 +42,7 @@ export const TopNav = (props) => {
           backdropFilter: 'blur(6px)',
           backgroundColor: (theme) => alpha(theme.palette.background.default, 0.8),
           position: 'sticky',
+          boxShadow: "rgba(0, 0, 0, 0.09) 0px 3px 12px",
           left: {
             lg: `${SIDE_NAV_WIDTH}px`
           },

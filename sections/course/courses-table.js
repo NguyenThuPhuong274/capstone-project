@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
+import PencilIcon from '@heroicons/react/24/solid/PencilIcon';
+
 import {
   Avatar,
   Box,
@@ -12,12 +14,16 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Paper,
+  Button,
+  SvgIcon,
+Chip,
   Typography
 } from '@mui/material';
-import { Scrollbar } from 'src/components/scrollbar';
-import { getInitials } from 'src/utils/get-initials';
+import { Scrollbar } from '@/components/scrollbar';
+import { getInitials } from '@/utils/get-initials';
 
-export const CustomersTable = (props) => {
+export const CoursesTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -35,11 +41,11 @@ export const CustomersTable = (props) => {
   const selectedSome = (selected.length > 0) && (selected.length < items.length);
   const selectedAll = (items.length > 0) && (selected.length === items.length);
 
-  return (
-    <Card>
+  return (<>
+    <Card sx={{ maxHeight: 450, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}   >
       <Scrollbar>
-        <Box sx={{ minWidth: 800 }}>
-          <Table>
+        <Box sx={{ minWidth: 800, maxHeight: 450 }}>
+          <Table stickyHeader >
             <TableHead>
               <TableRow>
                 <TableCell padding="checkbox">
@@ -56,31 +62,40 @@ export const CustomersTable = (props) => {
                   />
                 </TableCell>
                 <TableCell>
-                  Name
+                  Tên
                 </TableCell>
                 <TableCell>
-                  Email
+                  Cấp độ
                 </TableCell>
                 <TableCell>
-                  Location
+                  Thời gian
                 </TableCell>
                 <TableCell>
-                  Phone
+                  Giá 
                 </TableCell>
                 <TableCell>
-                  Signed Up
+                  Số bài học
+                </TableCell>
+                <TableCell>
+                  Ngày tạo
+                </TableCell>
+                <TableCell>
+                Trạng thái
+                </TableCell>
+                <TableCell>
+                 Hành động
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((customer) => {
-                const isSelected = selected.includes(customer.id);
-                const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
+              {items.map((course) => {
+                const isSelected = selected.includes(course.id);
+                const createdAt = format(course.createdAt, 'dd/MM/yyyy');
 
                 return (
                   <TableRow
                     hover
-                    key={customer.id}
+                    key={course.id}
                     selected={isSelected}
                   >
                     <TableCell padding="checkbox">
@@ -88,9 +103,9 @@ export const CustomersTable = (props) => {
                         checked={isSelected}
                         onChange={(event) => {
                           if (event.target.checked) {
-                            onSelectOne?.(customer.id);
+                            onSelectOne?.(course.id);
                           } else {
-                            onDeselectOne?.(customer.id);
+                            onDeselectOne?.(course.id);
                           }
                         }}
                       />
@@ -101,26 +116,45 @@ export const CustomersTable = (props) => {
                         direction="row"
                         spacing={2}
                       >
-                        <Avatar src={customer.avatar}>
-                          {getInitials(customer.name)}
+                        <Avatar src={course.avatar}>
+                          {getInitials(course.title)}
                         </Avatar>
                         <Typography variant="subtitle2">
-                          {customer.name}
+                          {course.title}
                         </Typography>
                       </Stack>
                     </TableCell>
                     <TableCell>
-                      {customer.email}
+                    <Chip color={'primary'} label={"N" + course.level} variant="outlined" />
+                      
                     </TableCell>
                     <TableCell>
-                      {customer.address.city}, {customer.address.state}, {customer.address.country}
+                      {course.duration} tháng
                     </TableCell>
                     <TableCell>
-                      {customer.phone}
+                      {course.price.toLocaleString('vi-VN', {
+                          style: 'currency',
+                          currency: 'VND',
+                        })}
+                    </TableCell>
+                    <TableCell>
+                      {course.lessons}
                     </TableCell>
                     <TableCell>
                       {createdAt}
                     </TableCell>
+                    <TableCell>
+                     <Chip color={course.status ? 'secondary' : 'error'} label={course.status ? 'Công khai' : 'Khóa'} />
+                    </TableCell>
+                    <TableCell>
+                <Button variant="contained" className='bg-primary' size='small'>
+                <SvgIcon>
+                  <PencilIcon />
+                </SvgIcon> 
+                </Button>
+              
+              
+              </TableCell>
                   </TableRow>
                 );
               })}
@@ -128,20 +162,28 @@ export const CustomersTable = (props) => {
           </Table>
         </Box>
       </Scrollbar>
-      <TablePagination
+     
+    </Card>
+    
+    <Card sx={{boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
+    <TablePagination
         component="div"
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}
         page={page}
+        labelDisplayedRows={({from, to, count}) => `Hiện thị từ ${from}-${to} trong tổng số ${count} bản ghi`}
+        boundaryCount={4}
+       labelRowsPerPage={"Số bản ghi"}
         rowsPerPage={rowsPerPage}
         rowsPerPageOptions={[5, 10, 25]}
       />
     </Card>
+    </>
   );
 };
 
-CustomersTable.propTypes = {
+CoursesTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,
