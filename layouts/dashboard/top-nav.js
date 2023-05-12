@@ -4,6 +4,8 @@ import BellIcon from '@heroicons/react/24/solid/BellIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import Bars3Icon from '@heroicons/react/24/solid/Bars3Icon';
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
+import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon';
+import CogIcon from '@heroicons/react/24/solid/CogIcon';
 
 
 import {
@@ -69,37 +71,32 @@ export const TopNav = (props) => {
             spacing={2}
           >
             
-            <Tooltip title="Search">
-              <IconButton>
-                <SvgIcon fontSize="small">
-                  <MagnifyingGlassIcon />
-                </SvgIcon>
-              </IconButton>
-            </Tooltip>
+            Tiêu Đề
           </Stack>
           <Stack
             alignItems="center"
             direction="row"
             spacing={2}
           >
-            <Tooltip title="Contacts">
+            <Tooltip title="Tổng quan">
               <IconButton>
-                <SvgIcon fontSize="small">
-                  <UsersIcon />
-                </SvgIcon>
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Notifications">
-              <IconButton>
-                <Badge
+              <Badge
                   badgeContent={4}
                   color="success"
                   variant="dot"
                 >
                   <SvgIcon fontSize="small">
-                    <BellIcon />
-                  </SvgIcon>
+                  <ChartBarIcon />
+                </SvgIcon>
                 </Badge>
+               
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Cài đặt">
+              <IconButton>
+              <SvgIcon fontSize="small">
+                    <CogIcon />
+                  </SvgIcon>
               </IconButton>
             </Tooltip>
             <Avatar

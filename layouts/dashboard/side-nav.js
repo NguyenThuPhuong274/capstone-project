@@ -45,11 +45,7 @@ export const SideNav = () => {
           <Box
             component={NextLink}
             href="/"
-            sx={{
-              display: 'inline-flex',
-              height: 32,
-              width: 32
-            }}
+            
           >
             <Logo />
           </Box>
