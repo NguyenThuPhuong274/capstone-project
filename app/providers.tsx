@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { toast, ToastContainer } from 'react-toastify';
 import 'flowbite';
 import 'react-toastify/dist/ReactToastify.css';
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import 'draft-js/dist/Draft.css';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

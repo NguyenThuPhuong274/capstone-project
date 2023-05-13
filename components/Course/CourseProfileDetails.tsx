@@ -36,13 +36,22 @@ const states = [
 
 export const CourseProfileDetails = () => {
   const [values, setValues] = useState({
-    firstName: 'Anika',
-    lastName: 'Visser',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'los-angeles',
-    country: 'USA'
+    title: '',
+    level: '',
+    description: '',
+    duration: 0,
+    price: 0,
+    status: false,
   });
+
+  const handleChangeValue = (key, value) => {
+    setValues(prevValues => ({
+      ...prevValues,
+      [key]: value
+    }));
+  };
+
+
 
   const handleChange = useCallback(
     (event) => {
@@ -75,7 +84,7 @@ export const CourseProfileDetails = () => {
               xs={12}
               md={6}
             >
-             <AppInput placeholder={"Tên khóa học"} />
+             <AppInput value={values} title={"title"} handleChangeValue={handleChangeValue} placeholder={"Tên khóa học"} />
             </Grid>
             <Grid
               xs={12}
@@ -87,19 +96,19 @@ export const CourseProfileDetails = () => {
               xs={12}
               md={6}
             >
-             <AppInput placeholder={"Thời gian học (tháng)"} />
+             <AppInput value={values} title={"duration"} handleChangeValue={handleChangeValue}  placeholder={"Thời gian học (tháng)"} />
             </Grid>
             <Grid
               xs={12}
               md={6}
             >
-              <AppInput placeholder={"Giá (vnd)"} />
+              <AppInput value={values} title={"price"} handleChangeValue={handleChangeValue}  placeholder={"Giá (vnd)"} />
             </Grid>
             <Grid
               xs={12}
               md={6}
             >
-              <AppInput placeholder={"Mô tả khóa học"} />
+              <AppInput value={values} title={"description"} handleChangeValue={handleChangeValue}  placeholder={"Mô tả khóa học"} />
             </Grid>
             <Grid
               xs={12}

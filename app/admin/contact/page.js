@@ -2,17 +2,20 @@
 import { useCallback, useMemo, useState } from 'react';
 import Head from 'next/head';
 import { subDays, subHours } from 'date-fns';
-import { Box, Button, CardContent, Card,  Container, Stack, SvgIcon, Dialog, DialogTitle,  Grid
-  , DialogContent, Divider, DialogContentText, DialogActions, TextField, Typography } from '@mui/material';
+import {
+  Box, Button, CardContent, Card, Container, Stack, SvgIcon, Dialog, DialogTitle, Grid
+  , DialogContent, Divider, DialogContentText, DialogActions, TextField, Typography, CardHeader
+} from '@mui/material';
 import { useSelection } from '../../../hooks/use-selection';
 import { applyPagination } from '../../../utils/apply-pagination';
 import { ContactTable } from '../../../sections/contact/contact-table';
 import { ContactTopBar } from '../../../sections/contact/contact-topbar';
 import { AccountProfile } from '../../../sections/account/account-profile';
 import { AccountProfileDetails } from '../../../sections/account/account-profile-details';
-import {CourseAvatar} from "@/components/Course/CourseAvatar";
-import {CourseProfileDetails} from "@/components/Course/CourseProfileDetails";
+import { CourseAvatar } from "@/components/Course/CourseAvatar";
+import { CourseProfileDetails } from "@/components/Course/CourseProfileDetails";
 import AppInput from '@/components/AppInput/AppInput';
+import AppEditor from '@/components/AppInput/AppEditor';
 
 
 const now = new Date();
@@ -127,6 +130,8 @@ const useCourseIds = (contacts) => {
   );
 };
 
+
+
 const AdminContactPage = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -138,9 +143,12 @@ const AdminContactPage = () => {
 
   const [currentContact, setCurrentContact] = useState();
 
-const handleCloseModal = ()  => {
-  setIsOpenModal(false);
-}
+  const [requestMessage, setRequestMessage] = useState("");
+  const [responseMessage, setResponseMessage] = useState("");
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  }
 
   const handlePageChange = useCallback(
     (event, value) => {
@@ -148,6 +156,10 @@ const handleCloseModal = ()  => {
     },
     []
   );
+
+  const handleChangeValue = (value) => {
+    setResponseMessage(value);
+  }
 
   const handleRowsPerPageChange = useCallback(
     (event) => {
@@ -160,11 +172,11 @@ const handleCloseModal = ()  => {
     <>
       <Head>
         <title>
-          Contacts 
+          Contacts
         </title>
       </Head>
       <Box
-      className='ml-72'
+        className='ml-72'
         component="main"
         sx={{
           flexGrow: 1,
@@ -173,17 +185,17 @@ const handleCloseModal = ()  => {
       >
         <Container maxWidth="xl">
           <Stack spacing={3}>
-           <Stack 
-           className='w-full'
-           direction="row"
-           justifyContent="space-between"
-           spacing={1}
-           >
-         
+            <Stack
+              className='w-full'
+              direction="row"
+              justifyContent="space-between"
+              spacing={1}
+            >
 
-        
-           </Stack>
-            <ContactTopBar setIsOpenModal={setIsOpenModal}  />
+
+
+            </Stack>
+            <ContactTopBar setIsOpenModal={setIsOpenModal} />
 
             <ContactTable
               count={data.length}
@@ -206,36 +218,44 @@ const handleCloseModal = ()  => {
       </Box>
 
 
-      <Dialog maxWidth open={isOpenModal} onClose={handleCloseModal}>
-        <DialogTitle >PHẢI HỒI LIÊN HỆ CỦA HỌC VIÊN {currentContact?.name}</DialogTitle>
-        <DialogContent sx={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'}} dividers>
-       <Box >
-       <Container className='mt-10' maxWidth="lg">
-        <Stack spacing={3}>
-          
-          <div>
-          <Card sx={{  boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;' }} >
-      
-      <CardContent  >
-      <span>{currentContact?.message}</span>
-      <AppInput placeholder={"Phản hồi của bạn"} />
-      </CardContent>
-      <Divider />
-    </Card>
-          </div>
-          <div className='w-full flex justify-end'>
-          <Button variant="contained" className='bg-cteal mr-3' onClick={handleCloseModal}>
-         Hủy
-        </Button>
-          <Button variant="contained" className='bg-primary'>
-          Gửi
-        </Button>
-          </div>
-        </Stack>
-      </Container>
-       </Box>
-    </DialogContent>
-        
+      <Dialog maxWidth open={isOpenModal}  onClose={handleCloseModal}>
+        <DialogTitle >HỌC VIÊN "{currentContact?.name}"</DialogTitle>
+        <DialogContent sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', p: 0, pb: 2, width: 1000 }} dividers>
+        <Container sx={{p: 0}} className='mt-10' maxWidth="lg">
+              <Stack spacing={3}>
+
+                <Card sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', p: 0 }} >
+
+                  <CardContent  >
+                    <CardHeader title="Thông điệp"  sx={{ p: 0, pb: 2}} />
+
+                   <span>
+                    {currentContact?.message}
+                   </span>
+                  </CardContent>
+                  <Divider />
+                </Card>
+                <Card sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;' }} >
+
+                  <CardContent  >
+                    <CardHeader title="Phản hồi" sx={{ p: 0, pb: 2}} />
+
+                    <AppInput value={responseMessage} handleChangeValue={handleChangeValue} placeholder={"Phản hồi của bạn"} />
+                  </CardContent>
+                  <Divider />
+                </Card>
+                <div className='w-full flex justify-end'>
+                  <Button variant="contained" title='Hủy' className='bg-cteal mr-3' onClick={handleCloseModal}>
+                    Hủy
+                  </Button>
+                  <Button variant="contained" title={currentContact?.email != null? 'Gửi phản hồi tới ' + currentContact?.email : 'Gửi phản hồi'} className='bg-primary'>
+                    Gửi
+                  </Button>
+                </div>
+              </Stack>
+            </Container>
+        </DialogContent>
+
       </Dialog>
     </>
   );

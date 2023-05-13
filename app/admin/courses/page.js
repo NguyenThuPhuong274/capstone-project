@@ -2,16 +2,18 @@
 import { useCallback, useMemo, useState } from 'react';
 import Head from 'next/head';
 import { subDays, subHours } from 'date-fns';
-import { Box, Button, Container, Stack, SvgIcon, Dialog, DialogTitle,  Grid
-  , DialogContent, DialogContentText, DialogActions, TextField, Typography } from '@mui/material';
+import {
+  Box, Button, Container, Stack, SvgIcon, Dialog, DialogTitle, Grid
+  , DialogContent, DialogContentText, DialogActions, TextField, Typography
+} from '@mui/material';
 import { useSelection } from '../../../hooks/use-selection';
 import { applyPagination } from '../../../utils/apply-pagination';
 import { CoursesTable } from '../../../sections/course/courses-table';
 import { CourseTopBar } from '../../../sections/course/course-topbar';
 import { AccountProfile } from '../../../sections/account/account-profile';
 import { AccountProfileDetails } from '../../../sections/account/account-profile-details';
-import {CourseAvatar} from "@/components/Course/CourseAvatar";
-import {CourseProfileDetails} from "@/components/Course/CourseProfileDetails";
+import { CourseAvatar } from "@/components/Course/CourseAvatar";
+import { CourseProfileDetails } from "@/components/Course/CourseProfileDetails";
 
 
 const now = new Date();
@@ -23,7 +25,7 @@ const data = [
     description: 'Mô tả khóa học ',
     lessons: 12,
     level: 1,
-        status: true,
+    status: true,
     price: 1230000,
     avatar: '/assets/avatars/avatar-carson-darrin.png',
     createdAt: subDays(subHours(now, 7), 1).getTime(),
@@ -34,8 +36,8 @@ const data = [
     description: 'Mô tả khóa học ',
     lessons: 12,
     level: 2,
-       duration: 6, 
-       status: true,
+    duration: 6,
+    status: true,
 
     price: 1230000,
     avatar: '/assets/avatars/avatar-carson-darrin.png',
@@ -47,7 +49,7 @@ const data = [
     description: 'Mô tả khóa học ',
     lessons: 12,
     level: 3,
-       duration: 6, status: false,
+    duration: 6, status: false,
 
     price: 1230000,
     avatar: '/assets/avatars/avatar-carson-darrin.png',
@@ -59,7 +61,7 @@ const data = [
     description: 'Mô tả khóa học ',
     lessons: 12,
     level: 4,
-       duration: 6, status: true,
+    duration: 6, status: true,
 
     price: 1230000,
     avatar: '/assets/avatars/avatar-carson-darrin.png',
@@ -71,7 +73,7 @@ const data = [
     description: 'Mô tả khóa học ',
     lessons: 12,
     level: 5,
-       duration: 6, status: true,
+    duration: 6, status: true,
 
     price: 1230000,
     avatar: '/assets/avatars/avatar-carson-darrin.png',
@@ -82,7 +84,7 @@ const data = [
     title: 'Khóa học N2 nâng cao',
     description: 'Mô tả khóa học ',
     lessons: 12,
-       duration: 6, status: true,
+    duration: 6, status: true,
 
     level: 2,
     price: 1230000,
@@ -94,7 +96,7 @@ const data = [
     title: 'Khóa học N1 nâng cao',
     description: 'Mô tả khóa học ',
     lessons: 12,
-       duration: 6, status: true,
+    duration: 6, status: true,
 
     level: 2,
     price: 1230000,
@@ -107,7 +109,7 @@ const data = [
     description: 'Mô tả khóa học ',
     lessons: 12,
     level: 3,
-       duration: 6, status: true,
+    duration: 6, status: true,
 
     price: 1230000,
     avatar: '/assets/avatars/avatar-carson-darrin.png',
@@ -120,7 +122,7 @@ const data = [
     lessons: 12,
     level: 4,
 
-       duration: 6, status: true,
+    duration: 6, status: true,
 
     price: 1230000,
     avatar: '/assets/avatars/avatar-carson-darrin.png',
@@ -131,7 +133,7 @@ const data = [
     title: 'Khóa học N3 nâng cao',
     description: 'Mô tả khóa học ',
     lessons: 12,
-       duration: 6, status: true,
+    duration: 6, status: true,
 
     level: 4,
     price: 1230000,
@@ -167,9 +169,9 @@ const AdminCoursesPage = () => {
 
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-const handleCloseModal = ()  => {
-  setIsOpenModal(false);
-}
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  }
 
   const handlePageChange = useCallback(
     (event, value) => {
@@ -189,11 +191,11 @@ const handleCloseModal = ()  => {
     <>
       <Head>
         <title>
-          Courses 
+          Courses
         </title>
       </Head>
       <Box
-      className='ml-72'
+        className='ml-72'
         component="main"
         sx={{
           flexGrow: 1,
@@ -202,17 +204,17 @@ const handleCloseModal = ()  => {
       >
         <Container maxWidth="xl">
           <Stack spacing={3}>
-           <Stack 
-           className='w-full'
-           direction="row"
-           justifyContent="space-between"
-           spacing={1}
-           >
-         
+            <Stack
+              className='w-full'
+              direction="row"
+              justifyContent="space-between"
+              spacing={1}
+            >
 
-        
-           </Stack>
-            <CourseTopBar setIsOpenModal={setIsOpenModal}  />
+
+
+            </Stack>
+            <CourseTopBar setIsOpenModal={setIsOpenModal} />
 
             <CoursesTable
               count={data.length}
@@ -225,7 +227,7 @@ const handleCloseModal = ()  => {
               onSelectOne={coursesSelection.handleSelectOne}
               page={page}
               rowsPerPage={rowsPerPage}
-              
+
               selected={coursesSelection.selected}
             />
           </Stack>
@@ -233,47 +235,45 @@ const handleCloseModal = ()  => {
       </Box>
 
 
-      <Dialog  maxWidth open={isOpenModal} onClose={handleCloseModal}>
+      <Dialog maxWidth open={isOpenModal} onClose={handleCloseModal}>
         <DialogTitle >THÊM MỚI KHÓA HỌC</DialogTitle>
-        <DialogContent sx={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'}} dividers>
-       <Box >
-       <Container className='mt-10' maxWidth="lg">
-        <Stack spacing={3}>
-          
-          <div>
-            <Grid
-              container
-              spacing={3}
-            >
-              <Grid
-                xs={12}
-                md={6}
-                lg={4}
-              >
-                <CourseAvatar />
-              </Grid>
-              <Grid
-                xs={12}
-                md={6}
-                lg={8}
-              >
-                <CourseProfileDetails />
-              </Grid>
-            </Grid>
-          </div>
-          <div className='w-full flex justify-end'>
-          <Button variant="contained" className='bg-cteal mr-3' onClick={handleCloseModal}>
-         Hủy
-        </Button>
-          <Button variant="contained" className='bg-primary'>
-          Lưu
-        </Button>
-          </div>
-        </Stack>
-      </Container>
-       </Box>
-    </DialogContent>
-        
+        <DialogContent sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;' }} dividers>
+          <Container className='mt-10' maxWidth="lg" sx={{ height: 500 }}>
+            <Stack spacing={3}>
+
+              <div>
+                <Grid
+                  container
+                  spacing={3}
+                >
+                  <Grid
+                    xs={12}
+                    md={6}
+                    lg={4}
+                  >
+                    <CourseAvatar />
+                  </Grid>
+                  <Grid
+                    xs={12}
+                    md={6}
+                    lg={8}
+                  >
+                    <CourseProfileDetails />
+                  </Grid>
+                </Grid>
+              </div>
+              <div className='w-full flex justify-end'>
+                <Button variant="contained" className='bg-cteal mr-3' onClick={handleCloseModal}>
+                  Hủy
+                </Button>
+                <Button variant="contained" className='bg-primary'>
+                  Lưu
+                </Button>
+              </div>
+            </Stack>
+          </Container>
+        </DialogContent>
+
       </Dialog>
     </>
   );
