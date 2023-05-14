@@ -20,7 +20,7 @@ export const items = [
   },
   {
     title: 'Khóa học',
-    path: '/admin/courses',
+    path: '/authen/courses',
     icon: (
       <SvgIcon fontSize="small">
         <BookOpenIcon />
@@ -29,7 +29,7 @@ export const items = [
   },
   {
     title: 'Bài kiểm tra',
-    path: '/admin/quiz',
+    path: '/authen/quiz',
     icon: (
       <SvgIcon fontSize="small">
         <QuestionMarkCircleIcon />
@@ -38,7 +38,7 @@ export const items = [
   },
   {
     title: 'Tin tức',
-    path: '/admin/blog',
+    path: '/authen/blogs',
     icon: (
       <SvgIcon fontSize="small">
         <NewspaperIcon />
@@ -47,7 +47,7 @@ export const items = [
   },
   {
     title: 'Hỗ trợ',
-    path: '/admin/support',
+    path: '/authen/supports',
     icon: (
       <SvgIcon fontSize="small">
         <PhoneIcon />
@@ -56,7 +56,7 @@ export const items = [
   },
   {
     title: 'Liên hệ',
-    path: '/admin/contact',
+    path: '/authen/contacts',
     icon: (
       <SvgIcon fontSize="small">
         <UserIcon />
@@ -65,7 +65,7 @@ export const items = [
   },
   {
     title: 'Phản hồi',
-    path: '/admin/feedback',
+    path: '/authen/feedbacks',
     icon: (
       <SvgIcon fontSize="small">
         <FaceSmileIcon />
@@ -74,7 +74,7 @@ export const items = [
   },
   {
     title: 'Cài đặt',
-    path: '/admin/settings',
+    path: '/authen/settings',
     icon: (
       <SvgIcon fontSize="small">
         <CogIcon />

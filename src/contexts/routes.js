@@ -9,11 +9,20 @@ import AdminBlogPage from "../pages/admin/blog";
 import AdminContactPage from "../pages/admin/contact";
 import ContactPage from "../pages/contact";
 import SupportPage from "../pages/support";
+import AccountPage from "../pages/account";
+import AdminCoursesPage from "../pages/admin/courses";
+
 export const routes = [
   {
     path: ROUTE_CONSTANTS.HOME_PAGE,
     isPrivate: false,
     component: <HomePage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ACCOUNT_PAGE,
+    isPrivate: false,
+    component: <AccountPage />,
     exact: true,
   },
   {
@@ -26,6 +35,12 @@ export const routes = [
     path: ROUTE_CONSTANTS.ADMIN_BLOG_PAGE,
     isPrivate: false,
     component: <AdminBlogPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ADMIN_COURSE_PAGE,
+    isPrivate: false,
+    component: <AdminCoursesPage />,
     exact: true,
   },
   {

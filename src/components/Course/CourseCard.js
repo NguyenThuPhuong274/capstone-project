@@ -1,4 +1,4 @@
-import Link from "@mui/material/Link";
+import {Link} from "react-router-dom";
 
 const CourseCard = (props) => {
   const { price, duration, description, title, level, img_url } = props;
@@ -17,16 +17,16 @@ const CourseCard = (props) => {
             <span className="amount">{formattedPrice}</span>
             <span className="time text-lg text-body-color"> / {duration} tháng</span>
           </h3>
-          <Link href={"/"} className="mb-2 rounded-3xl text-center p-2  bg-lime  text-xl font-bold text-black dark:text-white">
+          <Link to={"/"} className="mb-2 rounded-3xl text-center p-2  bg-lime  text-xl font-bold text-black dark:text-white">
             N{level}
           </Link>
         </div>
-        <Link href="/" className="relative block h-[260px] w-full mb-5">    
-          <img src={img_url} alt="image" />
+        <Link to="/" className="relative block h-[260px] w-full mb-5">    
+          <img src={img_url} className="object-fill w-full h-[270px]" alt="image" />
         </Link>
         <h3>
             <Link
-              href="/"
+              to="/"
               className="mb-4 block text-xl font-bold text-black hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl"
             >
               {title}

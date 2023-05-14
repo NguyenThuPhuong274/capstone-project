@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useState } from 'react';
-import Head from 'next/head';
 import { subDays, subHours } from 'date-fns';
 import {
   Box, Button, Container, Stack, Dialog, DialogTitle, Grid
@@ -9,8 +8,8 @@ import { useSelection } from '../../../hooks/use-selection';
 import { applyPagination } from '../../../utils/apply-pagination';
 import { CoursesTable } from '../../../sections/course/courses-table';
 import { CourseTopBar } from '../../../sections/course/course-topbar';
-import { CourseAvatar } from "@/components/Course/CourseAvatar";
-import { CourseProfileDetails } from "@/components/Course/CourseProfileDetails";
+import { CourseAvatar } from "../../../components/Course/CourseAvatar";
+import { CourseProfileDetails } from "../../../components/Course/CourseProfileDetails";
 
 
 const now = new Date();
@@ -186,11 +185,7 @@ const AdminCoursesPage = () => {
 
   return (
     <>
-      <Head>
-        <title>
-          Courses
-        </title>
-      </Head>
+      
       <Box
         className='ml-72'
         component="main"

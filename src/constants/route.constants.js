@@ -6,7 +6,10 @@ export const ROUTE_CONSTANTS = {
     ERROR_PAGE: "/error",
     SUPPORT_PAGE: "/support",
     CONTACT_PAGE: "/contact",
+    ACCOUNT_PAGE: "/authen/account",
     ADMIN_CONTACT_PAGE: "/authen/contacts",
     ADMIN_BLOG_PAGE: "/authen/blogs",
-
+    ADMIN_COURSE_PAGE: "/authen/courses",
+    ADMIN_SUPPORT_PAGE: "/authen/supports",
+    ADMIN_CONTACT_PAGE: "/authen/contacts",
 }

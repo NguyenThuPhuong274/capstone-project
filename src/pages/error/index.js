@@ -1,4 +1,4 @@
-import Link from "@mui/material/Link";
+import {Link} from "react-router-dom";
 
 const ErrorPage = () => {
   return (
@@ -140,7 +140,7 @@ const ErrorPage = () => {
                 Trang mà bạn đang tìm kiếm có vẻ đã bị chuyển đổi, xóa hoặc không tồn tại.
                 </p>
                 <Link
-                  href="/"
+                  to="/"
                   className="rounded-md bg-primary py-3 px-8 text-base font-bold text-white shadow-signUp duration-300 hover:bg-white hover:text-primary md:px-9 lg:px-8 xl:px-9"
                 >
                  Trở về trang chủ

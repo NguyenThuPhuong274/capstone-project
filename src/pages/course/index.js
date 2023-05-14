@@ -1,5 +1,4 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import Link from "@mui/material/Link";
 
 const CoursePage = () => {
   return (

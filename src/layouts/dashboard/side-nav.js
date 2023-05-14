@@ -1,4 +1,4 @@
-import Link from "@mui/material/Link";
+import {Link} from "react-router-dom";
 import {
   Box,
   Button,

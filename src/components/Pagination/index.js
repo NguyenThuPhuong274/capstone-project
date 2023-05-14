@@ -24,15 +24,15 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   };
 
   const handlePrevClick = () => {
-    if(currentPage > 1) {
-        onPageChange(currentPage - 1);
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
     }
   };
 
   const handleNextClick = () => {
-   if(currentPage < totalPages) {
-    onPageChange(currentPage + 1);
-   }
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
+    }
   };
 
   const handlePageClick = (pageNumber) => {
@@ -42,50 +42,53 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const pageRange = getPageRange();
 
   return (
-    <div className="w-full px-4">
-      <ul className="flex items-center justify-center pt-8">
-        <li className={`mx-1 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}>
-          <a
-            href="#0"
-            onClick={handlePrevClick}
-            className="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
-          >
-            Prev
-          </a>
-        </li>
-        {pageRange.map((pageNumber) => (
-          <li className="mx-1" key={pageNumber}>
-            <a
-              href="#0"
-              onClick={() => handlePageClick(pageNumber)}
-              className={`flex h-9 min-w-[36px] items-center justify-center rounded-md ${
-                pageNumber === currentPage
-                  ? "bg-primary text-white"
-                  : "bg-body-color bg-opacity-[15%] text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
-              } px-4 text-sm`}
-            >
-              {pageNumber}
-            </a>
-          </li>
-        ))}
-        {totalPages > visiblePages && currentPage < totalPages - Math.floor(visiblePages / 2) && (
-          <li className="mx-1">
-            <a className="flex h-9 min-w-[36px] cursor-not-allowed items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color">
-              ...
-            </a>
-          </li>
-        )}
-        <li className={`mx-1 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}>
-          <a
-            href="#0"
-            onClick={handleNextClick}
-            className="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
-          >
-            Next
-          </a>
-        </li>
-      </ul>
-    </div>
+
+    <>
+      {totalPages > 1 ?
+        <div className="w-full px-4">
+          <ul className="flex items-center justify-center pt-8">
+            <li className={` mx-1 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}>
+              <a
+                href="#0"
+                onClick={handlePrevClick}
+                className="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
+              >
+                Prev
+              </a>
+            </li>
+            {pageRange.map((pageNumber) => (
+              <li className="mx-1" key={pageNumber}>
+                <a
+                  href="#0"
+                  onClick={() => handlePageClick(pageNumber)}
+                  className={`flex h-9 min-w-[36px] items-center justify-center rounded-md ${pageNumber === currentPage
+                    ? "bg-primary text-white"
+                    : "bg-body-color bg-opacity-[15%] text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
+                    } px-4 text-sm`}
+                >
+                  {pageNumber}
+                </a>
+              </li>
+            ))}
+            {totalPages > visiblePages && currentPage < totalPages - Math.floor(visiblePages / 2) && (
+              <li className="mx-1">
+                <a className="flex h-9 min-w-[36px] cursor-not-allowed items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color">
+                  ...
+                </a>
+              </li>
+            )}
+            <li className={  `   mx-1 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}>
+              <a
+                href="#0"
+                onClick={handleNextClick}
+                className="flex h-9 min-w-[36px] items-center justify-center rounded-md bg-body-color bg-opacity-[15%] px-4 text-sm text-body-color transition hover:bg-primary hover:bg-opacity-100 hover:text-white"
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </div> : <></>}</>
+
   );
 }
 

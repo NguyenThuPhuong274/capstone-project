@@ -1,3 +1,6 @@
+import Course1 from "../../assets/images/course/course-1.png";
+import Course2 from "../../assets/images/course/course-2.png";
+import Course3 from "../../assets/images/course/course-3.png";
 
 const coursesData = [
     {
@@ -7,7 +10,7 @@ const coursesData = [
         description: "Khóa học N1 là chương trình đào tạo tiên tiến về ngoại ngữ Nhật Bản cấp độ cao.",
         title: "Khóa học N1",
         level: 1,
-        img_url: "/images/course/course-1.png",
+        img_url: Course1,
       },
       {
         id: 2,
@@ -16,7 +19,7 @@ const coursesData = [
         description: "Khóa học N2 là khóa học tiếng Nhật trình độ trung cấp tại Nhật Bản",
         title: "Khóa học N2",
         level: 2,
-        img_url: "/images/course/course-2.png",
+        img_url: Course2,
       },
       {
         id: 2,
@@ -25,7 +28,7 @@ const coursesData = [
         description: "Khóa học N3 giúp nâng cao trình độ tiếng Nhật tại trung cấp",
         title: "Khóa học N3",
         level: 3,
-        img_url: "/images/course/course-3.png",
+        img_url: Course3,
       },
 ];
 

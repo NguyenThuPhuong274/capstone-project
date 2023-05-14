@@ -14,14 +14,7 @@ import {
   TableHead,
   TableRow
 } from '@mui/material';
-import { Scrollbar } from '@/components/scrollbar';
-// import { SeverityPill } from '@/components/severity-pill';
-
-const statusMap = {
-  pending: 'warning',
-  delivered: 'success',
-  refunded: 'error'
-};
+import {Scrollbar} from '../../components/ScrollBar';
 
 export const OverviewLatestOrders = (props) => {
   const { orders = [], sx } = props;
