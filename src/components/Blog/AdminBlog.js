@@ -15,132 +15,9 @@ import React from "react";
 
 const now = new Date();
 
-const data = [
-  {
-    id: '5e887ac47eed253091be10cb',
-    title: 'Khóa học N1',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    level: 1,
-    status: true,
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  },
-  {
-    id: '5e887b209c28ac3dd97f6db5',
-    title: 'Khóa học N2',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    level: 2,
-    duration: 6,
-    status: true,
-
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  },
-  {
-    id: '5e887b7602bdbc4dbb234b27',
-    title: 'Khóa học N3',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    level: 3,
-    duration: 6, status: false,
-
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  },
-  {
-    id: '5e86809283e28b96d2d38537',
-    title: 'Khóa học N4',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    level: 4,
-    duration: 6, status: true,
-
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  },
-  {
-    id: '5e86805e2bafd54f66cc95c3',
-    title: 'Khóa học N4 nâng cao',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    level: 5,
-    duration: 6, status: true,
-
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  },
-  {
-    id: '5e887a1fbefd7938eea9c981',
-    title: 'Khóa học N2 nâng cao',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    duration: 6, status: true,
-
-    level: 2,
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  },
-  {
-    id: '5e887d0b3d090c1b8f162003',
-    title: 'Khóa học N1 nâng cao',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    duration: 6, status: true,
-
-    level: 2,
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  },
-  {
-    id: '5e88792be2d4cfb4bf0971d9',
-    title: 'Khóa học N6 nâng cao',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    level: 3,
-    duration: 6, status: true,
-
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  },
-  {
-    id: '5e8877da9a65442b11551975',
-    title: 'Khóa học N6',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    level: 4,
-
-    duration: 6, status: true,
-
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  },
-  {
-    id: '5e8680e60cba5019c5ca6fda',
-    title: 'Khóa học N3 nâng cao',
-    description: 'Mô tả khóa học ',
-    lessons: 12,
-    duration: 6, status: true,
-
-    level: 4,
-    price: 1230000,
-    avatar: '/assets/avatars/avatar-carson-darrin.png',
-    createdAt: subDays(subHours(now, 7), 1).getTime(),
-  }
-];
 
 
-const AdminCoursesPage = () => {
+const AdminBlog = ({data}) => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [courses, setCourses] = React.useState(data);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -208,8 +85,6 @@ const AdminCoursesPage = () => {
 
 
             </Stack>
-            <CourseTopBar values={values} handleChangeValue={handleChangeValue} setIsOpenModal={setIsOpenModal} />
-
             {courses.length > 0 ? <>
               <CoursesTable
                 count={data.length}
@@ -218,7 +93,7 @@ const AdminCoursesPage = () => {
               
               <Card className='bg-white'>
                 <CardContent>
-                  Không tìm thấy khóa học 
+                  Không tìm thấy tin tức
                 </CardContent>
               </Card>
               }
@@ -288,4 +163,4 @@ const AdminCoursesPage = () => {
 };
 
 
-export default AdminCoursesPage;
+export default AdminBlog;

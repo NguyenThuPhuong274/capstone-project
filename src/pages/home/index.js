@@ -4,7 +4,7 @@ import UserHomePage from "../user/home";
 
 
 const HomePage = () => {
-  const [role, setRole] = React.useState("user");
+  const [role, setRole] = React.useState("admin");
 
   return (
     <>

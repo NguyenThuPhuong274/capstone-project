@@ -1,5 +1,5 @@
 import { useTheme } from '@mui/material/styles';
-
+import LogoImage from "../../assets/images/logo/logo.png";
 export const Logo = () => {
   const theme = useTheme();
   const fillColor = theme.palette.primary.main;
@@ -10,7 +10,7 @@ export const Logo = () => {
       className={`flex items-center header-logo block `}
     >
       <img
-        src="/images/logo/logo.png"
+        src={LogoImage}
         alt="logo"
         width={65}
         height={65}

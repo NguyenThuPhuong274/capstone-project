@@ -1,27 +1,17 @@
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
-import { Button,Stack, Card, InputAdornment, OutlinedInput, SvgIcon } from '@mui/material';
+import { Button, Stack, Card, InputAdornment, OutlinedInput, SvgIcon } from '@mui/material';
+import AppInput from '../../components/AppInput/AppInput';
+import React from 'react';
 
-export const CourseTopBar = ({ setIsOpenModal }) => (
-  <Card sx={{ p: 2, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
+export const CourseTopBar = ({values, setIsOpenModal, handleChangeValue }) => {
+
+  
+  return <Card sx={{ p: 2, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
     <Stack direction="row" justifyContent="space-between">
-      <OutlinedInput
-        defaultValue=""
-        fullWidth
-        placeholder="Tìm kiếm khóa học"
-        startAdornment={(
-          <InputAdornment position="start">
-            <SvgIcon
-              color="action"
-              fontSize="small"
-            >
-              <MagnifyingGlassIcon />
-            </SvgIcon>
-          </InputAdornment>
-        )}
-
-        sx={{ maxWidth: 300 }}
-      />
+      <div className='w-96'>
+        <AppInput height={""} title={"searchTerm"} value={values?.searchTersm} handleChangeValue={ handleChangeValue} placeholder={"Tìm kiếm khóa học"} />
+      </div>
       <div>
         <Button
           onClick={() => setIsOpenModal(true)}
@@ -38,5 +28,5 @@ export const CourseTopBar = ({ setIsOpenModal }) => (
       </div>
     </Stack>
 
-  </Card>
-);
+  </Card>;
+};

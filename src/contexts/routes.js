@@ -13,6 +13,7 @@ import SupportPage from "../pages/support";
 import AccountPage from "../pages/account";
 import AdminCoursesPage from "../pages/admin/courses";
 import CoursePage from "../pages/course";
+import AdminCourseDetailsPage from "../pages/admin/course-details";
 
 export const routes = [
   {
@@ -49,6 +50,12 @@ export const routes = [
     path: ROUTE_CONSTANTS.ADMIN_BLOG_PAGE,
     isPrivate: false,
     component: <AdminBlogPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ADMIN_COURSE_DETAILS,
+    isPrivate: false,
+    component: <AdminCourseDetailsPage />,
     exact: true,
   },
   {

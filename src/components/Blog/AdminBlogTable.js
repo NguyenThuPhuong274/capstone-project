@@ -23,7 +23,7 @@ import { Scrollbar } from '../../components/ScrollBar';
 import { getInitials } from '../../utils/get-initials';
 import { useNavigate } from 'react-router-dom';
 import {ROUTE_CONSTANTS} from "../../constants/route.constants";
-export const CoursesTable = (props) => {
+export const BlogTable = (props) => {
 
   const navigate = useNavigate();
   const {
@@ -45,26 +45,18 @@ const handleEditCourse = (id) => {
               <TableRow>
 
                 <TableCell>
-                  Tên
+                  Tiêu đề
                 </TableCell>
                 <TableCell>
-                  Cấp độ
+                 Mô tả
                 </TableCell>
                 <TableCell>
-                  Thời gian
-                </TableCell>
-                <TableCell>
-                  Giá
-                </TableCell>
-                <TableCell>
-                  Số bài học
+                  Chủ đề
                 </TableCell>
                 <TableCell>
                   Ngày tạo
                 </TableCell>
-                <TableCell>
-                  Trạng thái
-                </TableCell>
+               
                 <TableCell>
                   Hành động
                 </TableCell>

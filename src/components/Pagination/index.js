@@ -45,8 +45,8 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
 
     <>
       {totalPages > 1 ?
-        <div className="w-full px-4">
-          <ul className="flex items-center justify-center pt-8">
+        <div className="w-full">
+          <ul className="flex items-center justify-center">
             <li className={` mx-1 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}>
               <a
                 href="#0"

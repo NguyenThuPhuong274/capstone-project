@@ -14,4 +14,5 @@ export const ROUTE_CONSTANTS = {
     ADMIN_COURSE_PAGE: "/authen/courses",
     ADMIN_SUPPORT_PAGE: "/authen/supports",
     ADMIN_CONTACT_PAGE: "/authen/contacts",
+    ADMIN_COURSE_DETAILS: "/authen/course-details",
 }

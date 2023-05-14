@@ -14,7 +14,7 @@ import {
   };
   
   export const CourseAvatar = () => (
-    <Card sx={{height: 297, mr:1, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'}}>
+    <Card sx={{height: 350, mr:1, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'}}>
       <CardContent>
         <Box
           sx={{
@@ -26,9 +26,9 @@ import {
           <Avatar
             src={user.avatar}
             sx={{
-              height: 200,
+              height: 250,
               mb: 2,
-              width: 200
+              width: 250
             }}
           />
          

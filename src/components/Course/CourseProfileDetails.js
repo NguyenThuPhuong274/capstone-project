@@ -72,55 +72,51 @@ export const CourseProfileDetails = () => {
 
   return (
     <Card sx={{ ml: 2, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;' }} >
-      
-      <CardContent sx={{ pb: 5}} >
+
+      <CardContent className='h-[350px]' sx={{ pb: 5 }} >
         <CardHeader title="Thông tin khóa học" />
-      <Grid
-            container
-            spacing={3}
+        <Grid
+          container
+          spacing={3}
+        >
+          <Grid
+
+            xs={12}
+            md={6}
           >
-            <Grid
-            
-              xs={12}
-              md={6}
-            >
-             <AppInput value={values} title={"title"} handleChangeValue={handleChangeValue} placeholder={"Tên khóa học"} />
-            </Grid>
-            <Grid
-              xs={12}
-              md={6}
-            >
-            <AppSelect data={[1, 2, 3, 4, 5]} placeholder="Chọn cấp độ" />
-            </Grid>
-            <Grid
-              xs={12}
-              md={6}
-            >
-             <AppInput value={values} title={"duration"} handleChangeValue={handleChangeValue}  placeholder={"Thời gian học (tháng)"} />
-            </Grid>
-            <Grid
-              xs={12}
-              md={6}
-            >
-              <AppInput value={values} title={"price"} handleChangeValue={handleChangeValue}  placeholder={"Giá (vnd)"} />
-            </Grid>
-            <Grid
-              xs={12}
-              md={6}
-            >
-              <AppInput value={values} title={"description"} handleChangeValue={handleChangeValue}  placeholder={"Mô tả khóa học"} />
-            </Grid>
-            <Grid
-              xs={12}
-              md={6}
-            >
-              <AppCheckBox />
-            </Grid>
-           
+            <AppInput height={""} value={values} title={"title"} handleChangeValue={handleChangeValue} placeholder={"Tên khóa học"} />
           </Grid>
+     
+          <Grid
+            xs={12}
+            md={6}
+          >
+            <AppInput height={""} value={values} title={"duration"} handleChangeValue={handleChangeValue} placeholder={"Thời gian học (tháng)"} />
+          </Grid>
+          <Grid
+            xs={12}
+            md={6}
+          >
+            <AppInput height={""} value={values} title={"price"} handleChangeValue={handleChangeValue} placeholder={"Giá (vnd)"} />
+          </Grid>
+          <Grid
+            xs={12}
+            md={6}
+          >
+            <AppCheckBox />
+          </Grid>
+          <Grid
+            xs={12}
+            md={12}
+            
+          >
+            <AppInput height={"h-[100px]"} value={values} title={"description"} handleChangeValue={handleChangeValue} placeholder={"Mô tả khóa học"} />
+          </Grid>
+
+        </Grid>
       </CardContent>
       <Divider />
     </Card>
-     
+
   );
 };

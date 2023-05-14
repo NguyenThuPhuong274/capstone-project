@@ -40,7 +40,7 @@ const rows = [
 
 const CourseChapter = () => {
 
-    const [expanded, setExpanded] = React.useState<string | false>(false);
+    const [expanded, setExpanded] = React.useState(false);
     const [isAddLesson, setIsAddLesson] = React.useState(false);
     const handleChange =
         (panel) => (event, isExpanded) => {
@@ -134,25 +134,7 @@ const CourseChapter = () => {
                     </TableContainer>
                 </AccordionDetails>
             </Accordion>
-            <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel2bh-content"
-                    id="panel2bh-header"
-                >
-                    <Typography sx={{ width: '33%', flexShrink: 0 }}>Users</Typography>
-                    <Typography sx={{ color: 'text.secondary' }}>
-                        You are currently not an owner
-                    </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
-                        varius pulvinar diam eros in elit. Pellentesque convallis laoreet
-                        laoreet.
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
+           
 
         </div>
     );

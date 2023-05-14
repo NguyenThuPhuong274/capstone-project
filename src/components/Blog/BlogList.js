@@ -29,7 +29,6 @@ const BlogList = ({ blogData, enableActionAdd }) => {
 
     const [totalPage, setTotalPage] = React.useState(0);
 
-    const carousel = React.useRef();
 
     React.useEffect(() => {
         let totalPage = Math.floor(data.length / 3);
@@ -70,7 +69,6 @@ const BlogList = ({ blogData, enableActionAdd }) => {
                     <Carousel
                         indicators={totalPage > 1 ? true : false}
                         index={currentPage - 1}
-                        ref={carousel}
                         swipe
                         autoPlay={false}
                         onChange={(index) => onPageChange(index + 1)}
