@@ -4,6 +4,8 @@ export const ROUTE_CONSTANTS = {
     SIGN_UP: "/signup",
     FORGOT_PASSOWRD: "/forgot-password",
     ERROR_PAGE: "/error",
+    BLOG_PAGE: "/blogs",
+    COURSE_PAGE: "/courses",
     SUPPORT_PAGE: "/support",
     CONTACT_PAGE: "/contact",
     ACCOUNT_PAGE: "/authen/account",

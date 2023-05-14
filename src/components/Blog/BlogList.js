@@ -6,12 +6,13 @@ import {
 } from '@mui/material';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import PencilIcon from '@heroicons/react/24/solid/PencilIcon';
+import EyeIcon from '@heroicons/react/24/solid/EyeIcon';
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import AppInput from "../AppInput/AppInput";
 import Carousel from 'react-material-ui-carousel'
 
-const BlogList = ({ blogData }) => {
+const BlogList = ({ blogData, enableActionAdd }) => {
     const [data, setBlogData] = React.useState(blogData);
     const navigate = useNavigate();
     const [isOpenModal, setIsOpenModal] = React.useState(false);
@@ -31,8 +32,8 @@ const BlogList = ({ blogData }) => {
     const carousel = React.useRef();
 
     React.useEffect(() => {
-        let totalPage = Math.floor(data.length / 1);
-        if (data.length % 1 != 0) totalPage += 1;
+        let totalPage = Math.floor(data.length / 3);
+        if (data.length % 3 != 0) totalPage += 1;
         setTotalPage(totalPage);
     }, [data])
 
@@ -47,7 +48,7 @@ const BlogList = ({ blogData }) => {
                 <div className="w-96">
                     <AppInput placeholder={"Tìm kiếm tin tức"} title={""} handleChangeValue={handleChangeValue} value={searchTerm} />
                 </div>
-                <div>
+                <div className={`${enableActionAdd == true? "block" : "hidden"}`} >
                     <Button
                         onClick={() => setIsOpenModal(true)}
                         className='bg-primary'
@@ -71,6 +72,7 @@ const BlogList = ({ blogData }) => {
                         index={currentPage - 1}
                         ref={carousel}
                         swipe
+                        autoPlay={false}
                         onChange={(index) => onPageChange(index + 1)}
                         navButtonsAlwaysVisible={totalPage > 1 ? true : false}
                         navButtonsAlwaysInvisible={totalPage > 1 ? false : true}
@@ -83,9 +85,9 @@ const BlogList = ({ blogData }) => {
                                 className="w-full px-2 md:w-2/3 lg:w-1/2 xl:w-1/3"
                             >
                                 <SingleBlog
-                                    actionTitle="Chỉnh sửa"
+                                    actionTitle={`${enableActionAdd == true? "Chỉnh sửa" : "Xem thông tin"}`}
                                     blog={blog}
-                                    icon={<PencilIcon />}
+                                    icon={enableActionAdd == true ? <PencilIcon /> : <EyeIcon />}
                                     handleAction={handleAction}
                                 />
                             </div>

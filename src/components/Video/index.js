@@ -1,9 +1,9 @@
 
 import { useState } from "react";
 import SectionTitle from "../Common/SectionTitle";
-
 import ModalVideo from "react-modal-video";
-
+import VideoImage from "../../assets/images/video/video.jpg";
+import Shape from "../../assets/images/video/shape.svg";
 const Video = () => {
   const [isOpen, setOpen] = useState(false);
 
@@ -24,7 +24,7 @@ const Video = () => {
               data-wow-delay=".15s"
             >
               <div className="relative aspect-[77/40] items-center justify-center">
-                <img src="/images/video/video.jpg" alt="video image" fill />
+                <img src={VideoImage} alt="video image" fill />
                 <div className="absolute top-0 right-0 flex h-full w-full items-center justify-center">
                   <button
                     onClick={() => setOpen(true)}
@@ -55,7 +55,7 @@ const Video = () => {
         onClose={() => setOpen(false)}
       />
        <div className="absolute bottom-0 left-0 right-0 z-[-1]">
-        <img src="/images/video/shape.svg" alt="shape" className="w-full" />
+        <img src={Shape} alt="shape" className="w-full" />
       </div>
      
     </section>

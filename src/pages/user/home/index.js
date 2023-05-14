@@ -9,16 +9,16 @@ import Testimonials from "../../../components/Testimonials";
 import Video from "../../../components/Video";
 import React from "react";
 const UserHomePage = () => {
-    return <>
-     <ScrollUp />
-      <Hero />
-      <Features />
-      <Video />
-      <Course />
-      <Blog />
-      <Testimonials />
-      <Contact />
-    </>
+  return <>
+    <ScrollUp />
+    <Hero />
+    <Features />
+    <Video />
+    <Course />
+    <Blog />
+    <Testimonials />
+    <Contact />
+  </>
 };
 
 export default UserHomePage;

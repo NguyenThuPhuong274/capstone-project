@@ -76,13 +76,13 @@ const AdminBlogPage = () => {
             onChangeIndex={handleChangeIndex}
           >
             <TabPanel value={value} index={0} dir={theme.direction}>
-              <BlogList blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Kinh Nghiệm Học Tiếng Nhật".toLowerCase())} />
+              <BlogList enableActionAdd={true} blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Kinh Nghiệm Học Tiếng Nhật".toLowerCase())} />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
-            <BlogList blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Văn Hóa Nhật Bản".toLowerCase())} />
+            <BlogList enableActionAdd={true} blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Văn Hóa Nhật Bản".toLowerCase())} />
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-            <BlogList blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Tin Tức Sự Kiện".toLowerCase())} />
+            <BlogList enableActionAdd={true} blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Tin Tức Sự Kiện".toLowerCase())} />
             </TabPanel>
           </SwipeableViews>
         </Box>

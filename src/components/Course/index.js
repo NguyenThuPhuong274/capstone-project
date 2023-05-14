@@ -1,12 +1,26 @@
-import { useState } from "react";
 import SectionTitle from "../Common/SectionTitle";
 import CourseCard from "./CourseCard";
 import coursesData from "./coursesData";
-
+import Carousel from "react-material-ui-carousel";
+import React from "react";
 
 const Course = () => {
-  const [isMonthly, setIsMonthly] = useState(true);
+  const totalCourse = coursesData.length;
+  let totalPage = Math.floor(totalCourse / 3);
+  let pageList = [];
+  if (Math.floor(totalCourse % 3) != 0) totalPage += 1;
 
+  for (let i = 0; i < totalPage; i++) {
+    pageList.push(i);
+
+  }
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+
+  const handleAction = () => {
+
+  }
   return (
     <section id="pricing" className="relative z-10 py-16 md:py-20 lg:py-28">
       <div className="container">
@@ -17,18 +31,65 @@ const Course = () => {
           width="665px"
         />
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-        {coursesData.map((course) => (
-               <CourseCard
-               id={course.id}
-               description={course.description}
-               title={course.title}
-               level={course.level}
-               price={course.price}
-               duration={course.duration}
-               img_url={course.img_url}
-            />
-            ))}
+        <div className="relative w-full pl-20 pr-20 pb-20">
+          <Carousel
+            className="p-2"
+            indicators={totalPage > 1 ? true : false}
+            autoPlay={true}
+            animation="slide"
+            navButtonsAlwaysInvisible
+            interval={7000}
+            index={currentPage - 1}
+          >
+            {pageList.map((pageNumber) => {
+
+              let startIndex = pageNumber * 3;
+              let endIndex = startIndex + 3;
+              if (endIndex > totalCourse) endIndex = totalCourse;
+
+              return <div key={"item-" + pageNumber} className={` w-full h-full duration-700 ease-in-out grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:grid-cols-3 `}>
+                {coursesData.slice(startIndex, endIndex).map((course) => (
+                  <CourseCard
+                    id={course.id}
+                    description={course.description}
+                    title={course.title}
+                    level={course.level}
+                    price={course.price}
+                    duration={course.duration}
+                    img_url={course.img_url}
+                  />
+                ))}
+              </div>
+
+            })}
+          </Carousel>
+
+          <div className={`${totalPage > 1 ? "block" : "hidden"}`} >
+            <button onClick={() => {
+              if (currentPage > 1) {
+                setCurrentPage(currentPage - 1);
+              } else {
+                setCurrentPage(totalPage);
+              }
+            }} type="button" className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
+
+              <span className="animate-bounce inline-flex bg-primary items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                <svg aria-hidden="true" className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+              </span>
+            </button>
+            <button type="button" onClick={() => {
+              if (currentPage < totalPage) {
+                setCurrentPage(currentPage + 1);
+              } else {
+                setCurrentPage(1);
+              }
+            }} className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" >
+              <span className="animate-bounce inline-flex bg-primary items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                <svg aria-hidden="true" className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </span>
+            </button>
+          </div>
+
         </div>
       </div>
 

@@ -1,13 +1,54 @@
+import { Card, CardContent, Tab,Tabs, Box,Typography } from "@mui/material";
 import SingleBlog from "../../components/Blog/SingleBlog";
 import blogData from "../../components/Blog/blogData";
 import Breadcrumb from "../../components/Common/Breadcrumb";
 import Pagination from "../../components/Pagination";
-import { useState } from "react";
+import React from "react";
+import { useTheme } from '@mui/material/styles';
+import SwipeableViews from 'react-swipeable-views';
+import BlogList from "../../components/Blog/BlogList";
 
-const Blog = () => {
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-  const [currentPage, onPageChange] = useState(1);
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 0 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
+  };
+}
+
+
+
+const BlogPage = () => {
+
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
   return (
     <>
       <Breadcrumb
@@ -15,29 +56,47 @@ const Blog = () => {
         description="Cập nhật tin tức khóa học, chia sẻ kinh nghiệp"
       />
 
-      <section className="pt-[120px] pb-[120px]">
-        <div className="container">
-          <div className="-mx-4 flex flex-wrap justify-center">
-            {blogData.map((blog) => (
-              <div
-                key={blog.id}
-                className="w-full px-4 md:w-2/3 lg:w-1/2 xl:w-1/3"
-              >
-                <SingleBlog blog={blog} />
-              </div>
-            ))}
-          </div>
+      <section className="pl-12 pr-12 pt-6 w-full pb-[120px]">
+        <div className="mt-[20px] w-full mr-[20px] mb-[20px]">
+          <Card sx={{ ml: "15px", w: "100%", boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" }}>
+            <CardContent>
+              <Box sx={{ width: '100%', }}>
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  indicatorColor="secondary"
+                  textColor="inherit"
+                  variant="fullWidth"
+                  centered
+                  aria-label="full width tabs example"
+                >
+                  <Tab label="Kinh nghiệp học tiếng nhật" {...a11yProps(0)} />
+                  <Tab label="Văn hóa nhật bản" {...a11yProps(1)} />
+                  <Tab label="Tin tức sự kiện" {...a11yProps(2)} />
+                </Tabs>
+                <SwipeableViews
+                  axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                  index={value}
+                  onChangeIndex={handleChangeIndex}
+                >
+                  <TabPanel value={value} index={0} dir={theme.direction}>
+                    <BlogList enableActionAdd={false} blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Kinh Nghiệm Học Tiếng Nhật".toLowerCase())} />
+                  </TabPanel>
+                  <TabPanel value={value} index={1} dir={theme.direction}>
+                    <BlogList enableActionAdd={false} blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Văn Hóa Nhật Bản".toLowerCase())} />
+                  </TabPanel>
+                  <TabPanel value={value} index={2} dir={theme.direction}>
+                    <BlogList enableActionAdd={false} blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Tin Tức Sự Kiện".toLowerCase())} />
+                  </TabPanel>
+                </SwipeableViews>
+              </Box>
+            </CardContent>
+          </Card>
 
-          <div
-            className="wow fadeInUp -mx-4 flex flex-wrap"
-            data-wow-delay=".15s"
-          >
-           <Pagination totalPages={10} currentPage={currentPage} onPageChange={onPageChange}   />
-          </div>
         </div>
       </section>
     </>
   );
 };
 
-export default Blog;
+export default BlogPage;

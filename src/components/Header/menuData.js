@@ -8,7 +8,7 @@ const menuData = [
   {
     id: 2,
     title: "Khóa học",
-    path: "/course",
+    path: "/courses",
     newTab: false,
   },
   {
@@ -31,19 +31,19 @@ const menuData = [
       {
         id: 43,
         title: "Kinh nghiệm học tiếng Nhật",
-        path: "/blog",
+        path: "/blogs",
         newTab: false,
       },
       {
         id: 44,
         title: "Văn hóa Nhật Bản",
-        path: "/blog",
+        path: "/blogs",
         newTab: false,
       },
       {
         id: 45,
         title: "Tin tức sự kiện",
-        path: "/blog",
+        path: "/blogs",
         newTab: false,
       },
       

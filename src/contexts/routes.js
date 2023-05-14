@@ -5,12 +5,14 @@ import SigninPage from "../pages/signin";
 import SignupPage from "../pages/signup";
 import ForgotPasswordPage from "../pages/forgot-password";
 import ErrorPage from "../pages/error";
+import BlogPage from "../pages/blog";
 import AdminBlogPage from "../pages/admin/blog";
 import AdminContactPage from "../pages/admin/contact";
 import ContactPage from "../pages/contact";
 import SupportPage from "../pages/support";
 import AccountPage from "../pages/account";
 import AdminCoursesPage from "../pages/admin/courses";
+import CoursePage from "../pages/course";
 
 export const routes = [
   {
@@ -20,9 +22,21 @@ export const routes = [
     exact: true,
   },
   {
+    path: ROUTE_CONSTANTS.COURSE_PAGE,
+    isPrivate: false,
+    component: <CoursePage />,
+    exact: true,
+  },
+  {
     path: ROUTE_CONSTANTS.ACCOUNT_PAGE,
     isPrivate: false,
     component: <AccountPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.BLOG_PAGE,
+    isPrivate: false,
+    component: <BlogPage />,
     exact: true,
   },
   {
