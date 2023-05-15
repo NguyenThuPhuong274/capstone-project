@@ -1,19 +1,12 @@
-import { useCallback, useState } from 'react';
 import {
-  Box,
-  Button,
   Card,
-  CardActions,
   CardContent,
   CardHeader,
   Divider,
-  TextField,
   Unstable_Grid2 as Grid
 } from '@mui/material';
 import AppInput from '../AppInput/AppInput';
-import AppSelect from '../AppInput/AppSelect';
 import AppCheckBox from '../AppInput/AppCheckBox';
-import AppTextArea from '../AppInput/AppTextArea';
 
 const states = [
   {
@@ -34,41 +27,8 @@ const states = [
   }
 ];
 
-export const CourseProfileDetails = () => {
-  const [values, setValues] = useState({
-    title: '',
-    level: '',
-    description: '',
-    duration: 0,
-    price: 0,
-    status: false,
-  });
-
-  const handleChangeValue = (key, value) => {
-    setValues(prevValues => ({
-      ...prevValues,
-      [key]: value
-    }));
-  };
-
-
-
-  const handleChange = useCallback(
-    (event) => {
-      setValues((prevState) => ({
-        ...prevState,
-        [event.target.name]: event.target.value
-      }));
-    },
-    []
-  );
-
-  const handleSubmit = useCallback(
-    (event) => {
-      event.preventDefault();
-    },
-    []
-  );
+export const CourseProfileDetails = ({handleChangeValue, values}) => {
+  
 
   return (
     <Card sx={{ ml: 2, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;' }} >

@@ -1,17 +1,18 @@
-import { useCallback, useMemo, useState } from 'react';
+import {  useState } from 'react';
 import { subDays, subHours } from 'date-fns';
 import {
   Box, Button, Container, Stack, Dialog, DialogTitle, Grid
-  , DialogContent, Card, CardContent
+  , DialogContent, Card, CardContent, Divider, SvgIcon
 } from '@mui/material';
-import { useSelection } from '../../../hooks/use-selection';
-import { applyPagination } from '../../../utils/apply-pagination';
 import { CoursesTable } from '../../../sections/course/courses-table';
 import { CourseTopBar } from '../../../sections/course/course-topbar';
-import { CourseAvatar } from "../../../components/Course/CourseAvatar";
 import { CourseProfileDetails } from "../../../components/Course/CourseProfileDetails";
 import Pagination from "../../../components/Pagination";
 import React from "react";
+import FileUploader from '../../../components/FileUploader';
+import CourseImageDefault from "../../../assets/images/course/course-default.png";
+import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
+import HandThumbUpIcon from '@heroicons/react/24/solid/HandThumbUpIcon';
 
 const now = new Date();
 
@@ -149,13 +150,21 @@ const AdminCoursesPage = () => {
 
   const [startIndex, setStartIndex] = React.useState(0);
   const [endIndex, setEndIndex] = React.useState(startIndex + rowsPerPage);
-  const [values, setValues] = React.useState({ searchTerm: "" });
+  const [searchTerms, setSearchTearms] = React.useState({ value: "" });
+
+  const [currentFile, setCurrentFile] = React.useState(null);
+  const [previewUrl, setPreviewUrl] = React.useState(null);
+  const [values, setValues] = useState({
+    title: '',
+    description: '',
+    duration: 0,
+    price: 0,
+    status: false,
+  });
 
   const handleCloseModal = () => {
     setIsOpenModal(false);
   }
-
-
 
   React.useEffect(() => {
     let startIndex = (currentPage - 1) * rowsPerPage;
@@ -168,22 +177,36 @@ const AdminCoursesPage = () => {
 
   React.useEffect(() => {
     let totalPage = Math.floor(courses.length / rowsPerPage);
-    if (courses.length % rowsPerPage != 0) totalPage += 1;
+    if (courses.length % rowsPerPage !== 0) totalPage += 1;
     setTotalPage(totalPage);
     onPageChange(1);
   }, [courses])
 
   React.useEffect(() => {
+    setCourses(data?.filter((course) => course?.title.includes(searchTerms.value)));
+  }, [searchTerms.value]);
 
-    setCourses(data?.filter((course) => course?.title.includes(values.searchTerm)));
-  }, [values.searchTerm]);
+  // React.useEffect(() => {
+  //   alert(currentFile?.url);
+  // }, [currentFile]);
 
-  const handleChangeValue = (title, value) => {
-    setValues({
+
+  const handleChangeSearchTerm = (title, value) => {
+    setSearchTearms({
       [title]: value,
       ...value
     });
   }
+
+
+
+  const handleChangeValue = (key, value) => {
+    setValues(prevValues => ({
+      ...prevValues,
+      [key]: value
+    }));
+  };
+
 
   return (
     <>
@@ -208,29 +231,29 @@ const AdminCoursesPage = () => {
 
 
             </Stack>
-            <CourseTopBar values={values} handleChangeValue={handleChangeValue} setIsOpenModal={setIsOpenModal} />
+            <CourseTopBar values={searchTerms} handleChangeValue={handleChangeSearchTerm} setIsOpenModal={setIsOpenModal} />
 
             {courses.length > 0 ? <>
               <CoursesTable
                 count={data.length}
                 items={courses.slice(startIndex, endIndex)}
-              /></> : 
-              
+              /></> :
+
               <Card className='bg-white'>
                 <CardContent>
-                  Không tìm thấy khóa học 
+                  Không tìm thấy khóa học
                 </CardContent>
               </Card>
-              }
+            }
           </Stack>
           <Card className={`${courses.length > 0 ? "block" : "hidden"}`} sx={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;", mt: 2 }}>
             <CardContent className='p-0' >
               <Stack direction={"row"} className='flex items-center justify-between' spacing={2}>
                 <div className='h-[25px]'>
-                Hiện thị từ <strong>{startIndex + 1}</strong> đến <strong>{endIndex > courses.length ? courses.length : endIndex}</strong> trong tổng số <strong>{courses.length}</strong> khóa học
+                  Hiện thị từ <strong>{startIndex + 1}</strong> đến <strong>{endIndex > courses.length ? courses.length : endIndex}</strong> trong tổng số <strong>{courses.length}</strong> khóa học
                 </div>
                 <div className='w-[300px] h-[25px]'>
-                <Pagination  totalPages={totalPage} currentPage={currentPage} onPageChange={onPageChange} />
+                  <Pagination totalPages={totalPage} currentPage={currentPage} onPageChange={onPageChange} />
                 </div>
               </Stack>
             </CardContent>
@@ -257,24 +280,43 @@ const AdminCoursesPage = () => {
                     md={6}
                     lg={4}
                   >
-                    <CourseAvatar />
+                    <div style={{ boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" }} className="relative  flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+                      <div className="relative mx-4  -mt-6 h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
+                        <img
+                          src={previewUrl == null ? CourseImageDefault : previewUrl}
+                          alt="img-blur-shadow"
+
+                        />
+                      </div>
+                      <Divider className='h-4' />
+                      <FileUploader
+
+                        setCurrentFile={setCurrentFile}
+                        firebaseFolderName={"course/images"} setPreviewUrl={setPreviewUrl} />
+                    </div>
+
                   </Grid>
                   <Grid
                     xs={12}
                     md={6}
                     lg={8}
                   >
-                    <CourseProfileDetails />
+                    <CourseProfileDetails handleChangeValue={handleChangeValue} values={values} />
                   </Grid>
                 </Grid>
               </div>
               <div className='w-full flex justify-end'>
                 <div className='w-[320px] flex justify-between'>
                   <Button color='error' variant="contained" className=' w-[150px]' onClick={handleCloseModal}>
-                    Hủy
+                 
+                  <SvgIcon className='mr-2'>
+                      <XMarkIcon />
+                    </SvgIcon> Hủy
                   </Button>
                   <Button color='primary' variant="contained" className='w-[150px] ml-3'>
-                    Lưu
+                    <SvgIcon className='mr-2'>
+                      <HandThumbUpIcon />
+                    </SvgIcon> Lưu
                   </Button>
                 </div>
               </div>

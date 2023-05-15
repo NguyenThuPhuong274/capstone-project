@@ -1,6 +1,5 @@
 import AppCheckBox from "../../../components/AppInput/AppCheckBox";
 import AppInput from "../../../components/AppInput/AppInput";
-import AppSelect from "../../../components/AppInput/AppSelect";
 import CourseChapter from "../../../components/Course/CourseChapter";
 import CourseChapterModal from "../../../components/Course/CourseChapterModal";
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
