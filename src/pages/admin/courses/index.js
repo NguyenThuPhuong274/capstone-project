@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 import { subDays, subHours } from 'date-fns';
 import {
   Box, Button, Container, Stack, Dialog, DialogTitle, Grid
@@ -150,7 +150,7 @@ const AdminCoursesPage = () => {
 
   const [startIndex, setStartIndex] = React.useState(0);
   const [endIndex, setEndIndex] = React.useState(startIndex + rowsPerPage);
-  const [searchTerms, setSearchTearms] = React.useState({ value: "" });
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   const [currentFile, setCurrentFile] = React.useState(null);
   const [previewUrl, setPreviewUrl] = React.useState(null);
@@ -183,8 +183,8 @@ const AdminCoursesPage = () => {
   }, [courses])
 
   React.useEffect(() => {
-    setCourses(data?.filter((course) => course?.title.includes(searchTerms.value)));
-  }, [searchTerms.value]);
+    setCourses(data?.filter((course) => course?.title.includes(searchTerm)));
+  }, [searchTerm]);
 
   // React.useEffect(() => {
   //   alert(currentFile?.url);
@@ -192,10 +192,7 @@ const AdminCoursesPage = () => {
 
 
   const handleChangeSearchTerm = (title, value) => {
-    setSearchTearms({
-      [title]: value,
-      ...value
-    });
+    setSearchTerm(value)
   }
 
 
@@ -231,7 +228,7 @@ const AdminCoursesPage = () => {
 
 
             </Stack>
-            <CourseTopBar values={searchTerms} handleChangeValue={handleChangeSearchTerm} setIsOpenModal={setIsOpenModal} />
+            <CourseTopBar values={{searchTerm: searchTerm}} handleChangeValue={handleChangeSearchTerm} setIsOpenModal={setIsOpenModal} />
 
             {courses.length > 0 ? <>
               <CoursesTable
@@ -308,8 +305,8 @@ const AdminCoursesPage = () => {
               <div className='w-full flex justify-end'>
                 <div className='w-[320px] flex justify-between'>
                   <Button color='error' variant="contained" className=' w-[150px]' onClick={handleCloseModal}>
-                 
-                  <SvgIcon className='mr-2'>
+
+                    <SvgIcon className='mr-2'>
                       <XMarkIcon />
                     </SvgIcon> Hủy
                   </Button>
