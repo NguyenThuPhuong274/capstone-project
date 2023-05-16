@@ -53,7 +53,7 @@ const AccountPage = () => {
 
         <div >
           <Grid
-          style={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'}}
+          style={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px'}}
             container
             spacing={3}
           >
@@ -62,7 +62,7 @@ const AccountPage = () => {
               md={6}
               lg={4}
             >
-              <Card sx={{ pt: 2, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;' }}  className=" w-96 flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+              <Card sx={{ pt: 2, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}  className=" w-96 flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                 <div className='w-full flex justify-center' >
                   <Avatar src={previewUrl == null ? CourseImageDefault : previewUrl}
                     sx={{ width: 200, height: 200 }}

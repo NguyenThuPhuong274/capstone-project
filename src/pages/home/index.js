@@ -1,7 +1,7 @@
 import React from "react";
 import Dashboard from "../admin/dashboard";
 import UserHomePage from "../user/home";
-import PublicHomePage from "../user/home";
+import PublicHomePage from "../public/home";
 
 
 const HomePage = () => {

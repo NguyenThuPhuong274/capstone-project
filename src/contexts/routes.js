@@ -15,6 +15,8 @@ import AdminCoursesPage from "../pages/admin/courses";
 import CoursePage from "../pages/course";
 import MyCoursePage from "../pages/user/course/MyCoursePage";
 import AdminCourseDetailsPage from "../pages/admin/course-details";
+import CourseDetailPage from "../pages/course-details";
+import LessonViewPage from "../pages/user/course/LessonViewPage";
 
 export const routes = [
   {
@@ -27,6 +29,18 @@ export const routes = [
     path: ROUTE_CONSTANTS.COURSE_PAGE,
     isPrivate: false,
     component: <CoursePage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.COURSE_DETAILS_PAGE,
+    isPrivate: false,
+    component: <CourseDetailPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.LESSON_VIEW_PAGE,
+    isPrivate: false,
+    component: <LessonViewPage />,
     exact: true,
   },
   {

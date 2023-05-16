@@ -21,4 +21,4 @@ const PublicHomePage = () => {
   </>
 };
 
-export default UserHomePage;
+export default PublicHomePage;

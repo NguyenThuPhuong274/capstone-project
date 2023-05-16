@@ -83,20 +83,20 @@ const redirectToPage = useCallback((path) => {
         {role == "admin" ? <></> : <>
 
           <MenuItem onClick={() => redirectToPage(ROUTE_CONSTANTS.MY_COURSE_PAGE)} >
-            <SvgIcon fontSize="small" className='mr-3'>
+            <SvgIcon fontSize="small" color='primary' className='mr-3'>
               <BookmarkIcon />
             </SvgIcon>
             Khóa học của tôi
           </MenuItem>
           <MenuItem onClick={() => redirectToPage(ROUTE_CONSTANTS.ACCOUNT_PAGE)}>
-            <SvgIcon fontSize="small" className='mr-3'>
+            <SvgIcon color='primary' fontSize="small" className='mr-3'>
               <UserIcon />
             </SvgIcon>
             Thông tin cá nhân
           </MenuItem>
         </>}
         <MenuItem onClick={handleSignOut}>
-          <SvgIcon fontSize="small" className='mr-3'>
+          <SvgIcon  color='primary' fontSize="small" className='mr-3'>
             <PowerIcon />
           </SvgIcon>
           Đăng xuất
