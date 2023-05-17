@@ -1,5 +1,5 @@
 import Breadcrumb from "../../components/Common/Breadcrumb";
-import { Button, Card, CardContent, CardHeader, List, ListItem, Stack } from "@mui/material";
+import { Button, Card, CardContent, CardHeader, Dialog, DialogContent, DialogContentText, DialogTitle, List, ListItem, Stack } from "@mui/material";
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 import CourseImage from "../../assets/images/course/course-1.png";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_CONSTANTS } from "../../constants/route.constants";
+import PayPal from "../../components/PayPal";
+
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -48,8 +50,11 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 const CourseDetailPage = () => {
     const navigate = useNavigate();
     const handleClick = () => {
+        // setIsOpen(true);
         navigate(ROUTE_CONSTANTS.LESSON_VIEW_PAGE);
     }
+
+
 
     const course = {
         id: 1,
@@ -110,7 +115,7 @@ const CourseDetailPage = () => {
         ]
     }
 
-    const [isOpen, setOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
 
     const [expanded, setExpanded] = React.useState('panel1');
 
@@ -128,7 +133,7 @@ const CourseDetailPage = () => {
             </Stack>
             <Stack direction={"row"} spacing={3}>
 
-                <Card className="w-full" sx={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
+                <Card className="w-full" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
                     <CardHeader title="Danh sách chương và bài học" />
                     <CardContent>
                         <div>
@@ -157,7 +162,7 @@ const CourseDetailPage = () => {
                     </CardContent>
                 </Card>
 
-                <Card sx={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }} >
+                <Card sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }} >
                     <CardContent className="w-full relative ">
                         <img src={CourseImage} className="w-[700px] h-[300px] mb-7" />
                         <Button onClick={() => handleClick()} variant="contained" className="w-full absolute bottom-0" color="primary" >
@@ -169,6 +174,10 @@ const CourseDetailPage = () => {
 
             </Stack>
         </Stack>
+
+
+
+        <PayPal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
 }
 

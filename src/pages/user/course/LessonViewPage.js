@@ -17,6 +17,10 @@ import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 
 import ReactPlayer from 'react-player'
+import { useNavigate } from "react-router-dom";
+import { ROUTE_CONSTANTS } from "../../../constants/route.constants";
+import TestDialog from "../../../components/Test";
+import ConfirmDialog from "../../../components/Confirm";
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -161,9 +165,11 @@ const course = {
 const LessonViewPage = () => {
     const [expanded, setExpanded] = React.useState('panel1');
     const [currentLesson, setCurrentLesson] = React.useState(course.chapters[0].lessons[0]);
-
+    const [openTestModal, setOpenTestModal] = React.useState(false);
+    const [isOpenTest, setIsOpenTest] = React.useState(false);
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const navigate = useNavigate();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -187,7 +193,12 @@ const LessonViewPage = () => {
         window.alert("done");
     }
 
-  
+    const handleConfirmTest = () => {
+        setOpenTestModal(false);
+        setIsOpenTest(true);
+    }
+
+
 
     const lessonDone = [
         1, 3, 4
@@ -196,21 +207,31 @@ const LessonViewPage = () => {
     const testDone = [1]
 
 
+    const handleConfirmAction = (status) => {
+        if (status == true) {
+            setOpenTestModal(false);
+            setIsOpenTest(true);
+        } else {
+            setOpenTestModal(false);
+
+        }
+    }
+
     return <>
         <Breadcrumb pageName={"Bài học"} description={"Xem thông tin bài học"} />
         <Stack direction={"row"} spacing={3} className="m-11 mt-10 mb-20">
-            <Card className="w-full" sx={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
+            <Card className="w-full" sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}>
                 <CardContent>
                     <div className="mb-5 expanded">
                         <ReactPlayer
-                    
-                        url={currentLesson.video_url}
-                        controls
-                        width='100%'
-                        height={550}
-                        onEnded={handleLessonDone}
+
+                            url={currentLesson.video_url}
+                            controls
+                            width='100%'
+                            height={550}
+                            onEnded={handleLessonDone}
                         />
-                       
+
                     </div>
                     <Divider />
                     <div className="relative" sx={{ height: "300px" }}>
@@ -270,7 +291,7 @@ const LessonViewPage = () => {
                                                     <ListItemText primary={lesson.title} />
                                                 </ListItemButton>
                                             })}
-                                            <ListItemButton onClick={() => handleChangeLesson(chapter.test)} >
+                                            <ListItemButton onClick={() => setOpenTestModal(true)} >
                                                 <ListItemIcon >
                                                     <SvgIcon sx={{ fontSize: 30 }} color={testDone.includes(chapter?.test?.id) ? "success" : "primary"}>
                                                         {lessonDone.includes(chapter?.test?.id) ? <CheckCircleIcon /> : <QuizIcon />}
@@ -292,7 +313,12 @@ const LessonViewPage = () => {
             </Card>
         </Stack>
 
+        <ConfirmDialog  
+        isOpen={openTestModal}
+        title={"Làm bài kiểm tra"} 
+        description={"Bạn có chắc mình đã sẵn sàng để bắt đầu bài kiểm tra không? Bạn sẽ có 30 phút để hoàn thành nó. Khi bạn đạt đến giới hạn thời gian, bài kiểm tra sẽ tự động nộp."} handleAction={handleConfirmAction} />
 
+        <TestDialog isOpen={isOpenTest} setIsOpen={setIsOpenTest} />
     </>
 }
 

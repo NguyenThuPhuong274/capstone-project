@@ -39,8 +39,6 @@ const Header = (props) => {
     }
   };
 
-
-  const { onNavOpen } = props;
   const accountPopover = usePopover();
   const [account, setAccount] = React.useState({
     name: "Nguyễn Thành Lâm",
@@ -50,8 +48,8 @@ const Header = (props) => {
   return (
     <>
       <header
-        className={`header top-0 left-0 z-40 flex w-full items-center bg-transparent ${sticky
-          ? "!fixed !z-[9999] !bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm !transition dark:!bg-primary dark:!bg-opacity-20"
+        className={`w-[1500px] header top-0 left-0 z-40 flex w-full items-center bg-transparent ${sticky
+          ? "!fixed !z-[99] !bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm !transition dark:!bg-primary dark:!bg-opacity-20"
           : "absolute"
           }`}
       >

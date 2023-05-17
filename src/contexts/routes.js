@@ -17,12 +17,19 @@ import MyCoursePage from "../pages/user/course/MyCoursePage";
 import AdminCourseDetailsPage from "../pages/admin/course-details";
 import CourseDetailPage from "../pages/course-details";
 import LessonViewPage from "../pages/user/course/LessonViewPage";
+import TestPage from "../pages/user/test";
 
 export const routes = [
   {
     path: ROUTE_CONSTANTS.HOME_PAGE,
     isPrivate: false,
     component: <HomePage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.TEST_PAGE,
+    isPrivate: false,
+    component: <TestPage />,
     exact: true,
   },
   {
