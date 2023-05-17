@@ -3,14 +3,20 @@ import { ROUTE_CONSTANTS } from "../../constants/route.constants";
 
 const CourseCard = (props) => {
   const navigate = useNavigate();
-  const { price, duration, description, title, level, img_url } = props;
+  const { price, duration, description, title, level, img_url, isBought } = props;
   const formattedPrice = price.toLocaleString('vi-VN', {
     style: 'currency',
     currency: 'VND',
   });
 
   const handleGoToCourse = () => {
-navigate(ROUTE_CONSTANTS.COURSE_DETAILS_PAGE);
+    if(isBought === true) {
+      navigate(ROUTE_CONSTANTS.LESSON_VIEW_PAGE);
+
+    } else {
+
+      navigate(ROUTE_CONSTANTS.COURSE_DETAILS_PAGE);
+    }
   }
   return (
     <div className="w-full h-full">
@@ -44,12 +50,22 @@ navigate(ROUTE_CONSTANTS.COURSE_DETAILS_PAGE);
 
         </p>
         <div className="mb-1 mt-7 border-b flex row border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">
-          <button  onClick={() => handleGoToCourse()} className="flex w-full mr-3 bg-cteal items-center justify-center rounded-md p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-            Chi tiết
-          </button>
-          <button className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-            Mua khóa học
-          </button>
+
+          {isBought === true ? <>
+            <button onClick={() => handleGoToCourse()} className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                Vào học
+              </button>
+          </> :
+
+            <>
+              <button onClick={() => handleGoToCourse()} className="flex w-full mr-3 bg-cteal items-center justify-center rounded-md p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                Chi tiết
+              </button>
+              <button className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                Mua khóa học
+              </button></>
+          }
+
         </div>
         <div className="absolute bottom-0 right-0 z-[-1]">
           <svg

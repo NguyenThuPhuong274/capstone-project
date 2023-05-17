@@ -17,7 +17,7 @@ import MyCoursePage from "../pages/user/course/MyCoursePage";
 import AdminCourseDetailsPage from "../pages/admin/course-details";
 import CourseDetailPage from "../pages/course-details";
 import LessonViewPage from "../pages/user/course/LessonViewPage";
-import TestPage from "../pages/user/test";
+import BlogDetailsPage from "../pages/blog-details";
 
 export const routes = [
   {
@@ -27,9 +27,9 @@ export const routes = [
     exact: true,
   },
   {
-    path: ROUTE_CONSTANTS.TEST_PAGE,
+    path: ROUTE_CONSTANTS.BLOG_DETAILS_PAGE,
     isPrivate: false,
-    component: <TestPage />,
+    component: <BlogDetailsPage />,
     exact: true,
   },
   {

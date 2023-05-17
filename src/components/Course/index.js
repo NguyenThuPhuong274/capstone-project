@@ -37,8 +37,9 @@ const Course = () => {
             autoPlay={true}
             animation="slide"
             navButtonsAlwaysInvisible
-            interval={7000}
+            interval={10000}
             index={currentPage - 1}
+            className="h-[700px]"
           >
             {pageList.map((pageNumber) => {
 

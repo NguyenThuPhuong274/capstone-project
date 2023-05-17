@@ -21,6 +21,7 @@ export const AccountPopover = (props) => {
   const { signOut } = authenSlice.actions;
 
 const redirectToPage = useCallback((path) => {
+  onClose?.();
   navigate(path);
 });
 
