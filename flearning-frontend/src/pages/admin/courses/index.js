@@ -13,6 +13,9 @@ import FileUploader from '../../../components/FileUploader';
 import CourseImageDefault from "../../../assets/images/course/course-default.png";
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
 import HandThumbUpIcon from '@heroicons/react/24/solid/HandThumbUpIcon';
+import { useDispatch } from 'react-redux';
+import userSlice from '../../../redux/userSlice';
+import { insertCourse } from '../../../redux/courseSlice';
 
 const now = new Date();
 
@@ -154,12 +157,25 @@ const AdminCoursesPage = () => {
 
   const [currentFile, setCurrentFile] = React.useState(null);
   const [previewUrl, setPreviewUrl] = React.useState(null);
+
+
+  const dispatch = useDispatch();
+
+  const { setCurrentPage } = userSlice.actions;
+
+  React.useEffect(() => {
+    dispatch(setCurrentPage("Quản lý khóa học"));
+  }, [])
+
+
   const [values, setValues] = useState({
-    title: '',
+    course_name: '',
     description: '',
     duration: 0,
     price: 0,
     status: false,
+    avatar_url: '',
+    created_at: '',
   });
 
   const handleCloseModal = () => {
@@ -183,18 +199,26 @@ const AdminCoursesPage = () => {
   }, [courses])
 
   React.useEffect(() => {
-    setCourses(data?.filter((course) => course?.title.includes(searchTerm)));
+    // setCourses(data?.filter((course) => course?.course_name.includes(searchTerm)));
   }, [searchTerm]);
 
-  // React.useEffect(() => {
-  //   alert(currentFile?.url);
-  // }, [currentFile]);
+  React.useEffect(() => {
+    if(currentFile?.url != undefined) {
+      // alert(currentFile?.url);
+      setValues(prevValues => ({
+        ...prevValues,
+        avatar_url: currentFile?.url
+      }));
+      setDisableSubmit(false);
+    }
+  }, [currentFile]);
 
 
   const handleChangeSearchTerm = (title, value) => {
     setSearchTerm(value)
   }
 
+  const [disableSubmit, setDisableSubmit] = React.useState(false);
 
 
   const handleChangeValue = (key, value) => {
@@ -204,6 +228,15 @@ const AdminCoursesPage = () => {
     }));
   };
 
+  const handleSubmitCourse = () => {
+    const currentDate = new Date().toLocaleDateString();
+    setValues(prevValues => ({
+      ...prevValues,
+      created_at: currentDate
+    }));
+    dispatch(insertCourse(values));
+    console.log(values);
+  }
 
   return (
     <>
@@ -228,7 +261,7 @@ const AdminCoursesPage = () => {
 
 
             </Stack>
-            <CourseTopBar values={{searchTerm: searchTerm}} handleChangeValue={handleChangeSearchTerm} setIsOpenModal={setIsOpenModal} />
+            <CourseTopBar values={{ searchTerm: searchTerm }} handleChangeValue={handleChangeSearchTerm} setIsOpenModal={setIsOpenModal} />
 
             {courses.length > 0 ? <>
               <CoursesTable
@@ -264,7 +297,7 @@ const AdminCoursesPage = () => {
       <Dialog maxWidth open={isOpenModal} onClose={handleCloseModal}>
         <DialogTitle >THÊM MỚI KHÓA HỌC</DialogTitle>
         <DialogContent sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;' }} dividers>
-          <Container className='mt-10' maxWidth="lg" sx={{ height: 400 }}>
+          <Container className='mt-10' maxWidth="lg" sx={{ height: 450 }}>
             <Stack spacing={3}>
 
               <div>
@@ -277,7 +310,7 @@ const AdminCoursesPage = () => {
                     md={6}
                     lg={4}
                   >
-                    <div style={{ boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" }} className="relative  flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+                    <div style={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;'  }} className="relative  flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                       <div className="relative mx-4  -mt-6 h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
                         <img
                           src={previewUrl == null ? CourseImageDefault : previewUrl}
@@ -287,7 +320,7 @@ const AdminCoursesPage = () => {
                       </div>
                       <Divider className='h-4' />
                       <FileUploader
-
+                        setDisableSubmit={setDisableSubmit}
                         setCurrentFile={setCurrentFile}
                         firebaseFolderName={"course/images"} setPreviewUrl={setPreviewUrl} />
                     </div>
@@ -304,13 +337,13 @@ const AdminCoursesPage = () => {
               </div>
               <div className='w-full flex justify-end'>
                 <div className='w-[320px] flex justify-between'>
-                  <Button color='error' variant="contained" className=' w-[150px]' onClick={handleCloseModal}>
+                  <Button disabled={disableSubmit} color='error' variant="contained" className=' w-[150px]' onClick={handleCloseModal}>
 
                     <SvgIcon className='mr-2'>
                       <XMarkIcon />
                     </SvgIcon> Hủy
                   </Button>
-                  <Button color='primary' variant="contained" className='w-[150px] ml-3'>
+                  <Button disabled={disableSubmit} onClick={handleSubmitCourse} color='primary' variant="contained" className='w-[150px] ml-3'>
                     <SvgIcon className='mr-2'>
                       <HandThumbUpIcon />
                     </SvgIcon> Lưu
