@@ -43,9 +43,7 @@ const handleEditCourse = (id) => {
                 <TableCell>
                   Tên
                 </TableCell>
-                <TableCell>
-                  Cấp độ
-                </TableCell>
+               
                 <TableCell>
                   Thời gian
                 </TableCell>
@@ -68,12 +66,12 @@ const handleEditCourse = (id) => {
             </TableHead>
             <TableBody>
               {items.map((course) => {
-                const createdAt = format(course.createdAt, 'dd/MM/yyyy');
+               const createdAt = format(new Date(course.created_at), 'dd/MM/yyyy'); 
 
                 return (
                   <TableRow
                     hover
-                    key={course.id}
+                    key={course.course_id}
                   >
 
                     <TableCell>
@@ -82,18 +80,15 @@ const handleEditCourse = (id) => {
                         direction="row"
                         spacing={2}
                       >
-                        <Avatar src={course.avatar}>
-                          {getInitials(course.title)}
+                        <Avatar src={course.course_avatar_url}>
+                          {getInitials(course.course_name)}
                         </Avatar>
                         <Typography variant="subtitle2">
-                          {course.title}
+                          {course.course_name}
                         </Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell>
-                      <Chip color={'primary'} label={"N" + course.level} variant="outlined" />
-
-                    </TableCell>
+                  
                     <TableCell>
                       {course.duration} tháng
                     </TableCell>
@@ -104,7 +99,7 @@ const handleEditCourse = (id) => {
                       })}
                     </TableCell>
                     <TableCell>
-                      {course.lessons}
+                      {course.chapters.length}
                     </TableCell>
                     <TableCell>
                       {createdAt}
@@ -113,7 +108,7 @@ const handleEditCourse = (id) => {
                       <Chip color={course.status ? 'secondary' : 'error'} label={course.status ? 'Công khai' : 'Khóa'} />
                     </TableCell>
                     <TableCell>
-                      <Button onClick={() => handleEditCourse(course.id)} variant="contained" className='bg-primary' size='small'>
+                      <Button onClick={() => handleEditCourse(course.course_id)} variant="contained" className='bg-primary' size='small'>
                         <SvgIcon>
                           <PencilIcon />
                         </SvgIcon>

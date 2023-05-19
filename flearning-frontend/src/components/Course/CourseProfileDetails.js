@@ -63,7 +63,7 @@ export const CourseProfileDetails = ({handleChangeValue, values}) => {
             xs={12}
             md={6}
           >
-            <AppCheckBox />
+            <AppCheckBox value={values?.status}  handleChangeValue={handleChangeValue} title={"status"} placeholder={"Trạng thái"} />
           </Grid>
           <Grid
             xs={12}

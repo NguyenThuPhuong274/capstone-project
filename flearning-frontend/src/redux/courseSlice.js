@@ -22,7 +22,8 @@ export const getCourses = createAsyncThunk("get-courses", async () => {
 const courseSlice = createSlice({
   name: "course",
   initialState: {
-
+    data: [],
+    isRefresh: false,
   },
   reducers: {
 
@@ -30,13 +31,19 @@ const courseSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(insertCourse.fulfilled, (state, action) => {
       toast.success("Thêm khóa học thành công");
+      state.isRefresh = true;
+
     });
     builder.addCase(updateCourse.fulfilled, (state, action) => {
       toast.success("Cập nhật khóa học thành công");
+      state.isRefresh = true;
+
     });
 
     builder.addCase(getCourses.fulfilled, (state, action) => {
-      toast.success("Cập nhật khóa học thành công");
+      state.data = action.payload;
+      state.isRefresh = false;
+      console.log(action.payload);
     });
 
 
