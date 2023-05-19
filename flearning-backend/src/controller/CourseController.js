@@ -72,7 +72,7 @@ const CourseController = {
     const course = req.body;
     console.log(req.body);
 
-    queryString = `UPDATE [dbo].[Course]
+    const queryString = `UPDATE [dbo].[Course]
                  SET [course_name] = '${course.course_name}'
                     ,[description] =  '${course.description}'
                     ,[course_avatar_url] = '${course.course_avatar_url}'
