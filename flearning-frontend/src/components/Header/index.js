@@ -157,7 +157,7 @@ const Header = (props) => {
                         height: 40,
                         width: 40
                       }}
-                      src={user.avatar_url != null? user.avatar_url : "/assets/avatars/avatar-anika-visser.png"}
+                      src={user.avatarUrl != null? user.avatarUrl : "/assets/avatars/avatar-anika-visser.png"}
                     />
                   </div>
                   <AccountPopover

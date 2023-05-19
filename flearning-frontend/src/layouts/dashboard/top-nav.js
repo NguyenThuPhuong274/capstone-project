@@ -12,11 +12,14 @@ import {
   Stack,
   SvgIcon,
   Tooltip,
+  Typography,
+  capitalize,
 } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { usePopover } from '../../hooks/use-popover';
 import { AccountPopover } from './account-popover';
 import React from "react"
+import { useSelector } from 'react-redux';
 
 const SIDE_NAV_WIDTH = 280;
 const TOP_NAV_HEIGHT = 64;
@@ -29,6 +32,8 @@ export const TopNav = (props) => {
     role: "admin"
     
   });
+
+  const currentPage = useSelector((state) => state.user.currentPage);
 
 
   return (
@@ -66,7 +71,7 @@ export const TopNav = (props) => {
             spacing={2}
           >
             
-            Tiêu Đề
+           <Typography sx={{textTransform: "capitalize"}} >{currentPage}</Typography>
           </Stack>
           <Stack
             alignItems="center"

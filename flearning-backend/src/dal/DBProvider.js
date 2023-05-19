@@ -10,6 +10,8 @@ var config = {
   options: {
     encrypt: false,
     useUTC: true,
+    enableArithAbort: true,
+    charset: 'UTF-8'
   },
 
   // pool: {

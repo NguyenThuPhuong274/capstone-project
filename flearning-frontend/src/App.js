@@ -38,10 +38,10 @@ function App() {
       dispatch(setUser(user));
     }
   } else {
-    user = decryptToken(token);
+    user = JSON.parse(sessionStorage.getItem("user"));
     dispatch(setUser(user));
-    console.log(user);
   }
+  console.log(user);
 
   // const [isRefresh, setIsRefresh] = React.useState(false);
 

@@ -23,9 +23,9 @@ const AppDatePicker = ({ value, title, handleChangeValue, placeholder }) => {
 
         <Button
             onClick={handleClick}
-            sx={{fontStyle: "normal"}}
+            sx={{ fontStyle: "normal" }}
             color='primary' variant="contained" className=' w-full' >
-           {value?.yearOfBirth  ? "Năm sinh: " + value.yearOfBirth : "Chọn năm sinh" }
+            {value ? "Năm sinh: " + value : "Chọn năm sinh"}
         </Button>
         <Popover
             id={id}
@@ -41,10 +41,10 @@ const AppDatePicker = ({ value, title, handleChangeValue, placeholder }) => {
             <List className="w-[355px] overflow-auto h-[200px]">
                 {years.map((year) => {
                     return <ListItemButton
-                    onClick={() => {
-                        handleChangeValue(title, year);
-                        handleClose();
-                    }}
+                        onClick={() => {
+                            handleChangeValue(title, year);
+                            handleClose();
+                        }}
                     // selected={}
                     // onClick={}
                     >

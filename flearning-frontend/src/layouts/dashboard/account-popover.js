@@ -4,6 +4,7 @@ import { Box, Divider, MenuItem, MenuList, Popover, Typography } from '@mui/mate
 
 import BookmarkIcon from '@heroicons/react/24/solid/BookmarkIcon';
 import PowerIcon from '@heroicons/react/24/solid/PowerIcon';
+import KeyIcon from '@heroicons/react/24/solid/KeyIcon';
 
 import UserIcon from '@heroicons/react/24/solid/UserCircleIcon';
 
@@ -96,6 +97,13 @@ const redirectToPage = useCallback((path) => {
               <UserIcon />
             </SvgIcon>
             Thông tin cá nhân
+          </MenuItem>
+     
+          <MenuItem onClick={() => redirectToPage(ROUTE_CONSTANTS.CHANGE_PASSWORD_PAGE)}>
+            <SvgIcon color='primary' fontSize="small" className='mr-3'>
+              <KeyIcon />
+            </SvgIcon>
+            Thay đổi mật khẩu
           </MenuItem>
         </>}
         <MenuItem onClick={handleSignOut}>

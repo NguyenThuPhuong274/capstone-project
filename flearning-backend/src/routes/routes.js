@@ -1,7 +1,3 @@
-import UserController from "../controller/UserController";
-import CategoryController from "../controller/CategoryController";
-
-import { CONSTANT_ROUTE } from "../constants";
 import { Links } from "./links";
 
 const routes = (app) => {

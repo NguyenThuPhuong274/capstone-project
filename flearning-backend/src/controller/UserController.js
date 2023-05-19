@@ -34,12 +34,11 @@ const UserController = {
     const queryString = `INSERT INTO [dbo].[User]
                           ([username]
                           ,[password]
-                          ,[phone]
-                          ,[role])
+                          ,[role_id])
                           VALUES ('${user.username}', 
                                   '${user.password}',
                                   '${user.phone}', 
-                                  'user')`;
+                                  '1')`;
     const data = await executeNonQuery(queryString);
 
     console.log(data);
@@ -49,17 +48,14 @@ const UserController = {
   updateUserInfo: async (req, res) => {
     const user = req.body;
     console.log("user is being updated", user);
-    const queryString = `UPDATE [dbo].[User]
+    const queryString = `UPDATE [dbo].[Account]
                           SET [phone] = '${user.phone}'
-                            ,[first_name] = '${user.first_name}'
-                            ,[last_name] = '${user.last_name}'
+                            ,[name] = N'${user.name}'
                             ,[gender] = '${user.gender}'
-                            ,[dob] = '${user.dob}'
-                            ,[address] = '${user.address}'
-                            ,[img_url] = '${user.img_url}'
-                            ,[img_name] = '${user.img_name}'
-                            ,[email] = '${user.email}'
-                        WHERE [username] = '${user.username}'`;
+                            ,[year_of_birth] = '${user.yearOfBirth}'
+                            ,[address] = N'${user.address}'
+                            ,[avatar_url] = '${user.avatarUrl}'
+                        WHERE [email] = '${user.email}'`;
     const data = await executeNonQuery(queryString);
 
     console.log(data);

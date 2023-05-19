@@ -1,7 +1,7 @@
+import { useRef } from "react";
 
-const AppRadioButton = () => {
-
-
+const AppRadioButton = ({ value, handleChangeValue }) => {
+ 
     return <>
         <div class="flex">
             <div class="inline-flex items-center">
@@ -14,6 +14,10 @@ const AppRadioButton = () => {
                         id="html"
                         name="type"
                         type="radio"
+                        value={value}
+                        checked={value === 1? 'checked': ''}
+
+                        onChange={() => handleChangeValue('gender', 1)}
                         class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-pink-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"
                     />
                     <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-pink-500 opacity-0 transition-opacity peer-checked:opacity-100">
@@ -31,7 +35,7 @@ const AppRadioButton = () => {
                     class="mt-px cursor-pointer select-none font-light text-gray-700"
                     for="html"
                 >
-                   Nam
+                    Nam
                 </label>
             </div>
             <div class="inline-flex items-center">
@@ -44,6 +48,10 @@ const AppRadioButton = () => {
                         id="react"
                         name="type"
                         type="radio"
+                        checked={value === 0? 'checked': ''}
+                        onChange={() => handleChangeValue('gender', 0)}
+                        value={value}
+
                         class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-pink-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"
                     />
                     <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-pink-500 opacity-0 transition-opacity peer-checked:opacity-100">
@@ -61,7 +69,7 @@ const AppRadioButton = () => {
                     class="mt-px cursor-pointer select-none font-light text-gray-700"
                     for="react"
                 >
-                   Nữ
+                    Nữ
                 </label>
             </div>
         </div>

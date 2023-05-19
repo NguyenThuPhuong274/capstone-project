@@ -10,17 +10,26 @@ import { OverviewTasksProgress } from '../../../sections/overview/overview-tasks
 import { OverviewTotalCustomers } from '../../../sections/overview/overview-total-customers';
 import { OverviewTotalProfit } from '../../../sections/overview/overview-total-profit';
 import { OverviewTraffic } from '../../../sections/overview/overview-traffic';
+import { useDispatch } from 'react-redux';
+import userSlice from '../../../redux/userSlice';
+import React from 'react';
 
 
 const DashboardPage = () => {
-    const now = new Date();
+  const now = new Date();
+  const dispatch = useDispatch();
+
+  const { setCurrentPage } = userSlice.actions;
+
+  React.useEffect(() => {
+    dispatch(setCurrentPage("Tổng quan"));
+  }, [])
+
+  return <>
 
 
-    return <>
-    
- 
     <Box
-    className='ml-72'
+      className='ml-72'
       component="main"
       sx={{
         flexGrow: 1,
@@ -220,7 +229,7 @@ const DashboardPage = () => {
         </Grid>
       </Container>
     </Box>
-    </>
+  </>
 }
 
 export default DashboardPage;
