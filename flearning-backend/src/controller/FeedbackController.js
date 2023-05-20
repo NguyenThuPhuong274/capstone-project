@@ -1,10 +1,10 @@
 import DBProvider, { executeQuery, executeNonQuery } from "../dal/DBProvider";
-const dbp = DBProvider();
 
 const FeedbackController = {
     getFeedbacks: async (req, res) => {
         const queryString = "SELECT * FROM [Feedback]";
-        const data = await executeNonQuery(queryString);
+        const data = await executeQuery(queryString);
+        console.log(data);
         return res.json(data);
     },
     insertFeedback: async (req, res) => {
@@ -13,12 +13,16 @@ const FeedbackController = {
         let queryString = `INSERT INTO [dbo].[Feedback]
                             ([message]
                               ,[email]
+                              ,[name]
+                              ,[course_name]
                               ,[star])
                         VALUES
                             (
-                              '${feedback.message}',
-                              '${feedback.email}', 
-                              '${feedback.star}')`;
+                              N'${feedback.message}',
+                               '${feedback.email}', 
+                              N'${feedback.name}', 
+                              N'${feedback.course_name}', 
+                               '${feedback.star}')`;
         const data = await executeNonQuery(queryString);
         console.log(data);
 
@@ -29,8 +33,7 @@ const FeedbackController = {
         console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Feedback]
-                 SET [message] = '${feedback.message}'
-                    ,[email] =  '${feedback.email}'
+                 SET [message] =  N'${feedback.message}'
                     ,[star] =  '${feedback.star}'
                  WHERE [feedback_id] =  ${feedback.feedback_id}`;
         const data = await executeNonQuery(queryString);

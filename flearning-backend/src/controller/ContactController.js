@@ -4,7 +4,8 @@ const dbp = DBProvider();
 const ContactController = {
     getContacts: async (req, res) => {
         const queryString = "SELECT * FROM [Contact]";
-        const data = await executeNonQuery(queryString);
+        const data = await executeQuery(queryString);
+        console.log("contacts: ", data);
         return res.json(data);
     },
     insertContact: async (req, res) => {
@@ -17,10 +18,10 @@ const ContactController = {
                                 ,[status]
                                 ,[request_message])
                              VALUES ('${contact.email}', 
-                                    '${contact.name}', 
+                                    N'${contact.name}', 
                                     '${contact.request_date}', 
                                     '${contact.status}', 
-                                    '${contact.request_message}')`;
+                                    N'${contact.request_message}')`;
         const data = await executeNonQuery(queryString);
         console.log(data);
 
@@ -33,7 +34,7 @@ const ContactController = {
         const queryString = `UPDATE [dbo].[Contact]
                  SET [response_date] = '${contact.response_date}'
                     ,[status] =  '${contact.status}'
-                    ,[response_message] =  '${contact.response_message}'
+                    ,[response_message] =   N'${contact.response_message}'
                  WHERE [contact_id] =  ${contact.contact_id}`;
         const data = await executeNonQuery(queryString);
 

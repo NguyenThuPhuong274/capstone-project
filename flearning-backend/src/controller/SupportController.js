@@ -4,7 +4,8 @@ const dbp = DBProvider();
 const SupportController = {
     getSupports: async (req, res) => {
         const queryString = "SELECT * FROM [Support]";
-        const data = await executeNonQuery(queryString);
+        const data = await executeQuery(queryString);
+        console.log(data);
         return res.json(data);
     },
     insertSupport: async (req, res) => {

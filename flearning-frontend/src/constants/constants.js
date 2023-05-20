@@ -1,11 +1,17 @@
 export const ROLE = {
     ADMIN: 1,
-    USER : 2,
+    USER: 2,
+}
+
+export const ACTION_TYPE = {
+    INSERT: 1,
+    UPDATE: 2,
+    DELETE: 3,
 }
 
 export const APP_CONSTANTS = {
-    GOOGLE_CLIENT_ID : "790769126717-o3usrjk4jboct43090kr0es97v5d1v0r.apps.googleusercontent.com",
-    HOME_TITLE : "Chào mừng đến với ",
+    GOOGLE_CLIENT_ID: "790769126717-o3usrjk4jboct43090kr0es97v5d1v0r.apps.googleusercontent.com",
+    HOME_TITLE: "Chào mừng đến với ",
     EMAIL: "Email",
     PASSWORD: "Mật khẩu",
 }

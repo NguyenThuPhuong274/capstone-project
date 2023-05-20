@@ -13,10 +13,10 @@ const LessonController = {
                               ,[chapter_id])
                         VALUES
                             (
-                              '${lesson.lesson_name}',
-                              '${lesson.description}', 
-                              '${lesson.video_url}', 
-                              '${lesson.material_url}', 
+                              N'${lesson.lesson_name}',
+                              N'${lesson.description}', 
+                              N'${lesson.video_url}', 
+                              N'${lesson.material_url}', 
                               '${lesson.chapter_id}')`;
     const data = await executeNonQuery(queryString);
     console.log(data);
@@ -28,10 +28,10 @@ const LessonController = {
     console.log(req.body);
 
     queryString = `UPDATE [dbo].[Lesson]
-                 SET [lesson_name] = '${lesson.lesson_name}'
-                    ,[description] =  '${lesson.description}'
-                    ,[video_url] = '${lesson.video_url}'
-                    ,[material_url] = '${lesson.material_url}'
+                 SET [lesson_name] =  N'${lesson.lesson_name}'
+                    ,[description] =   N'${lesson.description}'
+                    ,[video_url] =  N'${lesson.video_url}'
+                    ,[material_url] =  N'${lesson.material_url}'
                  WHERE [lesson_id] =  ${lesson.lesson_id}`;
     const data = await executeNonQuery(queryString);
 
@@ -50,7 +50,7 @@ const LessonController = {
     queryString = `DELETE FROM [Lesson] WHERE [lesson_id] = '${lesson.lesson_id}'`;
     data = await executeNonQuery(queryString);
 
-
+    console.log("rowAffected: ", data);
     return res.json({
       rowAffected: data,
     })

@@ -33,7 +33,7 @@ const AccountPage = () => {
     phone: user?.phone,
     email: user?.email,
     gender: user?.gender ? user.gender : 1,
-    avatarUrl: user?.avatarUrl,
+    avatar_url: user?.avatar_url,
   });
   console.log(values);
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const AccountPage = () => {
       // window.alert(currentFile?.url);
       setValues(prevValues => ({
         ...prevValues,
-        avatarUrl: currentFile?.url
+        avatar_url: currentFile?.url
       }));
     }
 
@@ -89,7 +89,7 @@ const AccountPage = () => {
             >
               <Card sx={{ pt: 2, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }} className=" w-96 flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
                 <div className='w-full flex justify-center' >
-                  <Avatar src={previewUrl == null ? (values?.avatarUrl != null ? values?.avatarUrl : CourseImageDefault) : previewUrl}
+                  <Avatar src={previewUrl == null ? (values?.avatar_url != null ? values?.avatar_url : CourseImageDefault) : previewUrl}
                     sx={{ width: 200, height: 200 }}
                   />
                 </div>

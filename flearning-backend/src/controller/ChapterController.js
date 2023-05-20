@@ -12,8 +12,8 @@ const LessonController = {
                               ,[course_id])
                         VALUES
                             (
-                              '${chapter.chapter_name}',
-                              '${chapter.description}', 
+                              N'${chapter.chapter_name}',
+                              N'${chapter.description}', 
                               '${chapter.course_id}')`;
         const data = await executeNonQuery(queryString);
         console.log(data);
@@ -25,8 +25,8 @@ const LessonController = {
         console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Chapter]
-                 SET [chapter_name] = '${chapter.chapter_name}'
-                    ,[description] =  '${chapter.description}'
+                 SET [chapter_name] =  N'${chapter.chapter_name}'
+                    ,[description] =   N'${chapter.description}'
                  WHERE [chapter_id] =  ${chapter.chapter_id}`;
         const data = await executeNonQuery(queryString);
 

@@ -8,7 +8,6 @@ const BlogController = {
 
         const data = await executeNonQuery(queryString);
 
-
         const handleGetBlogDetails = async (blog) => {
             queryString = `SELECT * FROM [Blog_Details] WHERE [blog_id] = '${blog.blog_id}'`;
             const blogDetails = await executeQuery(queryString);
@@ -20,13 +19,16 @@ const BlogController = {
         let blogs = [];
 
         for (let i = 0; i < data.length; i++) {
-            let blog = await handleGetBlogDetails(data[i]).then((response) => {
-                return response;
-            });
-            blogs.push(blog);
+            if (data[i] !== 0) {
+                let blog = await handleGetBlogDetails(data[i]).then((response) => {
+                    console.log(" data.length: ", data.length);
+                    return response;
+                });
+                blogs.push(blog);
+            }
         }
 
-        console.log(data);
+        console.log(blogs);
 
         return res.json(blogs);
     },

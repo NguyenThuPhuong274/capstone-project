@@ -4,16 +4,29 @@ import React from "react";
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
 import HandThumbUpIcon from '@heroicons/react/24/solid/HandThumbUpIcon';
 
+import { useDispatch } from "react-redux";
+import { insertChapter, updateChapter } from "../../redux/chapterSlice";
+import { toast } from "react-toastify";
+import courseSlice from "../../redux/courseSlice";
+import { ACTION_TYPE } from "../../constants/constants";
+
 const CourseChapterModal = ({
     isOpenModal,
+    courseId,
+    currentChapter,
+    actionTypeChapter,
     handleCloseModal
 }) => {
-
-
-    const [values, setValues] = React.useState({
-        chapterTitle: '',
+    const { setIsRefreshSpecific } = courseSlice.actions;
+    const dispatch = useDispatch();
+    const [values, setValues] = React.useState(currentChapter === null || currentChapter === undefined ? {
+        chapter_name: '',
         description: '',
-    });
+        course_id: courseId,
+    } : currentChapter);
+
+    console.log("values: ", currentChapter);
+    // window.alert(values.course_id);
 
     const handleChangeValue = (key, value) => {
         setValues(prevValues => ({
@@ -22,7 +35,23 @@ const CourseChapterModal = ({
         }));
     };
 
+    const onSubmit = () => {
+        if (values.chapter_name === '' || values.description === '') {
+            toast.warning("Hãy nhập tên và mô tả chương");
+        } else {
+            handleCloseModal();
 
+            if (actionTypeChapter === ACTION_TYPE.INSERT) {
+
+                dispatch(insertChapter(values));
+            } else {
+                dispatch(updateChapter(values));
+
+            }
+
+            dispatch(setIsRefreshSpecific(true));
+        }
+    }
 
     return <>
         <Dialog open={isOpenModal} >
@@ -31,12 +60,12 @@ const CourseChapterModal = ({
                 <Container sx={{ p: 0 }} className='mt-5' maxWidth="lg">
                     <Stack direction={"column"} spacing={2}>
                         <AppInput
-                            value={values}
-                            title={'chapterTitle'}
+                            value={values.chapter_name}
+                            title={'chapter_name'}
                             handleChangeValue={handleChangeValue}
                             placeholder={"Nhập tên chương"} />
                         <AppInput
-                            value={values}
+                            value={values.description}
                             title={'description'}
                             handleChangeValue={handleChangeValue}
                             placeholder={"Nhập mô tả"} />
@@ -48,8 +77,8 @@ const CourseChapterModal = ({
                                     <XMarkIcon />
                                 </SvgIcon>  Hủy
                             </Button>
-                            <Button variant="contained" color="primary" className=' w-[100px]'>
-                            <SvgIcon className="mr-2">
+                            <Button onClick={onSubmit} variant="contained" color="primary" className=' w-[100px]'>
+                                <SvgIcon className="mr-2">
                                     <HandThumbUpIcon />
                                 </SvgIcon>  Lưu
                             </Button>

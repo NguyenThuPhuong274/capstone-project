@@ -18,6 +18,9 @@ import AdminCourseDetailsPage from "../pages/admin/course-details";
 import CourseDetailPage from "../pages/course-details";
 import LessonViewPage from "../pages/user/course/LessonViewPage";
 import BlogDetailsPage from "../pages/blog-details";
+import AdminFeedbackPage from "../pages/admin/feedback";
+import AdminSupportPage from "../pages/admin/support";
+import SettingPage from "../pages/admin/settings";
 
 export const routes = [
   {
@@ -30,6 +33,24 @@ export const routes = [
     path: ROUTE_CONSTANTS.BLOG_DETAILS_PAGE,
     isPrivate: false,
     component: <BlogDetailsPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.SETING_PAGE,
+    isPrivate: false,
+    component: <SettingPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ADMIN_FEEDBACK_PAGE,
+    isPrivate: false,
+    component: <AdminFeedbackPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ADMIN_SUPPORT_PAGE,
+    isPrivate: false,
+    component: <AdminSupportPage />,
     exact: true,
   },
   {

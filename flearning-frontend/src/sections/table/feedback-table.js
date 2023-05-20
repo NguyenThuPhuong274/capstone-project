@@ -17,31 +17,24 @@ import {
 } from '@mui/material';
 import { Scrollbar } from '../../components/ScrollBar';
 
-export const ContactTable = (props) => {
+export const FeedbackTable = (props) => {
   const {
     count = 0,
     items = [],
-    onDeselectAll,
-    onDeselectOne,
-    onPageChange = () => { },
+    onPageChange,
     onRowsPerPageChange,
-    onSelectAll,
-    onSelectOne,
     page = 0,
     rowsPerPage = 0,
-    selected = [],
     setIsOpenModal,
     setCurrentContact,
     isOpenModal
   } = props;
 
-  const selectedSome = (selected.length > 0) && (selected.length < items.length);
-  const selectedAll = (items.length > 0) && (selected.length === items.length);
-  const [currentId, setCurrentId] = React.useState();
+  const [currentId, setCurrentId] = React.useState(null);
 
   const handleContact = () => {
-    var contact = items.find(item => item.id === currentId);
-    setCurrentContact(contact);
+    var feedback = items.find(item => item.feedback_id === currentId);
+    setCurrentContact(feedback);
 
     // alert(currentId);
     setIsOpenModal(true);
@@ -62,25 +55,13 @@ export const ContactTable = (props) => {
 
 
   return (<>
-    <Card sx={{ maxHeight: 450, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}   >
+    <Card sx={{ height: 450, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}   >
       <Scrollbar>
         <Box sx={{ minWidth: 800, maxHeight: 450 }}>
           <Table stickyHeader >
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedAll}
-                    indeterminate={selectedSome}
-                    onChange={(event) => {
-                      if (event.target.checked) {
-                        onSelectAll?.();
-                      } else {
-                        onDeselectAll?.();
-                      }
-                    }}
-                  />
-                </TableCell>
+
                 <TableCell>
                   Tên
                 </TableCell>
@@ -88,41 +69,26 @@ export const ContactTable = (props) => {
                   Email
                 </TableCell>
                 <TableCell>
-                  Thời gian gửi
+                  Khóa học
                 </TableCell>
-
                 <TableCell>
-                  Trạng thái
+                  Sao
                 </TableCell>
-
                 <TableCell>
-                  Hành động
+                  Nội dung
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((contact) => {
-                const isSelected = selected.includes(contact.id);
-                const sentAt = format(contact.sentAt, 'dd/MM/yyyy');
+              {items.map((feedback) => {
+
 
                 return (
                   <TableRow
                     hover
-                    key={contact.id}
-                    selected={isSelected}
+                    key={feedback?.feedback_id}
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        checked={isSelected}
-                        onChange={(event) => {
-                          if (event.target.checked) {
-                            onSelectOne?.(contact.id);
-                          } else {
-                            onDeselectOne?.(contact.id);
-                          }
-                        }}
-                      />
-                    </TableCell>
+
                     <TableCell>
                       <Stack
                         alignItems="center"
@@ -131,29 +97,26 @@ export const ContactTable = (props) => {
                       >
 
                         <Typography variant="subtitle2">
-                          {contact.name}
+                          {feedback?.name}
                         </Typography>
                       </Stack>
                     </TableCell>
 
                     <TableCell>
-                      {contact.email}
+                      {feedback?.email}
                     </TableCell>
 
                     <TableCell>
-                      {sentAt}
-                    </TableCell>
-
-                    <TableCell>
-                      <Chip color={contact.status === true ? 'secondary' : 'error'} label={contact.status === true ? 'Đã phản hồi' : 'Chưa phản hồi'} />
+                      {feedback?.course_name}
                     </TableCell>
                     <TableCell>
-                      <Button onClick={() => setCurrentId(contact.id)} variant="contained" className='bg-primary ' size='small'>
-                        {contact.status === true ? 'Chỉnh sửa' : 'Phản hồi'}
-                      </Button>
-
-
+                      {feedback?.star}
                     </TableCell>
+                    <TableCell>
+                      {feedback?.message}
+                    </TableCell>
+
+
                   </TableRow>
                 );
               })}
@@ -168,7 +131,7 @@ export const ContactTable = (props) => {
       <TablePagination
         component="div"
         count={count}
-        onPageChange={onPageChange}
+        onPageChange={(event, number) => onPageChange(number)}
         onRowsPerPageChange={onRowsPerPageChange}
         page={page}
         labelDisplayedRows={({ from, to, count }) => `Hiện thị từ ${from}-${to} trong tổng số ${count} bản ghi`}

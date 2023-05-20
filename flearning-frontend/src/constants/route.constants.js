@@ -13,6 +13,7 @@ export const ROUTE_CONSTANTS = {
     ADMIN_CONTACT_PAGE: "/authen/contacts",
     ADMIN_BLOG_PAGE: "/authen/blogs",
     ADMIN_COURSE_PAGE: "/authen/courses",
+    ADMIN_FEEDBACK_PAGE: "/authen/feedbacks",
     ADMIN_SUPPORT_PAGE: "/authen/supports",
     ADMIN_CONTACT_PAGE: "/authen/contacts",
     ADMIN_COURSE_DETAILS: "/authen/course-details",
@@ -20,4 +21,5 @@ export const ROUTE_CONSTANTS = {
     LESSON_VIEW_PAGE: "/authen/lesson-view",
     BLOG_DETAILS_PAGE: "/blog-details",
     CHANGE_PASSWORD_PAGE: "/authen/change-password",
+    SETING_PAGE: "/authen/settings",
 }

@@ -54,6 +54,7 @@ const authenSlice = createSlice({
         state.token = accessToken;
         sessionStorage.setItem("token", accessToken);
         sessionStorage.setItem("user", JSON.stringify(user));
+        console.log("JSON.stringify(user)", JSON.stringify(user));
         localStorage.setItem("currentPage", "Trang chủ");
         toast.success("Đăng nhập thành công");
       }

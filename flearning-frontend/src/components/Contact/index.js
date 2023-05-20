@@ -4,7 +4,7 @@ import ContactInformation from "./Information";
 import React from "react";
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from "react-redux";
-import { sendMessage } from "../../redux/contactSlice";
+import { insertContact } from "../../redux/contactSlice";
 
 const Contact = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Contact = () => {
   if(fullname == "" || email == "" || message == "") {
     toast.warning("Nhập tên, email và thông điệp của bạn");
   } else {
-    dispatch(sendMessage({fullname: fullname, email: email, message: message}));
+    dispatch(insertContact({name: fullname, email: email, request_message: message, request_date: new Date().toLocaleString()}));
     console.log("fullname: " + fullname + ", email: " + email + ", message: " + message);
   }
 

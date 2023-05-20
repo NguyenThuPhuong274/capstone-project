@@ -9,7 +9,7 @@ import PencilIcon from '@heroicons/react/24/solid/PencilIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 
 import {
-    Card, CardContent, Avatar, CardActions, Divider, Button, Stack, SvgIcon,
+    Button, Stack, SvgIcon,
     Table,
     TableContainer,
     TableBody,
@@ -20,34 +20,23 @@ import {
 } from "@mui/material";
 import CourseLessonModal from "./CourseLessonModal";
 import ConfirmDialog from "../Confirm";
-
-function createData(
-    lessonId,
-    lessonTitle,
-    description,
-    lessionDuration,
-    video_url,
-    material_url,
-) {
-    return { lessonId, lessonTitle, description, lessionDuration, video_url, material_url };
-}
-
-const rows = [
-    createData(1, 'Bài học 1', "Mô tả bài học 1", 12345, "", ""),
-    createData(2, 'Bài học 2', "Mô tả bài học 2", 555, "", ""),
-    createData(3, 'Bài học 3', "Mô tả bài học 3", 487, "", ""),
-    createData(4, 'Bài học 4', "Mô tả bài học 4", 102, "", ""),
-
-];
+import { useDispatch } from "react-redux";
+import { deleteChapter } from "../../redux/chapterSlice";
+import courseSlice from "../../redux/courseSlice";
+import { ACTION_TYPE } from "../../constants/constants";
+import { deleteLesson } from "../../redux/lessonSlice";
 
 
-
-const CourseChapter = () => {
-
+const CourseChapter = ({ chapter, setIsAddChapter, setCurrentChapter, setActionTypeChapter }) => {
+    const dispatch = useDispatch();
     const [expanded, setExpanded] = React.useState(false);
     const [isAddLesson, setIsAddLesson] = React.useState(false);
     const [isDeleteChapter, setIsDeleteChapter] = React.useState(false);
     const [isDeleteLesson, setIsDeleteLesson] = React.useState(false);
+    const [isActionTypeLesson, setActionTypeLesson] = React.useState(ACTION_TYPE.INSERT);
+    const { setIsRefreshSpecific } = courseSlice.actions;
+
+    const [currentLesson, setCurrentLesson] = React.useState();
     const handleChange =
         (panel) => (event, isExpanded) => {
             setExpanded(isExpanded ? panel : false);
@@ -63,22 +52,24 @@ const CourseChapter = () => {
 
     const handleConfirmDeleteChapter = (value) => {
         if (value == true) {
-        } else {
-            
+
+            dispatch(deleteChapter({ chapter_id: chapter.chapter_id }));
+            dispatch(setIsRefreshSpecific(true));
         }
         setIsDeleteChapter(false);
     }
 
-    const handleConfirmDeleteLesson= (value) => {
+    const handleConfirmDeleteLesson = (value) => {
         if (value == true) {
-        } else {
             
-        }
+            dispatch(deleteLesson({lesson_id: currentLesson.lesson_id}));
+            dispatch(setIsRefreshSpecific(true));
+        } 
         setIsDeleteLesson(false);
     }
 
     return (
-        <div>
+        <div className="p-1">
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary
                     expandIcon={<SvgIcon>
@@ -89,9 +80,9 @@ const CourseChapter = () => {
                     id="panel1bh-header"
                 >
                     <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                        Chương 1
+                        {chapter.chapter_name}
                     </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}> Mô tả bài chương 1</Typography>
+                    <Typography sx={{ color: 'text.secondary' }}> {chapter.description}</Typography>
 
                 </AccordionSummary>
                 <AccordionDetails sx={{ p: 3 }}>
@@ -107,42 +98,62 @@ const CourseChapter = () => {
                                 <TrashIcon />
                             </SvgIcon> Xóa chương
                         </Button>
-                        <Button sx={{ fontSize: 12 }} variant="contained" className='bg-primary' onClick={() => setIsDeleteChapter(true)}>
+                        <Button sx={{ fontSize: 12 }} variant="contained" className='bg-primary' onClick={() => 
+                        
+                        {
+                            setActionTypeChapter(ACTION_TYPE.UPDATE);
+                            setCurrentChapter(chapter);
+                            setIsAddChapter(true);
+                        }
+                        }>
                             <SvgIcon sx={{ fontSize: 18, mr: 1 }} >
                                 <PencilIcon />
                             </SvgIcon> Chỉnh sửa chương
                         </Button>
                     </Stack>
-                    <TableContainer sx={{ maxHeight: 210, mt: 2 }} component={Paper}>
+
+                    {chapter.lessons.length > 0 ? <TableContainer sx={{ maxHeight: 210, mt: 2 }} component={Paper}>
                         <Table sx={{ minWidth: 650 }} stickyHeader aria-label="simple table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell sx={{ width: 200 }}>Tên bài học</TableCell>
                                     <TableCell >Mô tả</TableCell>
-                                    <TableCell sx={{ width: 110 }}>Thời lượng</TableCell>
+                                    {/* <TableCell sx={{ width: 110 }}>Thời lượng</TableCell> */}
                                     <TableCell align="center" sx={{ width: 100 }} >Hành động</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((row) => (
+                                {chapter.lessons.map((row) => (
                                     <TableRow
                                         key={row.lessonId}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">
-                                            {row.lessonTitle}
+                                            {row.lesson_name}
                                         </TableCell>
                                         <TableCell >{row.description}</TableCell>
-                                        <TableCell >{getDuration(row.lessionDuration)}</TableCell>
+                                        {/* <TableCell >{getDuration(row.lesson_duration)}</TableCell> */}
                                         <TableCell>
                                             <Stack direction={"row"} spacing={1}>
-
-                                                <Button variant="contained" size="small" className='bg-pink-500' onClick={() => setIsDeleteLesson(true)}>
+                                                <Button
+                                                    variant="contained" size="small" className='bg-pink-500' onClick={() => {
+                                                        setActionTypeLesson(ACTION_TYPE.UPDATE);
+                                                        setCurrentLesson(row);
+                                                        setIsDeleteLesson(true);
+                                                    }
+                                                    }
+                                                >
                                                     <SvgIcon sx={{ fontSize: 18 }} >
                                                         <TrashIcon />
                                                     </SvgIcon>
                                                 </Button>
-                                                <Button variant="contained" size="small" className='bg-primary' onClick={() => setIsAddLesson(true)}>
+                                                <Button variant="contained" size="small" className='bg-primary' onClick={() => {
+
+                                                    setCurrentLesson(row);
+                                                    setIsAddLesson(true);
+                                                }
+                                                }
+                                                >
                                                     <SvgIcon sx={{ fontSize: 18 }} >
                                                         <PencilIcon />
                                                     </SvgIcon>
@@ -153,11 +164,12 @@ const CourseChapter = () => {
                                 ))}
                             </TableBody>
                         </Table>
-                    </TableContainer>
+                    </TableContainer> : <></>}
+
+
                 </AccordionDetails>
             </Accordion>
-
-            <CourseLessonModal isOpenModal={isAddLesson} handleCloseModal={() => setIsAddLesson(false)} />
+            <CourseLessonModal currentLesson={currentLesson} actionType={isActionTypeLesson} chapterId={chapter.chapter_id} isOpenModal={isAddLesson} handleCloseModal={() => setIsAddLesson(false)} />
             <ConfirmDialog title={"Xác nhận xóa chương"} description={"Chương và tất cả khóa học trong chương sẽ bị xóa! Bạn có muốn tiếp tục?"} isOpen={isDeleteChapter} handleAction={handleConfirmDeleteChapter} />
             <ConfirmDialog title={"Xác nhận xóa bài học"} description={"Tất cả thông tin liên quan tới bài học sẽ bị xóa! Bạn có muốn tiếp tục?"} isOpen={isDeleteLesson} handleAction={handleConfirmDeleteLesson} />
         </div>

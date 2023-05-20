@@ -28,7 +28,7 @@ export const CoursesTable = (props) => {
   } = props;
 
 const handleEditCourse = (id) => {
-  navigate(ROUTE_CONSTANTS.ADMIN_COURSE_DETAILS);
+  navigate(ROUTE_CONSTANTS.ADMIN_COURSE_DETAILS + "?course_id=" + id);
 }
 
 

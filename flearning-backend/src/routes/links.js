@@ -45,6 +45,11 @@ export const Links = [
     handleAction: CourseController.getCourses,
   },
   {
+    route: CONSTANT_ROUTE.MANAGE_COURSE + "/get/by-id",
+    method: "post",
+    handleAction: CourseController.getCourseById,
+  },
+  {
     route: CONSTANT_ROUTE.MANAGE_COURSE + "/insert",
     method: "post",
     handleAction: CourseController.insertCourse,

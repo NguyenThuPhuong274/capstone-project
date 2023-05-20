@@ -15,7 +15,7 @@ const UserController = {
       const accessToken = jwt.sign(user, "secretKey", {
         expiresIn: "20m",
       });
-      console.log(accessToken);
+      console.log(user);
       return res.json({ user: user, accessToken: accessToken });
     } else {
       return res.json({ message: "Tài khoản hoặc mật khẩu không chính xác" });
@@ -54,7 +54,7 @@ const UserController = {
                             ,[gender] = '${user.gender}'
                             ,[year_of_birth] = '${user.yearOfBirth}'
                             ,[address] = N'${user.address}'
-                            ,[avatar_url] = '${user.avatarUrl}'
+                            ,[avatar_url] = '${user.avatar_url}'
                         WHERE [email] = '${user.email}'`;
     const data = await executeNonQuery(queryString);
 

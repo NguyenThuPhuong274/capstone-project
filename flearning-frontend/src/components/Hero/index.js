@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom"
+import { ROUTE_CONSTANTS } from "../../constants/route.constants";
 
 const Hero = () => {
   return (
@@ -30,7 +31,7 @@ const Hero = () => {
                   </Link>
                   <Link
                 
-                    to="/"
+                    to={ROUTE_CONSTANTS.CONTACT_PAGE}
                     className="rounded-md bg-black/20 py-4 px-8 text-base font-semibold text-black duration-300 ease-in-out hover:bg-black/30 dark:bg-white/20 dark:text-white dark:hover:bg-white/30"
                   >
                     Liên hệ giảng viên
