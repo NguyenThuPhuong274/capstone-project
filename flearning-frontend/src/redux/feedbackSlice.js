@@ -33,17 +33,11 @@ const feedbackSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(updateFeedback.fulfilled, (state, action) => {
-      const { response_status } = action.payload;
-      state.response_status = response_status;
       state.isRefresh = true;
-      console.log("Send message successfully", action.payload);
-      toast.success("Gửi thông điệp thành công");
+      toast.success("Cập nhật điệp thành công");
     });
     builder.addCase(insertFeedback.fulfilled, (state, action) => {
-        const { response_status } = action.payload;
-        state.response_status = response_status;
         state.isRefresh = true;
-        console.log("Send message successfully", action.payload);
         toast.success("Gửi thông điệp thành công");
       });
     builder.addCase(getFeedbacks.fulfilled, (state, action) => {

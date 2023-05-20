@@ -51,7 +51,7 @@ const supportSlice = createSlice({
     builder.addCase(getSupports.fulfilled, (state, action) => {
       state.data = action.payload;
       state.isRefreshSupport = false;
-      window.alert("ok");
+      // window.alert("ok");
     });
   },
 });

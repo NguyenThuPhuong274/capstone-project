@@ -12,13 +12,13 @@ const AdminFeedbackPage = () => {
     }, [])
 
 
+    const isRefresh = useSelector((state) => state.feedback.isRefresh);
     const feedbacks = useSelector((state) => state.feedback.data);
     
     
     React.useEffect(() => {
         dispatch(getFeedbacks());
     }, [isRefresh]);
-    const isRefresh = useSelector((state) => state.feedback.isRefresh);
     
     return <>
         <ListFeedback data={feedbacks} />
