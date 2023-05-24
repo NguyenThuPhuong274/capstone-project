@@ -21,6 +21,7 @@ import BlogDetailsPage from "../pages/blog-details";
 import AdminFeedbackPage from "../pages/admin/feedback";
 import AdminSupportPage from "../pages/admin/support";
 import SettingPage from "../pages/admin/settings";
+import AdminTestPage from "../pages/admin/test";
 
 export const routes = [
   {
@@ -33,6 +34,12 @@ export const routes = [
     path: ROUTE_CONSTANTS.BLOG_DETAILS_PAGE,
     isPrivate: false,
     component: <BlogDetailsPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ADMIN_TEST_PAGE,
+    isPrivate: false,
+    component: <AdminTestPage />,
     exact: true,
   },
   {

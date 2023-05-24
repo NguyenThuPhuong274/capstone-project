@@ -29,7 +29,7 @@ export const items = [
   },
   {
     title: 'Bài kiểm tra',
-    path: '/authen/quiz',
+    path: '/authen/tests',
     icon: (
       <SvgIcon fontSize="small">
         <QuestionMarkCircleIcon />

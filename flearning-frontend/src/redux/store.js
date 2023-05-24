@@ -11,6 +11,8 @@ import feedbackSlice from "./feedbackSlice";
 import supportSlice from "./supportSlice";
 import chapterSlice from "./chapterSlice";
 import lessonSlice from "./lessonSlice";
+import testSlice from "./testSlice";
+import quizSlice from "./quizSlice";
 
 const persistConfig = {
   key: "root",
@@ -27,6 +29,8 @@ const rootReducers = combineReducers({
   support: supportSlice.reducer,
   chapter: chapterSlice.reducer,
   lesson: lessonSlice.reducer,
+  test: testSlice.reducer,
+  quiz: quizSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

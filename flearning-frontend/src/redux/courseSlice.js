@@ -51,7 +51,7 @@ const courseSlice = createSlice({
     builder.addCase(getCourses.fulfilled, (state, action) => {
       state.data = action.payload;
       state.isRefresh = false;
-      // console.log(action.payload);
+      console.log(action.payload);
     });
 
     builder.addCase(getCourseById.fulfilled, (state, action) => {

@@ -22,4 +22,6 @@ export const ROUTE_CONSTANTS = {
     BLOG_DETAILS_PAGE: "/blog-details",
     CHANGE_PASSWORD_PAGE: "/authen/change-password",
     SETING_PAGE: "/authen/settings",
+    ADMIN_TEST_PAGE: "/authen/tests",
+    ADMIN_TEST_DETAILS: "/authen/test-details",
 }
