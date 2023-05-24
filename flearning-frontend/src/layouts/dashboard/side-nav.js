@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Box,
   Button,
@@ -12,6 +12,7 @@ import { Scrollbar } from "../../components/ScrollBar";
 import { items } from "./config";
 import { SideNavItem } from "./side-nav-item";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ROUTE_CONSTANTS } from "../../constants/route.constants";
 
 export const SideNav = () => {
   const navigate = useNavigate();
@@ -65,7 +66,14 @@ export const SideNav = () => {
             }}
           >
             {items.map((item) => {
-              const active = item.path ? (location.pathname === item.path) : false;
+              let active = false;
+
+              if (location.pathname === "/" || item.path === "/") {
+                active = item.path ? (location.pathname == item.path) : false;
+              } else {
+                active = item.path ? (location.pathname.includes(item.path)) : false;
+              }
+              console.log(location.pathname + ", " + item.path);
 
               return (
                 <SideNavItem

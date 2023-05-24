@@ -15,4 +15,6 @@ export const CONSTANT_ROUTE = {
   MANAGE_FEEDBACK: "/authen/manage/feedback",
   MANAGE_SUPPORT: "/authen/manage/support",
   MANAGE_LESSON: "/authen/manage/lesson",
+  MANAGE_TEST: "/authen/manage/test",
+  MANAGE_QUESTION: "/authen/manage/question",
 };

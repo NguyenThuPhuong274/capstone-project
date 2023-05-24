@@ -8,6 +8,8 @@ import SupportController from "../controller/SupportController";
 import ContactController from "../controller/ContactController";
 import BlogController from "../controller/BlogController";
 import BlogDetailsController from "../controller/BlogDetailsController";
+import TestController from "../controller/TestController";
+import QuestionController from "../controller/QuestionController";
 export const Links = [
   {
     route: CONSTANT_ROUTE.SIGN_IN,
@@ -175,6 +177,49 @@ export const Links = [
     route: CONSTANT_ROUTE.MANAGE_BLOG_DETAILS + "/delete",
     method: "post",
     handleAction: BlogDetailsController.deleteBlogDetails,
+  },
+
+
+  {
+    route: CONSTANT_ROUTE.MANAGE_TEST + "/get",
+    method: "get",
+    handleAction: TestController.getTests,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_TEST + "/insert",
+    method: "post",
+    handleAction: TestController.insertTest,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_TEST + "/update",
+    method: "post",
+    handleAction: TestController.updateTest,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_TEST + "/delete",
+    method: "post",
+    handleAction: TestController.deleteTest
+  },
+
+  {
+    route: CONSTANT_ROUTE.MANAGE_QUESTION + "/get/by-test-id",
+    method: "get",
+    handleAction: QuestionController.getQuestionByTestId,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_QUESTION + "/insert",
+    method: "post",
+    handleAction: QuestionController.insertQuestion,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_QUESTION + "/update",
+    method: "post",
+    handleAction: QuestionController.updateQuestion,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_QUESTION + "/delete",
+    method: "post",
+    handleAction: QuestionController.deleteQuestion
   },
 
 ];

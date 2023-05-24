@@ -2,7 +2,6 @@ export const API  = {
     AUTHEN: {
         SIGN_IN: process.env.REACT_APP_SIGN_IN,
         SIGN_UP: process.env.REACT_APP_SIGN_UP,
-
         FORGOT_PASSWORD: process.env.REACT_APP_FORGOT_PASSWORD,
     },
     MANAGE_USER: process.env.REACT_APP_MANAGE_USER,
@@ -14,4 +13,5 @@ export const API  = {
     MANAGE_CHAPTER: process.env.REACT_APP_MANAGE_CHAPTER,
     MANAGE_LESSON: process.env.REACT_APP_MANAGE_LESSON,
     MANAGE_TEST: process.env.REACT_APP_MANAGE_TEST,
+    MANAGE_QUESTION: process.env.REACT_APP_MANAGE_QUESTION,
 }

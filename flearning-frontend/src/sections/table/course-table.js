@@ -1,8 +1,9 @@
-import { format } from 'date-fns';
-import PencilIcon from '@heroicons/react/24/solid/PencilIcon';
 
+
+
+import React from 'react';
+import { format } from 'date-fns';
 import {
-  Avatar,
   Box,
   Card,
   Stack,
@@ -10,26 +11,36 @@ import {
   TableBody,
   TableCell,
   TableHead,
+  TablePagination,
   TableRow,
   Button,
+  Typography,
   SvgIcon,
   Chip,
-  Typography
+  Avatar
 } from '@mui/material';
 import { Scrollbar } from '../../components/ScrollBar';
+import PencilIcon from '@heroicons/react/24/solid/PencilIcon';
 import { getInitials } from '../../utils/get-initials';
-import { useNavigate } from 'react-router-dom';
 import {ROUTE_CONSTANTS} from "../../constants/route.constants";
-export const CoursesTable = (props) => {
 
-  const navigate = useNavigate();
+import { useNavigate } from "react-router-dom";
+
+export const CourseTable = (props) => {
   const {
+    count = 0,
     items = [],
+    onPageChange,
+    onRowsPerPageChange,
+    page = 0,
+    rowsPerPage = 0,
+
   } = props;
 
-const handleEditCourse = (id) => {
-  navigate(ROUTE_CONSTANTS.ADMIN_COURSE_DETAILS + "?course_id=" + id);
-}
+  const navigate = useNavigate();
+  const handleEditCourse = (id) => {
+    navigate(ROUTE_CONSTANTS.ADMIN_COURSE_DETAILS + "?course_id=" + id);
+  }
 
 
   return (<>
@@ -43,7 +54,7 @@ const handleEditCourse = (id) => {
                 <TableCell>
                   Tên
                 </TableCell>
-               
+
                 <TableCell>
                   Thời gian
                 </TableCell>
@@ -66,7 +77,7 @@ const handleEditCourse = (id) => {
             </TableHead>
             <TableBody>
               {items.map((course) => {
-               const createdAt = format(new Date(course.created_at), 'dd/MM/yyyy'); 
+                const createdAt = format(new Date(course.created_at), 'dd/MM/yyyy');
 
                 return (
                   <TableRow
@@ -88,7 +99,7 @@ const handleEditCourse = (id) => {
                         </Typography>
                       </Stack>
                     </TableCell>
-                  
+
                     <TableCell>
                       {course.duration} tháng
                     </TableCell>
@@ -123,11 +134,24 @@ const handleEditCourse = (id) => {
           </Table>
         </Box>
       </Scrollbar>
+
     </Card>
 
-
+    <Card sx={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
+      <TablePagination
+        component="div"
+        count={count}
+        onPageChange={(event, number) => onPageChange(number)}
+        onRowsPerPageChange={onRowsPerPageChange}
+        page={page}
+        labelDisplayedRows={({ from, to, count }) => `Hiện thị từ ${from}-${to} trong tổng số ${count} bản ghi`}
+        boundaryCount={4}
+        labelRowsPerPage={"Số bản ghi"}
+        rowsPerPage={rowsPerPage}
+        rowsPerPageOptions={[5, 10, 25]}
+      />
+    </Card>
   </>
   );
 };
-
 

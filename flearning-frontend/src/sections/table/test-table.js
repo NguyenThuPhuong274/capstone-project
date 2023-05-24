@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Box,
   Card,
-  Checkbox,
   Stack,
   Table,
   TableBody,
@@ -11,10 +10,17 @@ import {
   TablePagination,
   TableRow,
   Button,
-  Chip,
-  Typography
+  Typography,
+  SvgIcon
 } from '@mui/material';
 import { Scrollbar } from '../../components/ScrollBar';
+import PencilIcon from '@heroicons/react/24/solid/PencilIcon';
+import TrashIcon from '@heroicons/react/24/solid/TrashIcon';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import ConfirmDialog from '../../components/Confirm';
+import { deleteTest } from '../../redux/testSlice';
+import { ROUTE_CONSTANTS } from '../../constants/route.constants';
 
 export const TestTable = (props) => {
   const {
@@ -24,34 +30,29 @@ export const TestTable = (props) => {
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
-    setIsOpenModal,
-    setCurrentContact,
-    isOpenModal
   } = props;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [currentId, setCurrentId] = React.useState(null);
+  const [isOpenConfirm, setIsOpenConfirm] = React.useState(false);
 
-  const handleContact = () => {
-    var test = items.find(item => item.test_id === currentId);
-    setCurrentContact(test);
-
-    // alert(currentId);
-    setIsOpenModal(true);
+  const handleConfirmDelete = (status) => {
+    if (status === true) {
+      dispatch(deleteTest({ test_id: currentId }));
+    }
+    setIsOpenConfirm(false);
   }
 
-  React.useEffect(() => {
-    if (currentId !== null) {
-      handleContact();
-    }
-  }, [currentId]);
+  const handleEditTest = (id) => {
+    navigate(ROUTE_CONSTANTS.ADMIN_TEST_DETAILS + "?test_id=" + id);
+  }
 
-  React.useEffect(() => {
-    if (isOpenModal === false) {
-      setCurrentId(null);
-    }
-  }, [isOpenModal]);
-
-
+  const handleDeleteTest = (id) => {
+    setIsOpenConfirm(true);
+    setCurrentId(id);
+  }
 
   return (<>
     <Card sx={{ height: 450, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}   >
@@ -65,21 +66,29 @@ export const TestTable = (props) => {
                   Tên
                 </TableCell>
                 <TableCell>
-                  Email
+                  Số câu hỏi
+                </TableCell>
+                <TableCell>
+                  Thời gian
                 </TableCell>
                 <TableCell>
                   Khóa học
                 </TableCell>
                 <TableCell>
-                  Sao
+                  Chương
                 </TableCell>
                 <TableCell>
-                  Nội dung
+                  Mô tả
+                </TableCell>
+                <TableCell>
+                  Hành động
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((test) => {
+               const hours = Math.floor(test.duration / 60);
+               const minutes = test.duration % 60;
 
 
                 return (
@@ -96,23 +105,39 @@ export const TestTable = (props) => {
                       >
 
                         <Typography variant="subtitle2">
-                          {test?.name}
+                          {test?.test_name}
                         </Typography>
                       </Stack>
                     </TableCell>
 
                     <TableCell>
-                      {test?.email}
+                      {test?.questions.length}
+                    </TableCell>
+                    <TableCell>
+                      {hours + "h " + minutes + "m" }
                     </TableCell>
 
                     <TableCell>
                       {test?.course_name}
                     </TableCell>
                     <TableCell>
-                      {test?.star}
+                      {test?.chapter_name}
                     </TableCell>
                     <TableCell>
-                      {test?.message}
+                      {test?.description}
+                    </TableCell>
+                    <TableCell sx={{ width: 200 }}>
+                      <Button onClick={() => handleEditTest(test?.test_id)} sx={{ mr: 1 }} variant="contained" className='bg-primary' >
+
+                        <SvgIcon  >
+                          <PencilIcon />
+                        </SvgIcon>
+                      </Button>
+                      <Button onClick={() => handleDeleteTest(test?.test_id)} variant="contained" className='bg-pink-500' >
+                        <SvgIcon  >
+                          <TrashIcon />
+                        </SvgIcon>
+                      </Button>
                     </TableCell>
 
 
@@ -140,6 +165,9 @@ export const TestTable = (props) => {
         rowsPerPageOptions={[5, 10, 25]}
       />
     </Card>
+
+
+    <ConfirmDialog isOpen={isOpenConfirm} description={"Bài kiểm tra sẽ bị xóa, bạn có muốn tiếp tục?"} title={"Xác nhận xóa bài kiểm tra"} handleAction={handleConfirmDelete} />
   </>
   );
 };

@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import AppInput from '../AppInput/AppInput';
 import AppCheckBox from '../AppInput/AppCheckBox';
+import AppTextArea from '../AppInput/AppTextArea';
 
 const states = [
   {
@@ -70,7 +71,7 @@ export const CourseProfileDetails = ({handleChangeValue, values}) => {
             md={12}
             
           >
-            <AppInput height={"h-[100px]"} value={values?.description} title={"description"} handleChangeValue={handleChangeValue} placeholder={"Mô tả khóa học"} />
+            <AppTextArea height={"h-[150px]"} value={values?.description} title={"description"} handleChangeValue={handleChangeValue} placeholder={"Mô tả khóa học"} />
           </Grid>
 
         </Grid>
