@@ -84,10 +84,10 @@ const TestController = {
                               ,[description]
                               ,[duration])
                         VALUES
-                            ('${test.test_name}'
+                            (N'${test.test_name}'
                               ,'${test.chapter_id}'
                               ,'${test.course_id}'
-                              ,'${test.description}'
+                              ,N'${test.description}'
                               ,'${test.duration}'  )`;
         const data = await executeNonQuery(queryString);
         console.log(data);
@@ -99,10 +99,10 @@ const TestController = {
         console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Test]
-                 SET [test_name] = '${test.test_name}'
+                 SET [test_name] = N'${test.test_name}'
                     ,[chapter_id] = '${test.chapter_id}'
                     ,[course_id] = '${test.course_id}'
-                    ,[description] = '${test.description}'
+                    ,[description] = N'${test.description}'
                     ,[duration] = '${test.duration}'
                  WHERE [test_id] =  ${test.test_id}`;
         const data = await executeNonQuery(queryString);

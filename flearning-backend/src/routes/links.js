@@ -22,6 +22,11 @@ export const Links = [
     handleAction: UserController.insertUser,
   },
   {
+    route: CONSTANT_ROUTE.CHANGE_PASSWORD,
+    method: "post",
+    handleAction: UserController.changePassword,
+  },
+  {
     route: CONSTANT_ROUTE.MANAGE_USER + "/get",
     method: "get",
     handleAction: UserController.getUser,
@@ -41,6 +46,7 @@ export const Links = [
     method: "post",
     handleAction: UserController.updateUserInfo,
   },
+
   {
     route: CONSTANT_ROUTE.MANAGE_COURSE + "/get",
     method: "get",

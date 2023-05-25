@@ -13,6 +13,7 @@ import AppSelect from '../AppInput/AppSelect';
 import { useDispatch } from "react-redux";
 import { insertTest } from '../../redux/testSlice';
 import { toast } from 'react-toastify';
+import AppInputNumber from '../AppInput/AppInputNumber';
 
 const ListTest = ({ data, courses }) => {
     const dispatch = useDispatch();
@@ -36,6 +37,20 @@ const ListTest = ({ data, courses }) => {
         duration: 0,
         course_id: 0,
     })
+
+
+    React.useEffect(() => {
+        if (isOpenModal === false) {
+            setValues({
+                test_name: '',
+                description: '',
+                chapter_id: 0,
+                duration: 0,
+                course_id: 0,
+            })
+        }
+    }, [isOpenModal])
+
     const handleChangeValue = (key, value) => {
         setValues(prevValues => ({
             ...prevValues,
@@ -201,7 +216,7 @@ const ListTest = ({ data, courses }) => {
                                 <Stack direction={"column"} spacing={2}>
                                     <Stack direction={"row"} spacing={2}>
                                         <AppInput value={values.test_name} title={"test_name"} placeholder={"Tên bài kiểm tra"} handleChangeValue={handleChangeValue} />
-                                        <AppInput value={values.duration} title={"duration"} placeholder={"Thời gian"} handleChangeValue={handleChangeValue} />
+                                        <AppInputNumber value={values.duration} title={"duration"} placeholder={"Thời gian (phút)"} handleChangeValue={handleChangeValue} />
                                     </Stack>
                                     <Stack direction={"row"} spacing={2}>
                                         <AppSelect value={values.course_id} data={courses} title={"course_id"} display={"course_name"} placeholder={"Chọn khóa học"} handleChangeValue={handleChangeValue} />

@@ -27,11 +27,20 @@ const ListSupport = ({ data }) => {
         message: '',
     })
 
+    React.useEffect(() => {
+        if (isOpenModal === false) {
+            setValues({
+                support_name: '',
+                message: '',
+            });
+        }
+    }, [isOpenModal])
+
     // console.log(data);
-React.useEffect(() => {
-    setSupports(data);
-    setSupportsPagination(data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
-}, [data]);
+    React.useEffect(() => {
+        setSupports(data);
+        setSupportsPagination(data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
+    }, [data]);
 
     const dispatch = useDispatch();
 
@@ -195,7 +204,7 @@ React.useEffect(() => {
                                 <AppInput placeholder={"Tiêu đề"} value={values.support_name} title={"support_name"} handleChangeValue={handleChangeValue} />
                             </div>
                             <div className='h-[170px]' >
-                            <AppTextArea height={"h-[160px]"} value={values.message} title={"message"} handleChangeValue={handleChangeValue} placeholder={"Nội dung"} />
+                                <AppTextArea height={"h-[160px]"} value={values.message} title={"message"} handleChangeValue={handleChangeValue} placeholder={"Nội dung"} />
 
                             </div>
                             <div className='w-full flex justify-end'>

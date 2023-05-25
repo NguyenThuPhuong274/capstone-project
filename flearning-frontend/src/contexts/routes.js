@@ -23,12 +23,19 @@ import AdminSupportPage from "../pages/admin/support";
 import SettingPage from "../pages/admin/settings";
 import AdminTestPage from "../pages/admin/test";
 import AdminTestDetailsPage from "../pages/admin/test-details";
+import ChangePasswordPage from "../pages/change-password";
 
 export const routes = [
   {
     path: ROUTE_CONSTANTS.HOME_PAGE,
     isPrivate: false,
     component: <HomePage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.CHANGE_PASSWORD_PAGE,
+    isPrivate: false,
+    component: <ChangePasswordPage />,
     exact: true,
   },
   {

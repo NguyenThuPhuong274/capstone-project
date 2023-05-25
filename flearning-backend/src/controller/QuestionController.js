@@ -6,7 +6,7 @@ const QuestionController = {
         const test = req.body;
         const queryString = `SELECT * FROM [Question] WHERE [test_id] = ${test.id}`;
         const data = await executeQuery(queryString);
-        console.log(data);
+        // console.log(data);
         return res.json(data);
     },
     insertQuestion: async (req, res) => {
@@ -21,13 +21,13 @@ const QuestionController = {
                               ,[correct_answer]
                               ,[test_id])
                         VALUES
-                            ('${question.description}'
-                              ,'${question.answer_1}'
-                              ,'${question.answer_2}'
-                              ,'${question.answer_3}'
-                              ,'${question.answer_4}' 
+                            (N'${question.description}'
+                              ,N'${question.answer_1}'
+                              ,N'${question.answer_2}'
+                              ,N'${question.answer_3}'
+                              ,N'${question.answer_4}' 
                               ,'${question.correct_answer}' 
-                              ,'${question.test_id}'   )`;
+                              ,'${question.test_id}')`;
         const data = await executeNonQuery(queryString);
         console.log(data);
 
@@ -38,11 +38,11 @@ const QuestionController = {
         console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Question]
-                 SET [question_name] = '${question.question_name}'
-                    ,[answer_1] = '${question.answer_1}'
-                    ,[answer_2] = '${question.answer_2}'
-                    ,[answer_3] = '${question.answer_3}'
-                    ,[answer_4] = '${question.answer_4}'
+                 SET [description] = N'${question.description}'
+                    ,[answer_1] = N'${question.answer_1}'
+                    ,[answer_2] = N'${question.answer_2}'
+                    ,[answer_3] = N'${question.answer_3}'
+                    ,[answer_4] = N'${question.answer_4}'
                     ,[correct_answer] = '${question.correct_answer}'
                     ,[test_id] = '${question.test_id}'
                  WHERE [question_id] =  ${question.question_id}`;

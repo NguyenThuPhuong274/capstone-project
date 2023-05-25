@@ -13,14 +13,19 @@ import Question from "../../../components/Question";
 import AppSelect from "../../../components/AppInput/AppSelect";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import ArrowLeftIcon from "@heroicons/react/24/solid/ArrowLeftIcon";
-import  { insertQuestion } from "../../../redux/questionSlice";
+import { insertQuestion, updateQuestion } from "../../../redux/questionSlice";
 import { toast } from "react-toastify";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ROUTE_CONSTANTS } from "../../../constants/route.constants";
+import AppInputNumber from "../../../components/AppInput/AppInputNumber";
 
 const AdminTestDetails = ({ test, courses }) => {
     const dispatch = useDispatch();
-    const navigate= useNavigate();
+    const navigate = useNavigate();
+
+
+    const [currentQuestion, setCurrentQuestion] = React.useState();
+
     const [values, setValues] = React.useState({
         test_id: test?.test_id,
         test_name: test?.test_name,
@@ -93,9 +98,13 @@ const AdminTestDetails = ({ test, courses }) => {
         }
 
 
+        if (actionType === ACTION_TYPE.UPDATE) {
+            dispatch(updateQuestion(question));
+        } else {
+            dispatch(insertQuestion(question));
+        }
 
 
-        dispatch(insertQuestion(question));
         dispatch(setIsRefreshSpecific(true));
 
         setOpenQuestionModal(false);
@@ -113,6 +122,8 @@ const AdminTestDetails = ({ test, courses }) => {
                 correct_answer: 0,
                 test_id: test?.test_id
             });
+
+            setCurrentQuestion(null);
         }
     }, [openQuestionModal])
 
@@ -121,6 +132,23 @@ const AdminTestDetails = ({ test, courses }) => {
     const handleReturnToList = () => {
         navigate(ROUTE_CONSTANTS.ADMIN_TEST_PAGE);
     }
+
+    React.useEffect(() => {
+        if (currentQuestion !== null && currentQuestion !== undefined) {
+            setOpenQuestionModal(true);
+            setActionType(ACTION_TYPE.UPDATE);
+            setQuestion({
+                description: currentQuestion?.description,
+                answer_1: currentQuestion?.answer_1,
+                answer_2: currentQuestion?.answer_2,
+                answer_3: currentQuestion?.answer_3,
+                answer_4: currentQuestion?.answer_4,
+                correct_answer: currentQuestion?.correct_answer,
+                test_id: test?.test_id,
+                question_id: currentQuestion.question_id,
+            })
+        }
+    }, [currentQuestion]);
 
     return (
         <>
@@ -135,15 +163,18 @@ const AdminTestDetails = ({ test, courses }) => {
                         <CardContent>
                             <Stack direction={"column"} spacing={2}>
                                 <div >
-                                    <Button variant="contained" className='bg-primary' onClick={() => setOpenQuestionModal(true)} >
+                                    <Button variant="contained" className='bg-primary' onClick={() => {
+                                        setOpenQuestionModal(true);
+                                        setActionType(ACTION_TYPE.INSERT);
+                                    }} >
                                         <SvgIcon sx={{ mr: 1 }}>
                                             <PlusIcon />
                                         </SvgIcon> Thêm mới câu hỏi
                                     </Button>
                                 </div>
-                                <Stack direction={"column"} sx={{ overflow: "auto" }} spacing={0}>
+                                <Stack direction={"column"} sx={{ overflow: "auto", height: 600 }} spacing={0}>
                                     {test?.questions.map((question, key) => {
-                                        return <Question key={key} question={question} title={`Câu hỏi ${key + 1}`} />
+                                        return <Question setCurrentQuestion={setCurrentQuestion} key={key} question={question} title={`Câu hỏi ${key + 1}`} index={key} />
                                     })}
                                 </Stack>
 
@@ -155,7 +186,7 @@ const AdminTestDetails = ({ test, courses }) => {
                         <div className="p-4 h-full">
                             <Stack spacing={2} direction={"column"} className="h-full">
                                 <AppInput value={values.test_name} title={"test_name"} handleChangeValue={handleChangeValue} placeholder={"Tên bài kiểm tra"} />
-                                <AppInput value={values.duration} title={"duration"} handleChangeValue={handleChangeValue} placeholder={"Thời gian làm bài (phút)"} />
+                                <AppInputNumber value={values.duration} title={"duration"} handleChangeValue={handleChangeValue} placeholder={"Thời gian làm bài (phút)"} />
                                 <AppSelect value={values.course_id} data={courses} title={"course_id"} display={"course_name"} placeholder={"Chọn khóa học"} handleChangeValue={handleChangeValue} />
                                 <AppSelect value={values.chapter_id} data={selectedCourse?.chapters} title={"chapter_id"} display={"chapter_name"} placeholder={"Chọn chương"} handleChangeValue={handleChangeValue} />
                                 <AppTextArea height={"h-[190px]"} value={values.description} title={"description"} handleChangeValue={handleChangeValue} placeholder={"Mô tả"} />

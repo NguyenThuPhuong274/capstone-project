@@ -12,12 +12,12 @@ import ConfirmDialog from "../Confirm";
 import { deleteQuestion } from "../../redux/questionSlice";
 import testSlice from "../../redux/testSlice";
 import AppInput from "../AppInput/AppInput";
-const Question = ({ question, title }) => {
+const Question = ({ question, title, index, setCurrentQuestion }) => {
     const dispatch = useDispatch();
     const [expanded, setExpanded] = React.useState(false);
     const [isDeleteQuestion, setIsDeleteQuestion] = React.useState(false);
 
-    const [currentLesson, setCurrentLesson] = React.useState();
+   
 
     const { setIsRefreshSpecific } = testSlice.actions;
     const handleChange =
@@ -46,14 +46,14 @@ const Question = ({ question, title }) => {
 
     return <>
         <div className="p-1">
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+            <Accordion expanded={expanded === 'panel' + index} onChange={handleChange('panel' + index)}>
                 <AccordionSummary
                     expandIcon={<SvgIcon>
                         <ExpandMoreIcon />
                     </SvgIcon>}
-                    sx={{ boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" }}
+                    sx={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;"}}
                     aria-controls="panel1bh-content"
-                    id="panel1bh-header"
+                    id={'panel-header' + index}
                 >
                     <Typography sx={{ width: '15%', flexShrink: 0 }}>
                         {title}:
@@ -66,7 +66,9 @@ const Question = ({ question, title }) => {
                         <Stack direction={"row"} spacing={1}>
 
                             <Button sx={{ fontSize: 12 }} variant="contained" className='bg-primary'
-                            >
+                           
+                           onClick={() => setCurrentQuestion(question)}
+                           >
                                 <SvgIcon sx={{ fontSize: 18, mr: 1 }} >
                                     <PencilIcon />
                                 </SvgIcon> Chỉnh sửa câu hỏi

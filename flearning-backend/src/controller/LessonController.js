@@ -27,7 +27,7 @@ const LessonController = {
     const lesson = req.body;
     console.log(req.body);
 
-    queryString = `UPDATE [dbo].[Lesson]
+    const queryString = `UPDATE [dbo].[Lesson]
                  SET [lesson_name] =  N'${lesson.lesson_name}'
                     ,[description] =   N'${lesson.description}'
                     ,[video_url] =  N'${lesson.video_url}'

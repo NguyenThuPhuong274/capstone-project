@@ -15,8 +15,8 @@ const SupportController = {
                             ([support_name]
                               ,[message])
                         VALUES
-                            ('${support.support_name}',
-                              '${support.message}')`;
+                            (N'${support.support_name}',
+                              N'${support.message}')`;
         const data = await executeNonQuery(queryString);
         console.log(data);
 
@@ -27,8 +27,8 @@ const SupportController = {
         console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Support]
-                 SET [support_name] = '${support.support_name}'
-                    ,[message] =  '${support.message}'
+                 SET [support_name] = N'${support.support_name}'
+                    ,[message] =  N'${support.message}'
                  WHERE [support_id] =  ${support.support_id}`;
         const data = await executeNonQuery(queryString);
 

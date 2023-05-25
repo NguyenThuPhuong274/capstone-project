@@ -17,6 +17,7 @@ import CourseImageDefault from "../../assets/images/course/course-default.png";
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
 import HandThumbUpIcon from '@heroicons/react/24/solid/HandThumbUpIcon';
 import userSlice from '../../redux/userSlice';
+import { toast } from 'react-toastify';
 
 const ListCourse = ({ data }) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -34,23 +35,23 @@ const ListCourse = ({ data }) => {
     const [values, setValues] = useState({
         course_name: '',
         description: '',
-        duration: 0,
-        price: 0,
+        duration: '0',
+        price: '0',
         status: false,
         avatar_url: '',
         created_at: '',
     });
     React.useEffect(() => {
         if (currentFile?.url != undefined) {
-          // alert(currentFile?.url);
-          setValues(prevValues => ({
-            ...prevValues,
-            avatar_url: currentFile?.url
-          }));
-          setDisableSubmit(false);
+            // alert(currentFile?.url);
+            setValues(prevValues => ({
+                ...prevValues,
+                avatar_url: currentFile?.url
+            }));
+            setDisableSubmit(false);
         }
-      }, [currentFile]);
-    
+    }, [currentFile]);
+
 
     const { setCurrentPage } = userSlice.actions;
 
@@ -83,30 +84,52 @@ const ListCourse = ({ data }) => {
     };
 
     const handleSubmitCourse = () => {
+
+        if (values.course_name.trim() === '') {
+            toast.warning("Chưa nhập tên khóa học");
+            return;
+        }
+
+        if (values.duration.trim() === '' || parseInt(values.duration.trim()) === 0) {
+            toast.warning("Chưa thời gian học");
+            return;
+        }
+        if (values.price.trim() === '') {
+            toast.warning("Chưa nhập giá tiền");
+            return;
+        }
+
+        if (values.description.trim() === '') {
+            toast.warning("Chưa nhập giá tiền");
+            return;
+        }
+        if (values.avatar_url.trim() === '') {
+            toast.warning("Chưa chọn ảnh khóa học");
+            return;
+        }
+
         const currentDate = new Date().toLocaleDateString();
-        setValues(prevValues => ({
-          ...prevValues,
-          created_at: currentDate
+
+        dispatch(insertCourse({
+            ...values,
+            created_at: currentDate
         }));
-        dispatch(insertCourse(values));
         setValues({
-          course_name: '',
-          description: '',
-          duration: 0,
-          price: 0,
-          status: false,
-          avatar_url: '',
-          created_at: '',
-    
+            course_name: '',
+            description: '',
+            duration: 0,
+            price: 0,
+            status: false,
+            avatar_url: '',
+            created_at: '',
+
         })
-    
+
         setPreviewUrl(null);
-    
         setIsOpenModal(false);
-    
-        console.log(values);
-      }
-    
+        // console.log(values);
+    }
+
 
 
     const handleChangeSearchTerm = (key, value) => {
@@ -191,7 +214,7 @@ const ListCourse = ({ data }) => {
                             onRowsPerPageChange={handleRowsPerPageChange}
                             page={page}
                             rowsPerPage={rowsPerPage}
-                   
+
                         /> : <>
 
                             <Card sx={{ p: 2, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;", height: 525 }}>

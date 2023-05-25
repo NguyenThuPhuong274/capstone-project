@@ -124,7 +124,7 @@ export const TestTable = (props) => {
                       {test?.chapter_name}
                     </TableCell>
                     <TableCell>
-                      {test?.description}
+                     <Typography sx={{overflow: "auto", width: 300}}> {test?.description}</Typography>
                     </TableCell>
                     <TableCell sx={{ width: 200 }}>
                       <Button onClick={() => handleEditTest(test?.test_id)} sx={{ mr: 1 }} variant="contained" className='bg-primary' >

@@ -2,6 +2,7 @@ export const CONSTANT_ROUTE = {
   HOME_PAGE: "/",
   SIGN_IN: "/signin",
   SIGN_UP: "/signup",
+  CHANGE_PASSWORD: "/authen/change-password",
   LOG_OUT: "/logout",
   FORGOT_PASSWORD: "/password/forgot",
   CHANGE_PASSWORD: "/password/change",

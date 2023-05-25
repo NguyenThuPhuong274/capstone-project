@@ -45,6 +45,17 @@ const LessonController = {
         queryString = `DELETE FROM [Lesson] WHERE [chapter_id] = '${chapter.chapter_id}'`;
         data = await executeNonQuery(queryString);
 
+        queryString = `SELECT * FROM [Test] WHERE [chapter_id] = '${chapter.chapter_id}'`;
+        const test = await executeQuery(queryString);
+
+        if (test.length > 0) {
+            queryString = `DELETE FROM [Question] WHERE [test_id] = '${test[0].test_id}'`;
+            data = await executeNonQuery(queryString);
+        }
+
+        queryString = `DELETE FROM [Test] WHERE [chapter_id] = '${chapter.chapter_id}'`;
+        data = await executeNonQuery(queryString);
+
         queryString = `DELETE FROM [Chapter] WHERE [chapter_id] = '${chapter.chapter_id}'`;
         data = await executeNonQuery(queryString);
 

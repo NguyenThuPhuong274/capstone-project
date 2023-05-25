@@ -31,14 +31,16 @@ const UserController = {
   },
   insertUser: async (req, res) => {
     const user = req.body;
-    const queryString = `INSERT INTO [dbo].[User]
-                          ([username]
+    console.log(user);
+    const queryString = `INSERT INTO [dbo].[Account]
+                          ([email]
                           ,[password]
+                          ,[name]
                           ,[role_id])
-                          VALUES ('${user.username}', 
+                          VALUES ('${user.email}', 
                                   '${user.password}',
-                                  '${user.phone}', 
-                                  '1')`;
+                                  N'${user.fullname}',
+                                  '2')`;
     const data = await executeNonQuery(queryString);
 
     console.log(data);
@@ -69,6 +71,18 @@ const UserController = {
 
     const data = await executeQuery(queryString);
     return res.json({ data: data[0] });
+  },
+  changePassword: async (req, res) => {
+    const user = req.body;
+    console.log("user is being updated", user);
+    const queryString = `UPDATE [dbo].[Account]
+                          SET [password] = '${user.password}'
+                        WHERE [email] = '${user.email}'`;
+    const data = await executeNonQuery(queryString);
+
+    console.log(data);
+
+    return res.json({ user: user, rowAffected: data });
   },
 };
 
