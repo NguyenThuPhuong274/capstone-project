@@ -14,6 +14,10 @@ import axios from "axios";
     const response = await axios.post(API.MANAGE_TEST + "/delete", test);
     return response.data;
   },
+  getTestById: async (test) => {
+    const response = await axios.post(API.MANAGE_TEST + "/get-byid", test);
+    return response.data;
+  },
   getTests: async () => {
     const response = await axios.get(API.MANAGE_TEST + "/get");
     return response.data;

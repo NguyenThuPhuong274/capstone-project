@@ -7,6 +7,10 @@ export const insertTest = createAsyncThunk("insert-test", async (test) => {
   const response = await testServices.insertTest(test);
   return response;
 });
+export const getTestById = createAsyncThunk("get-test", async (test) => {
+  const response = await testServices.getTestById(test);
+  return response;
+});
 
 export const updateTest = createAsyncThunk("update-test", async (test) => {
   const response = await testServices.updateTest(test);
@@ -29,14 +33,19 @@ const testSlice = createSlice({
   name: "test",
   initialState: {
     data: [],
+    specific: null,
+    isRefreshSpecific: false,
     isRefresh: false,
   },
   reducers: {
-
+    setIsRefreshSpecific: (state, action) => {
+      state.isRefreshSpecific = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(updateTest.fulfilled, (state, action) => {
       toast.success("Cập nhật bài kiểm tra thành công");
+      state.isRefreshSpecific = true;
       state.isRefresh = true;
     });
     builder.addCase(insertTest.fulfilled, (state, action) => {
@@ -49,9 +58,11 @@ const testSlice = createSlice({
       });
     builder.addCase(getTests.fulfilled, (state, action) => {
       state.data = action.payload;
-      // console.log("get tests from db: ",  action.payload);
-      // toast.success("Lấy dữ liệu thành công");
       state.isRefresh = false;
+    });
+    builder.addCase(getTestById.fulfilled, (state, action) => {
+      state.specific = action.payload;
+      state.isRefreshSpecific = false;
     });
   },
 });

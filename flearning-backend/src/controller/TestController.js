@@ -38,6 +38,42 @@ const TestController = {
         console.log(newTests);
         return res.json(newTests);
     },
+    getTestById: async (req, res) => {
+        const test = req.body;
+        let queryString = `SELECT t.[test_id]
+                        ,t.[test_name]
+                        ,t.[chapter_id]
+                        ,t.[course_id]
+                        ,t.[duration]
+                        ,t.[description]
+                        ,c.[course_name]
+                        ,ch.[chapter_name]
+                    FROM [Test] t
+                    JOIN [Course] c ON t.course_id = c.course_id
+                    JOIN [Chapter] ch ON ch.chapter_id = t.chapter_id
+                    WHERE t.[test_id] = '${test.test_id}';
+         `;
+         const tests = await executeQuery(queryString);
+        const handleGetQuestions = async (test) => {
+            queryString = `SELECT * FROM [Question] WHERE [test_id] = '${test.test_id}'`;
+            const questions = await executeQuery(queryString);
+
+            test.questions = questions;
+            return test;
+        }
+
+        let newTests = [];
+
+        for (let i = 0; i < tests.length; i++) {
+            let test = await handleGetQuestions(tests[i]).then((response) => {
+                return response;
+            });
+            newTests.push(test);
+        }
+
+        console.log(newTests[0]);
+        return res.json(newTests[0]);
+    },
     insertTest: async (req, res) => {
         const test = req.body;
         console.log("test is being inserted", test);

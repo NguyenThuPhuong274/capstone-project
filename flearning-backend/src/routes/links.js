@@ -186,6 +186,11 @@ export const Links = [
     handleAction: TestController.getTests,
   },
   {
+    route: CONSTANT_ROUTE.MANAGE_TEST + "/get-byid",
+    method: "post",
+    handleAction: TestController.getTestById,
+  },
+  {
     route: CONSTANT_ROUTE.MANAGE_TEST + "/insert",
     method: "post",
     handleAction: TestController.insertTest,

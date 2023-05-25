@@ -40,7 +40,7 @@ const CourseController = {
       newCourses.push(course);
     }
 
-    console.log("courses", newCourses);
+    // console.log("courses", newCourses);
     return res.json(newCourses);
   },
   getCourseById: async (req, res) => {
@@ -77,12 +77,12 @@ const CourseController = {
       return response;
     });
 
-    console.log("course", returnCourse);
+    // console.log("course", returnCourse);
     return res.json(returnCourse);
   },
   insertCourse: async (req, res) => {
     const course = req.body;
-    console.log("course is being inserted", course);
+    // console.log("course is being inserted", course);
     let queryString = `INSERT INTO [dbo].[Course]
                             ([course_name]
                               ,[description]
@@ -101,13 +101,13 @@ const CourseController = {
                               '${course.created_at}', 
                               '${course.avatar_url}')`;
     const data = await executeNonQuery(queryString);
-    console.log(data);
+    // console.log(data);
 
     return res.json({ course: course, rowAffected: data });
   },
   updateCourse: async (req, res) => {
     const course = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
     const queryString = `UPDATE [dbo].[Course]
                  SET [course_name] = '${course.course_name}'

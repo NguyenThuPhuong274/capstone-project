@@ -17,18 +17,6 @@ import AppTextArea from "../../../components/AppInput/AppTextArea";
 
 const AdminCourseDetails = ({ course }) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const params = new URLSearchParams(location.search);
-    const course_id = params.get('course_id');
-
-    console.log("course: ", course);
-    React.useEffect(() => {
-        if (course_id === null || course_id === '') {
-            navigate(ROUTE_CONSTANTS.ERROR_PAGE);
-        }
-    }, [course_id, navigate]);
-
 
     const [values, setValues] = React.useState({
         course_id: course.course_id,
@@ -65,8 +53,8 @@ const AdminCourseDetails = ({ course }) => {
             flexGrow: 1,
             py: 0
         }}>
-        <Container maxWidth="xl" sx={{display: "flex", flexDirection: "row"}}>
-            <Card className="w-full mr-4 h-5/6" sx={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
+        <Container maxWidth="xl" sx={{display: "flex", flexDirection: "row", height: 620}}>
+            <Card className="w-full mr-4 h-full" sx={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
                 <CardContent>
                     <Stack direction={"column"} spacing={2}>
                         <div >
@@ -76,26 +64,26 @@ const AdminCourseDetails = ({ course }) => {
                                 </SvgIcon> Thêm mới chương
                             </Button>
                         </div>
-                        <Stack direction={"column"} sx={{ overflow: "auto", height: 500 }} spacing={0}>
+                        <Stack direction={"column"} sx={{ overflow: "auto" }} spacing={0}>
                             {course.chapters.map((chapter) => {
                                 return <CourseChapter setCurrentChapter={setCurrentChapter} setActionTypeChapter={setActionTypeChapter} setIsAddChapter={setIsAddChapter} chapter={chapter} />
                             })}
                         </Stack>
 
-                        <CourseChapterModal currentChapter={currentChapter} actionTypeChapter={actionTypeChapter} courseId={course_id} isOpenModal={isAddChapter} handleCloseModal={handleCloseAddModal} />
+                        <CourseChapterModal currentChapter={currentChapter} actionTypeChapter={actionTypeChapter} courseId={course.course_id} isOpenModal={isAddChapter} handleCloseModal={handleCloseAddModal} />
                     </Stack>
                 </CardContent>
             </Card>
-            <Card sx={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }} className=" w-[500px] h-5/6 flex w-96 flex-col rounded bg-white bg-clip-border text-gray-700 shadow-md">
-                <div className=" overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
+            <Card sx={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }} className=" w-[500px] h-full flex flex-col rounded bg-white bg-clip-border text-gray-700 shadow-md">
+                <div className="h-full overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
                     <img src={values.course_avatar_url} alt="img-blur-shadow" />
                 </div>
-                <div className="p-4">
+                <div className="p-4 h-full">
                     <Stack spacing={2} direction={"column"}>
                         <AppInput value={values.course_name} title={"course_name"} handleChangeValue={handleChangeValue} placeholder={"Tên khóa học"} />
                         <AppInput value={values.duration} title={"duration"} handleChangeValue={handleChangeValue} placeholder={"Thời gian học (tháng)"} />
                         <AppInput value={values.price} title={"price"} handleChangeValue={handleChangeValue} placeholder={"Giá (vnd)"} />
-                        <AppTextArea height={"h-150px"} value={values.description} title={"description"} handleChangeValue={handleChangeValue} placeholder={"Mô tả"} />
+                        <AppTextArea height={"h-[100px]"} value={values.description} title={"description"} handleChangeValue={handleChangeValue} placeholder={"Mô tả"} />
                         <AppCheckBox placeholder={"Trạng thái"} title={"status"} value={values.status} handleChangeValue={handleChangeValue} />
                     </Stack>
                 </div>
