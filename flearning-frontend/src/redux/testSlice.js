@@ -26,6 +26,11 @@ export const getTests = createAsyncThunk("get-testes", async () => {
   return response;
 });
 
+export const getTestsDone = createAsyncThunk("get-tests-done", async (user) => {
+  const response = await testServices.getTestsDone(user);
+  return response;
+});
+
 
 
 
@@ -33,6 +38,7 @@ const testSlice = createSlice({
   name: "test",
   initialState: {
     data: [],
+    tests_done: [],
     specific: null,
     isRefreshSpecific: false,
     isRefresh: false,
@@ -63,6 +69,9 @@ const testSlice = createSlice({
     builder.addCase(getTestById.fulfilled, (state, action) => {
       state.specific = action.payload;
       state.isRefreshSpecific = false;
+    });
+    builder.addCase(getTestsDone.fulfilled, (state, action) => {
+      state.tests_done = action.payload;
     });
   },
 });

@@ -64,14 +64,7 @@ const UserController = {
 
     return res.json({ user: user, rowAffected: data });
   },
-  getUserByUsername: async (req, res) => {
-    const username = req.body.username;
-    console.log("get user info of", username);
-    const queryString = `SELECT * FROM [User] WHERE username = '${username}'`;
 
-    const data = await executeQuery(queryString);
-    return res.json({ data: data[0] });
-  },
   changePassword: async (req, res) => {
     const user = req.body;
     console.log("user is being updated", user);

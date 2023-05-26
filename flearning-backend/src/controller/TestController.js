@@ -53,7 +53,7 @@ const TestController = {
                     JOIN [Chapter] ch ON ch.chapter_id = t.chapter_id
                     WHERE t.[test_id] = '${test.test_id}';
          `;
-         const tests = await executeQuery(queryString);
+        const tests = await executeQuery(queryString);
         const handleGetQuestions = async (test) => {
             queryString = `SELECT * FROM [Question] WHERE [test_id] = '${test.test_id}'`;
             const questions = await executeQuery(queryString);
@@ -126,6 +126,21 @@ const TestController = {
         return res.json({
             rowAffected: data,
         })
+    },
+    getTestsDone: async (req, res) => {
+        const user = req.body;
+        // console.log(req.body);
+
+        const queryString = `SELECT [test_id] FROM [dbo].[Test_Done]
+                          WHERE [email] = '${user.email}'
+                                AND [course_id] = '${user.course_id}'`;
+        const data = await executeQuery(queryString);
+        let ids = [];
+        for (let i = 0; i < data.length; i++) {
+            ids.push(data[i].test_id);
+        }
+
+        return res.json(ids);
     }
 };
 

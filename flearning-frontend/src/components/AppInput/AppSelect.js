@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const AppSelect = ({ title, display, data, value, placeholder,handleChangeValue }) => {
+const AppSelect = ({ title, display,display2, data, value, placeholder,handleChangeValue }) => {
 
   // console.log("datd: ", data);
   return <>
@@ -14,7 +14,7 @@ const AppSelect = ({ title, display, data, value, placeholder,handleChangeValue 
         onChange={(e) => handleChangeValue(title, e.target.value)}
       >
         {data?.map((item, key) => {
-          return <MenuItem   key={key} value={item[title]}>{item[display]}</MenuItem>
+          return <MenuItem   key={key} value={item[title]}>{item[display]}{display2 ? ': ' + item[display2] : ''}</MenuItem>
         })}
 
       </Select>

@@ -91,7 +91,7 @@ const ListCourse = ({ data }) => {
         }
 
         if (values.duration.trim() === '' || parseInt(values.duration.trim()) === 0) {
-            toast.warning("Chưa thời gian học");
+            toast.warning("Chưa nhập thời gian học");
             return;
         }
         if (values.price.trim() === '') {
@@ -100,7 +100,7 @@ const ListCourse = ({ data }) => {
         }
 
         if (values.description.trim() === '') {
-            toast.warning("Chưa nhập giá tiền");
+            toast.warning("Chưa nhập mô tả");
             return;
         }
         if (values.avatar_url.trim() === '') {

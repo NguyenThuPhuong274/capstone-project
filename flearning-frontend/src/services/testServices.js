@@ -22,6 +22,10 @@ import axios from "axios";
     const response = await axios.get(API.MANAGE_TEST + "/get");
     return response.data;
   },
+  getTestsDone: async (user) => {
+    const response = await axios.post(API.MANAGE_TEST + "/get/test-done", user);
+    return response.data;
+  },
  
 };
 

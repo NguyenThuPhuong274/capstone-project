@@ -188,7 +188,7 @@ const AdminTestDetails = ({ test, courses }) => {
                                 <AppInput value={values.test_name} title={"test_name"} handleChangeValue={handleChangeValue} placeholder={"Tên bài kiểm tra"} />
                                 <AppInputNumber value={values.duration} title={"duration"} handleChangeValue={handleChangeValue} placeholder={"Thời gian làm bài (phút)"} />
                                 <AppSelect value={values.course_id} data={courses} title={"course_id"} display={"course_name"} placeholder={"Chọn khóa học"} handleChangeValue={handleChangeValue} />
-                                <AppSelect value={values.chapter_id} data={selectedCourse?.chapters} title={"chapter_id"} display={"chapter_name"} placeholder={"Chọn chương"} handleChangeValue={handleChangeValue} />
+                                <AppSelect value={values.chapter_id} data={selectedCourse?.chapters} title={"chapter_id"} display={"chapter_name"} display2={"description"} placeholder={"Chọn chương"} handleChangeValue={handleChangeValue} />
                                 <AppTextArea height={"h-[190px]"} value={values.description} title={"description"} handleChangeValue={handleChangeValue} placeholder={"Mô tả"} />
                             </Stack>
                         </div>

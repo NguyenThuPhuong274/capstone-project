@@ -62,12 +62,10 @@ const LessonController = {
     let queryString = `INSERT INTO [dbo].[Lesson_Done]
                           ([lesson_id]
                           ,[email]
-                          ,[chapter_id]
                           ,[course_id])
                       VALUES
                           ('${lesson.lesson_id}'
                           ,'${lesson.email}'
-                          ,'${lesson.chapter_id}'
                           ,'${lesson.course_id}')`;
     let data = await executeNonQuery(queryString);
 
@@ -75,6 +73,21 @@ const LessonController = {
     return res.json({
       rowAffected: data,
     })
+  },
+  getLessonsDone: async (req, res) => {
+    const user = req.body;
+    
+    const queryString = `SELECT [lesson_id] FROM [dbo].[Lesson_Done]
+    WHERE [email] = '${user.email}' AND [course_id] = '${user.course_id}'`;
+    const data = await executeQuery(queryString);
+    
+    let ids = [];
+    for (let i = 0; i < data.length; i++) {
+      ids.push(data[i].lesson_id);
+    }
+    
+    console.log(ids);
+    return res.json(ids);
   }
 };
 

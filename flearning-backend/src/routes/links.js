@@ -31,11 +31,7 @@ export const Links = [
     method: "get",
     handleAction: UserController.getUser,
   },
-  {
-    route: CONSTANT_ROUTE.MANAGE_USER + "/get/byusername",
-    method: "post",
-    handleAction: UserController.getUserByUsername,
-  },
+
   {
     route: CONSTANT_ROUTE.MANAGE_USER + "/insert",
     method: "post",
@@ -58,9 +54,19 @@ export const Links = [
     handleAction: CourseController.getCourseById,
   },
   {
+    route: CONSTANT_ROUTE.MANAGE_COURSE + "/get/user-courses",
+    method: "post",
+    handleAction: CourseController.getUserCourses,
+  },
+  {
     route: CONSTANT_ROUTE.MANAGE_COURSE + "/insert",
     method: "post",
     handleAction: CourseController.insertCourse,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_COURSE + "/insert/user-course",
+    method: "post",
+    handleAction: CourseController.insertUserCourse,
   },
   {
     route: CONSTANT_ROUTE.MANAGE_COURSE + "/update",
@@ -86,6 +92,16 @@ export const Links = [
     route: CONSTANT_ROUTE.MANAGE_LESSON + "/insert",
     method: "post",
     handleAction: LessonController.insertLesson,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_LESSON + "/insert/lesson-done",
+    method: "post",
+    handleAction: LessonController.insertLessonDone,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_LESSON + "/get/lesson-done",
+    method: "post",
+    handleAction: LessonController.getLessonsDone,
   },
   {
     route: CONSTANT_ROUTE.MANAGE_LESSON + "/update",
@@ -190,6 +206,11 @@ export const Links = [
     route: CONSTANT_ROUTE.MANAGE_TEST + "/get",
     method: "get",
     handleAction: TestController.getTests,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_TEST + "/get/test-done",
+    method: "post",
+    handleAction: TestController.getTestsDone,
   },
   {
     route: CONSTANT_ROUTE.MANAGE_TEST + "/get-byid",
