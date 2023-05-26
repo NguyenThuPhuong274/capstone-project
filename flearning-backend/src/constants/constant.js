@@ -5,7 +5,6 @@ export const CONSTANT_ROUTE = {
   CHANGE_PASSWORD: "/authen/change-password",
   LOG_OUT: "/logout",
   FORGOT_PASSWORD: "/password/forgot",
-  CHANGE_PASSWORD: "/password/change",
   MANAGE_USER: "/authen/manage/user",
   MANAGE_COURSE: "/authen/manage/course",
   MANAGE_LESSON: "/authen/manage/lesson",

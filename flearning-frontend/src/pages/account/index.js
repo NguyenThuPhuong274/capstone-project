@@ -23,7 +23,7 @@ import AppInputPhone from '../../components/AppInput/AppInputPhone';
 
 
 const AccountPage = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.authen.user);
   const [currentFile, setCurrentFile] = React.useState(null);
   const [previewUrl, setPreviewUrl] = React.useState(null);
@@ -35,21 +35,13 @@ const AccountPage = () => {
     yearOfBirth: user?.yearOfBirth ? user?.yearOfBirth : 1990,
     phone: user?.phone,
     email: user?.email,
-    gender: user?.gender ? user.gender : 1,
+    gender: user?.gender === true || user?.gender === 1 ? 1: 0,
     avatar_url: user?.avatar_url,
   });
-  console.log(values);
-  const dispatch = useDispatch();
-
-  const handleCloseModal = () => {
-    setIsOpenModal(false);
-  }
 
   const handleSubmitInfo = () => {
     dispatch(updateInfo(values));
-    const data = JSON.stringify(values);
-    // Store the JSON string in the session storage
-    sessionStorage.setItem("user", data);
+    dispatch(setUser(values));
   }
 
   React.useEffect(() => {

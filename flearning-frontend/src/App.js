@@ -30,20 +30,14 @@ function App() {
   const dispatch = useDispatch();
   const { setUser } = authenSlice.actions;
   let token = useSelector((state) => state.authen.token);
-  let user = null;
-  if (token === null) {
-    token = sessionStorage.getItem("token");
-    if (token) {
-      user = decryptToken(token);
-      dispatch(setUser(user));
-    }
-  } else {
-    user = JSON.parse(sessionStorage.getItem("user"));
-    dispatch(setUser(user));
-  }
-  // console.log("user: ", user);
-
-  // const [isRefresh, setIsRefresh] = React.useState(false);
+  let user = useSelector((state) => state.authen.user);
+  // if (token === null) {
+  //   token = sessionStorage.getItem("token");
+  //   if (token) {
+  //     user = decryptToken(token);
+  //     dispatch(setUser(user));
+  //   }
+  // } 
 
   const renderRoute = () => {
     return routes.map((route) => {
@@ -59,13 +53,6 @@ function App() {
       );
     });
   };
-
-  // console.log("render");
-
-  // React.useEffect(() => {
-  //   setIsRefresh(true);
-  // }, [token]);
-
 
   return (
     <>

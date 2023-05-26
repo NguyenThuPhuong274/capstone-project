@@ -58,23 +58,20 @@ const authenSlice = createSlice({
         state.token = accessToken;
         sessionStorage.setItem("token", accessToken);
         sessionStorage.setItem("user", JSON.stringify(user));
-        console.log("JSON.stringify(user)", JSON.stringify(user));
         localStorage.setItem("currentPage", "Trang chủ");
         toast.success("Đăng nhập thành công");
       }
-    })
-      .addCase(signup.fulfilled, (state, action) => {
-        if (action.payload.rowAffected === 1) {
-          // const { user, accessToken } = action.payload;
-          state.createAccountStatus = true;
-          // state.token = accessToken;
-        }
-        toast.success("Tạo tài khoản thành công");
-        console.log("create account successfully", action.payload);
-      })
-      .addCase(changePassword.fulfilled, (state, action) => {
+    }).addCase(signup.fulfilled, (state, action) => {
+      if (action.payload.rowAffected === 1) {
+        // const { user, accessToken } = action.payload;
+        state.createAccountStatus = true;
+        // state.token = accessToken;
+      }
+      toast.success("Tạo tài khoản thành công");
+      console.log("create account successfully", action.payload);
+    }) .addCase(changePassword.fulfilled, (state, action) => {
         toast.success("Thay đổi mật khẩu thành công");
-      }) ;
+      });
   },
 });
 

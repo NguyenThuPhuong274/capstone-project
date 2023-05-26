@@ -3,16 +3,20 @@ import { SvgIcon } from '@mui/material';
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
-import { changePassword } from '../../redux/authenSlice';
+import authenSlice, { changePassword } from '../../redux/authenSlice';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE_CONSTANTS } from '../../constants/route.constants';
 
 
 const ChangePasswordPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [oldPassword, setOldPassword] = React.useState("");
     const [newPassword, setNewPassword] = React.useState("");
     const [confirmNewPassword, setConfirmNewPassword] = React.useState("");
 
+    const {setUser} = authenSlice.actions;
     const user = useSelector((state) => state.authen.user)
 
     const handleForgotPassword = () => {
@@ -33,6 +37,8 @@ const ChangePasswordPage = () => {
             return;
         }
         dispatch(changePassword({ email: user.email, password: newPassword }))
+        dispatch(setUser({...user, password: newPassword}));
+        navigate(ROUTE_CONSTANTS.HOME_PAGE);
     };
 
     return (
