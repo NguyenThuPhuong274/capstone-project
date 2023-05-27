@@ -24,7 +24,7 @@ const AppDatePicker = ({ value, title, handleChangeValue, placeholder }) => {
         <Button
             onClick={handleClick}
             sx={{ fontStyle: "normal" }}
-            color='primary' variant="contained" className=' w-full' >
+            color='info' variant="contained" className=' w-full' >
             {value ? "Năm sinh: " + value : "Chọn năm sinh"}
         </Button>
         <Popover

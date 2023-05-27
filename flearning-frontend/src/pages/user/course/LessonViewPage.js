@@ -22,8 +22,8 @@ const LessonViewPage = () => {
 
     React.useEffect(() => {
         dispatch(getCourseById({ course_id: course_id }));
-        dispatch(getLessonsDone({ email: user.email, course_id: course_id }));
-        dispatch(getTestsDone({ email: user.email, course_id: course_id }));
+        dispatch(getLessonsDone({ email: user?.email, course_id: course_id }));
+        dispatch(getTestsDone({ email: user?.email, course_id: course_id }));
     }, [isRefresh])
 
 

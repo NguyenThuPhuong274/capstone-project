@@ -29,10 +29,11 @@ const AccountPage = () => {
   const [previewUrl, setPreviewUrl] = React.useState(null);
   const [disableSubmit, setDisableSubmit] = React.useState(false);
   const { setUser } = authenSlice.actions;
+  console.log(user);
   const [values, setValues] = useState({
     name: user?.name,
     address: user?.address,
-    yearOfBirth: user?.yearOfBirth ? user?.yearOfBirth : 1990,
+    year_of_birth: user?.year_of_birth ? user?.year_of_birth : 1990,
     phone: user?.phone,
     email: user?.email,
     gender: user?.gender === true || user?.gender === 1 ? 1: 0,
@@ -112,8 +113,8 @@ const AccountPage = () => {
                       <AppInputPhone value={values.phone} title={"phone"} handleChangeValue={handleChangeValue} placeholder={"Số điện thoại"} />
                     </Stack>
                     <Stack className='w-full' direction={"row"} spacing={2}>
-                      <Chip sx={{ borderRadius: 1, height: 40, paddingLeft: "8px", justifyContent: "left" }} className='w-full' color='default' icon={<EmailIcon />} label={"Email: " + values.email} />
-                      <AppDatePicker value={values.yearOfBirth} title={"yearOfBirth"} handleChangeValue={handleChangeValue} placeholder={"Ngày sinh"} />
+                      <Chip sx={{ borderRadius: 1, height: 36, paddingLeft: "8px", justifyContent: "left" }} className='w-full' color='default' icon={<EmailIcon />} label={"Email: " + values.email} />
+                      <AppDatePicker value={values.year_of_birth} title={"year_of_birth"} handleChangeValue={handleChangeValue} placeholder={"Ngày sinh"} />
                     </Stack>
                     <Stack direction={"row"} spacing={2}>
                       <AppRadioButton value={values.gender} handleChangeValue={handleChangeValue} />

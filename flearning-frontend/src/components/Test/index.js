@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import React from "react";
 import ConfirmDialog from "../Confirm";
-import Quiz from "../Quiz";
+import QuestionCard from "../QuestionCard";
 import { Stack } from "@mui/system";
 const Transition = React.forwardRef(function Transition(
     props,
@@ -14,11 +14,12 @@ const Transition = React.forwardRef(function Transition(
 
 
 
-const TestDialog = (props) => {
-    const { isOpen, setIsOpen, test } = props;
+const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers, handleTestDone}) => {
     const [openReturnConfirm, setOpenReturnConfirm] = React.useState(false);
     const [openSubmitConfirm, setOpenSubmitConfirm] = React.useState(false);
-    const [countdown, setCountdown] = React.useState(60 * 30);
+    const [countdown, setCountdown] = React.useState(test?.duration * 60);
+
+    const [answers, setAnswers] = React.useState([]);
 
     React.useEffect(() => {
         const intervalId = setInterval(() => {
@@ -35,7 +36,8 @@ const TestDialog = (props) => {
     }, [countdown]);
 
     React.useEffect(() => {
-        setCountdown(60 * 30);
+        setCountdown(test?.duration * 60);
+        setAnswers([]);
     }, [isOpen]);
 
     const formatTime = (seconds) => {
@@ -47,14 +49,7 @@ const TestDialog = (props) => {
             .map(time => time.toString().padStart(2, '0'))
             .join(':');
     };
-    const handleSubmitTest = () => {
 
-    }
-
-    const handleClose = () => {
-
-        setIsOpen(false)
-    }
     const handleConfirmReturnAction = (value) => {
         if (value == true) {
             setOpenReturnConfirm(false);
@@ -67,6 +62,12 @@ const TestDialog = (props) => {
         if (value == true) {
             setOpenSubmitConfirm(false);
             setIsOpen(false);
+
+            setTestAnswers(answers);
+            setOpenTestResult(true);
+
+            handleTestDone();
+
         } else {
             setOpenSubmitConfirm(false);
         }
@@ -74,6 +75,17 @@ const TestDialog = (props) => {
 
     const handleOpenConfirm = () => {
         setOpenReturnConfirm(true)
+    }
+
+    const handleSetValue = (index, value) => {
+
+        if (index < answers.length) {
+            answers[index] = value;
+        } else {
+            answers.push(value);
+        }
+        console.log("answers: ", answers);
+
     }
 
     return <>
@@ -103,13 +115,13 @@ const TestDialog = (props) => {
                         </Typography>
                         <Stack className="w-[120px] mr-[90px]" spacing={0} direction={"column"}>
                             <Typography className="w-full text-center"  >
-                                Bài kiểm tra 1
+                                {test?.test_name}
                             </Typography>
                             <Typography className="w-full text-center" >
                                 {formatTime(countdown)}
                             </Typography>
                         </Stack>
-                        <Button   color="inherit" onClick={() => setOpenSubmitConfirm(true)}>
+                        <Button color="inherit" onClick={() => setOpenSubmitConfirm(true)}>
                             Nộp bài
                         </Button> </div>
                 </Toolbar>
@@ -118,10 +130,22 @@ const TestDialog = (props) => {
             <div className="p-28 pl-64 pr-64 back bg-quiz"  >
                 <Stack direction={"column"} spacing={8}>
                     <Stack direction={"column"} spacing={5}>
-                        <Quiz />
-                        <Quiz />
-                        <Quiz />
-                        <Quiz />
+
+                        {test?.questions.map((question, key) => {
+                            return (
+                                <div key={"question-" + key}>
+                                    <QuestionCard
+                                        question={question}
+                                        index={key + 1}
+                                        totalQuestion={test?.questions.length}
+                                        handleSetValue={handleSetValue}
+                                    />
+                                </div>
+                            );
+                        })}
+
+
+
 
                     </Stack>
                     <div className="flex justify-center w-full" >

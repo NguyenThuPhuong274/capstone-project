@@ -10,6 +10,10 @@ import axios from "axios";
     const response = await axios.post(API.MANAGE_TEST + "/insert", test);
     return response.data;
   },
+  insertTestDone: async (test) => {
+    const response = await axios.post(API.MANAGE_TEST + "/insert/test-done", test);
+    return response.data;
+  },
   deleteTest: async (test) => {
     const response = await axios.post(API.MANAGE_TEST + "/delete", test);
     return response.data;

@@ -223,6 +223,11 @@ export const Links = [
     handleAction: TestController.insertTest,
   },
   {
+    route: CONSTANT_ROUTE.MANAGE_TEST + "/insert/test-done",
+    method: "post",
+    handleAction: TestController.insertTestDone,
+  },
+  {
     route: CONSTANT_ROUTE.MANAGE_TEST + "/update",
     method: "post",
     handleAction: TestController.updateTest,

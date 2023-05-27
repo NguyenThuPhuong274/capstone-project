@@ -25,6 +25,8 @@ import { display } from "@mui/system";
 import { insertLessonDone } from "../../../redux/lessonSlice";
 import courseSlice from "../../../redux/courseSlice";
 import { useDispatch } from "react-redux";
+import TestResultDialog from "../../../components/Test/TestResultDialog";
+import { insertTest, insertTestDone } from "../../../redux/testSlice";
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -99,7 +101,9 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
     const [currentTest, setCurrentTest] = React.useState(null);
     const [openTestModal, setOpenTestModal] = React.useState(false);
     const [isOpenTest, setIsOpenTest] = React.useState(false);
+    const [openTestResult, setOpenTestResult] = React.useState(false);
     const [isShowTest, setIsShowTest] = React.useState(false);
+    const [testAnswers, setTestAnswers] = React.useState([]);
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     const navigate = useNavigate();
@@ -112,7 +116,6 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
     const handleChangeIndex = (index) => {
         setValue(index);
     };
-
 
     const handleChangeAccordion =
         (panel) => (event, newExpanded) => {
@@ -135,8 +138,10 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
 
     const handleLessonDone = () => {
         if (!lessonsDone.includes(currentLesson.lesson_id)) {
-            dispatch(insertLessonDone({ course_id: course?.course_id, email: user?.email, lesson_id: currentLesson.lesson_id }));
-            dispatch(setIsRefreshSpecific(true));
+            if (user) {
+                dispatch(insertLessonDone({ course_id: course?.course_id, email: user?.email, lesson_id: currentLesson.lesson_id }));
+                dispatch(setIsRefreshSpecific(true));
+            }
         }
         const chapters = course.chapters;
         const chapterIndex = chapters.findIndex(function (chapter) {
@@ -190,6 +195,13 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
 
     const goToLink = (url) => {
         window.open(url, '_blank');
+    }
+
+    const handleTestDone = () => {
+        if (user) {
+            dispatch(insertTestDone({ test_id: currentTest.test_id, course_id: course.course_id, email: user.email }));
+            dispatch(setIsRefreshSpecific(true));
+        }
     }
 
     return <>
@@ -298,7 +310,7 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
                                                     <ListItemButton key={"test" + key} sx={{ backgroundColor: test.test_id === currentTest?.test_id ? "ButtonFace" : "" }} onClick={() => handleShowTest(test)} >
                                                         <ListItemIcon >
                                                             <SvgIcon sx={{ fontSize: 30 }} color={testsDone?.includes(test?.test_id) ? "success" : "secondary"}>
-                                                                {lessonsDone?.includes(test?.test_id) ? <CheckCircleIcon /> : <QuizIcon />}
+                                                                {testsDone?.includes(test?.test_id) ? <CheckCircleIcon /> : <QuizIcon />}
 
                                                             </SvgIcon>
                                                         </ListItemIcon>
@@ -324,7 +336,21 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
             title={"Xác nhận làm bài kiểm tra"}
             description={"Bạn có chắc mình đã sẵn sàng để bắt đầu bài kiểm tra không? Khi bạn đạt đến giới hạn thời gian, bài kiểm tra sẽ tự động nộp."} handleAction={handleConfirmAction} />
 
-        <TestDialog isOpen={isOpenTest} setIsOpen={setIsOpenTest} />
+        {currentTest !== null ? <>
+            <TestDialog
+                isOpen={isOpenTest}
+                test={currentTest}
+                setIsOpen={setIsOpenTest}
+                setOpenTestResult={setOpenTestResult}
+                setTestAnswers={setTestAnswers}
+                handleTestDone={handleTestDone} />
+            <TestResultDialog
+                isOpen={openTestResult}
+                test={currentTest}
+                setIsOpenTest={setIsOpenTest}
+                setIsOpen={setOpenTestResult}
+                answers={testAnswers} />
+        </> : <></>}
     </>
 }
 

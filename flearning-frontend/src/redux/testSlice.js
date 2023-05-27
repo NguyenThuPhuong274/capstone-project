@@ -7,6 +7,10 @@ export const insertTest = createAsyncThunk("insert-test", async (test) => {
   const response = await testServices.insertTest(test);
   return response;
 });
+export const insertTestDone = createAsyncThunk("insert-test-done", async (test) => {
+  const response = await testServices.insertTestDone(test);
+  return response;
+});
 export const getTestById = createAsyncThunk("get-test", async (test) => {
   const response = await testServices.getTestById(test);
   return response;
@@ -57,11 +61,15 @@ const testSlice = createSlice({
     builder.addCase(insertTest.fulfilled, (state, action) => {
       toast.success("Thêm bài kiểm tra thành công");
       state.isRefresh = true;
-      });
+    });
+    builder.addCase(insertTestDone.fulfilled, (state, action) => {
+      state.isRefresh = true;
+      state.isRefreshSpecific = true;
+    });
     builder.addCase(deleteTest.fulfilled, (state, action) => {
       toast.success("Xóa bài kiểm tra thành công");
       state.isRefresh = true;
-      });
+    });
     builder.addCase(getTests.fulfilled, (state, action) => {
       state.data = action.payload;
       state.isRefresh = false;

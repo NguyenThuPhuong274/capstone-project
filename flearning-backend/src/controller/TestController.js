@@ -94,6 +94,22 @@ const TestController = {
 
         return res.json({ test: test, rowAffected: data });
     },
+    insertTestDone: async (req, res) => {
+        const test = req.body;
+        console.log("test is being inserted", test);
+        let queryString = `INSERT INTO [dbo].[Test_Done]
+                            ([test_id]
+                              ,[email]
+                              ,[course_id])
+                        VALUES
+                            ('${test.test_id}'
+                              ,'${test.email}'
+                              ,'${test.course_id}')`;
+        const data = await executeNonQuery(queryString);
+        console.log(data);
+
+        return res.json({ test: test, rowAffected: data });
+    },
     updateTest: async (req, res) => {
         const test = req.body;
         console.log(req.body);
@@ -129,16 +145,16 @@ const TestController = {
     },
     getTestsDone: async (req, res) => {
         const user = req.body;
-        // console.log(req.body);
-
+        
         const queryString = `SELECT [test_id] FROM [dbo].[Test_Done]
-                          WHERE [email] = '${user.email}'
-                                AND [course_id] = '${user.course_id}'`;
+        WHERE [email] = '${user.email}'
+        AND [course_id] = '${user.course_id}'`;
         const data = await executeQuery(queryString);
         let ids = [];
         for (let i = 0; i < data.length; i++) {
             ids.push(data[i].test_id);
         }
+        console.log("test id: ", ids);
 
         return res.json(ids);
     }

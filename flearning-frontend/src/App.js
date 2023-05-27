@@ -13,11 +13,12 @@ import { SideNav } from './layouts/dashboard/side-nav';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import { routes } from './contexts/routes';
-import React  from 'react';
+import React from 'react';
 import authenSlice from './redux/authenSlice';
 import { decryptToken } from './helpers/decryptToken';
 import { ROLE } from './constants/constants';
 import { ROUTE_CONSTANTS } from './constants/route.constants';
+import ErrorPage from './pages/error';
 
 const PrivateRoute = ({ element }) => {
   const token = sessionStorage.getItem("token");
@@ -57,15 +58,17 @@ function App() {
   return (
     <>
       <Router>
-       <div>
-       {user?.role_id == ROLE.ADMIN ? <TopNav /> : <Header />} 
-         {user?.role_id == ROLE.ADMIN? <SideNav /> : <></>} 
-          
-         <Routes>{renderRoute()}</Routes>
-          {user?.role_id != ROLE.ADMIN? <Footer /> : <></>} 
-          <ScrollToTop /> 
-      
-       </div>
+        <div>
+          {user?.role_id == ROLE.ADMIN ? <TopNav /> : <Header />}
+          {user?.role_id == ROLE.ADMIN ? <SideNav /> : <></>}
+
+          <Routes>{renderRoute()}
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+          {user?.role_id != ROLE.ADMIN ? <Footer /> : <></>}
+          <ScrollToTop />
+
+        </div>
       </Router>
     </>
   );
