@@ -9,6 +9,7 @@ import chapterServices from "./chapterServices";
 import questionServices from "./questionServices";
 import testServices from "./testServices";
 import blogCategoryServices from "./blogCategoryServices";
+import blogDetailServices from "./blogDetailServices";
 
 
 export {
@@ -22,5 +23,6 @@ export {
     chapterServices,
     questionServices,
     blogCategoryServices,
+    blogDetailServices,
     testServices
 };

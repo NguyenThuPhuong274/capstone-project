@@ -2,12 +2,25 @@ import Carousel from "react-material-ui-carousel";
 import React, { useRef } from "react";
 import SectionTitle from "../Common/SectionTitle";
 import SingleBlog from "./SingleBlog";
-import blogData from "./blogData";
 
 import EyeIcon from '@heroicons/react/24/solid/EyeIcon';
+import { useDispatch, useSelector } from "react-redux";
+import { getBlogs } from "../../redux/blogSlice";
+import { getBlogCategories } from "../../redux/blogCategorySlice";
+import { useNavigate } from "react-router-dom";
+import { ROUTE_CONSTANTS } from "../../constants/route.constants";
 const Blog = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const blogs = useSelector((state) => state.blog.data);
+  const categories = useSelector((state) => state.blogCategory.data);
+  React.useEffect(() => {
+    dispatch(getBlogs());
+    dispatch(getBlogCategories());
+  }, []);
 
-  const totalBlog = blogData.length;
+
+  const totalBlog = blogs.length;
   let totalPage = Math.floor(totalBlog / 3);
   let pageList = [];
   if (Math.floor(totalBlog % 3) != 0) totalPage += 1;
@@ -20,8 +33,8 @@ const Blog = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
 
-  const handleAction = () => {
-
+  const handleAction = (id) => {
+    navigate(ROUTE_CONSTANTS.BLOG_DETAILS_PAGE + "?blog_id=" + id);
   }
   return (
     <section id="blog" className="bg-primary/5 py-16 md:py-20 lg:py-28 h-full">
@@ -50,9 +63,9 @@ const Blog = () => {
               return <div
 
                 key={"item-" + pageNumber} className={` w-full h-full duration-700 ease-in-out grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:grid-cols-3 `}>
-                {blogData.slice(startIndex, endIndex).map((blog) => (
+                {blogs.slice(startIndex, endIndex).map((blog) => (
                   <div key={"blog-" + blog.id} id={pageNumber} className="w-full h-full" style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
-                    <SingleBlog actionTitle={"Xem chi tiết"} icon={<EyeIcon />} handleAction={handleAction} blog={blog} />
+                    <SingleBlog categories={categories} actionTitle={"Xem chi tiết"} icon={<EyeIcon />} handleAction={handleAction} blog={blog} />
                   </div>
                 ))}
               </div>

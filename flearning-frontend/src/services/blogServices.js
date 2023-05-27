@@ -15,7 +15,7 @@ const blogServices = {
         return response.data;
     },
     updateBlog: async (blog) => {
-        const response = await axios.post(API.MANAGE_BLOG + "/insert", blog);
+        const response = await axios.post(API.MANAGE_BLOG + "/update", blog);
         return response.data;
     },
     deleteBlog: async (blog) => {

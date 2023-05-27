@@ -172,7 +172,7 @@ export const BlogTable = (props) => {
     </Card>
 
 
-    <ConfirmDialog isOpen={isOpenConfirm} description={"Bài kiểm tra sẽ bị xóa, bạn có muốn tiếp tục?"} title={"Xác nhận xóa bài kiểm tra"} handleAction={handleConfirmDelete} />
+    <ConfirmDialog isOpen={isOpenConfirm} description={"Tin tức sẽ bị xóa, bạn có muốn tiếp tục?"} title={"Xác nhận xóa tin tức"} handleAction={handleConfirmDelete} />
   </>
   );
 };

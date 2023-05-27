@@ -34,7 +34,8 @@ const BlogController = {
     },
     getBlogById: async (req, res) => {
         const blog = req.body;
-        let queryString = `SELECT * FROM [Blog] WHERE [blog_id] = ${blog.blog_id}`;
+        console.log("blog: ", blog);
+        let queryString = `SELECT * FROM [Blog] WHERE [blog_id] = '${blog.blog_id}'`;
 
         const data = await executeQuery(queryString);
 
@@ -89,9 +90,8 @@ const BlogController = {
         const queryString = `UPDATE [dbo].[Blog]
                                 SET [blog_avatar_url] = '${blog.blog_avatar_url}'
                                 ,[blog_category_id] = '${blog.blog_category_id}'
-                                ,[created_date] = '${blog.created_date}'
-                                ,[blog_name] = '${blog.blog_name}'
-                                ,[blog_description] = '${blog.blog_description}'
+                                ,[blog_name] = N'${blog.blog_name}'
+                                ,[blog_description] = N'${blog.blog_description}'
                                 ,[status] =  '${blog.status}'
                             WHERE [blog_id] = '${blog.blog_id}'`
         const data = await executeNonQuery(queryString);

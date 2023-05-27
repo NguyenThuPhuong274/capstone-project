@@ -14,6 +14,7 @@ import lessonSlice from "./lessonSlice";
 import testSlice from "./testSlice";
 import questionSlice from "./questionSlice";
 import blogCategorySlice from "./blogCategorySlice";
+import blogDetailSlice from "./blogDetailSlice";
 
 const persistConfig = {
   key: "root",
@@ -33,6 +34,7 @@ const rootReducers = combineReducers({
   test: testSlice.reducer,
   question: questionSlice.reducer,
   blogCategory: blogCategorySlice.reducer,
+  blogDetails : blogDetailSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

@@ -20,6 +20,7 @@ export const getBlogs = createAsyncThunk("get-blogs", async () => {
     return response;
 });
 export const getBlogById = createAsyncThunk("get-blog-byid", async (blog) => {
+
     const response = await blogServices.getBlogById(blog);
     return response;
 });
@@ -36,7 +37,9 @@ const blogSlice = createSlice({
         isRefresh: false,
     },
     reducers: {
-
+        setIsRefreshSpecific: (state, action) => {
+            state.isRefreshSpecific = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(insertBlog.fulfilled, (state, action) => {
@@ -62,7 +65,7 @@ const blogSlice = createSlice({
         builder.addCase(getBlogById.fulfilled, (state, action) => {
             state.specific = action.payload;
             state.isRefreshSpecific = false;
-       
+
         });
 
 

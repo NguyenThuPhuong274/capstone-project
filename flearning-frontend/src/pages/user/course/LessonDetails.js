@@ -259,6 +259,7 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
                                 <Tab label="Mô tả bài học" {...a11yProps(0)} />
                                 <Tab label="Tài liệu" {...a11yProps(1)} />
                                 <Tab label="Khóa học liên quan" {...a11yProps(2)} />
+                                <Tab label="Phản hồi của bạn" {...a11yProps(3)} />
                             </Tabs>
                         </AppBar>
                         <SwipeableViews
@@ -276,6 +277,9 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
                             </TabPanel>
                             <TabPanel value={value} index={2} dir={theme.direction}>
                                 Các khóa học khác
+                            </TabPanel>
+                            <TabPanel value={value} index={3} dir={theme.direction}>
+                                Phản hồi 
                             </TabPanel>
                         </SwipeableViews>
                     </div>
@@ -324,6 +328,7 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
                                 </AccordionDetails>
                             </Accordion>
                         })}
+                     
 
 
                     </div>

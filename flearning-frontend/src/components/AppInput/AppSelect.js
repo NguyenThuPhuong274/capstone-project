@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const AppSelect = ({ title, display,display2, data, value, placeholder,handleChangeValue }) => {
+const AppSelect = ({ title, display, display2, data, value, placeholder,handleChangeValue }) => {
 
   // console.log("datd: ", data);
   return <>
