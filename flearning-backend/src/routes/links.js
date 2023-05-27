@@ -10,6 +10,7 @@ import BlogController from "../controller/BlogController";
 import BlogDetailsController from "../controller/BlogDetailsController";
 import TestController from "../controller/TestController";
 import QuestionController from "../controller/QuestionController";
+import BlogCategoryController from "../controller/BlogCategoryController";
 export const Links = [
   {
     route: CONSTANT_ROUTE.SIGN_IN,
@@ -170,6 +171,11 @@ export const Links = [
     handleAction: BlogController.getBlogs,
   },
   {
+    route: CONSTANT_ROUTE.MANAGE_BLOG + "/get/by-id",
+    method: "post",
+    handleAction: BlogController.getBlogById,
+  },
+  {
     route: CONSTANT_ROUTE.MANAGE_BLOG + "/insert",
     method: "post",
     handleAction: BlogController.insertBlog,
@@ -183,6 +189,26 @@ export const Links = [
     route: CONSTANT_ROUTE.MANAGE_BLOG + "/delete",
     method: "post",
     handleAction: BlogController.deleteBlog,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_BLOG_CATEGORY + "/get",
+    method: "get",
+    handleAction: BlogCategoryController.getBlogCategorys,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_BLOG_CATEGORY + "/insert",
+    method: "post",
+    handleAction: BlogCategoryController.insertBlogCategory,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_BLOG_CATEGORY + "/update",
+    method: "post",
+    handleAction: BlogCategoryController.updateBlogCategory,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_BLOG_CATEGORY + "/delete",
+    method: "post",
+    handleAction: BlogCategoryController.deleteBlogCategory,
   },
 
   {

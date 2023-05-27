@@ -157,7 +157,7 @@ const AdminCourseDetails = ({ course }) => {
                         alt="img-blur-shadow"
 
                     />
-                    <div className={`${isViewImage === true ? 'hidden' : 'block'}`}>
+                    <div className={`${isViewImage === true ? 'hidden' : 'block'}  pt-4`}>
                         <FileUploader
                             id={"update-course-image"}
                             setDisableSubmit={setDisableSubmit}

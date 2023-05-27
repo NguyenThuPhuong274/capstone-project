@@ -11,6 +11,7 @@ export const CONSTANT_ROUTE = {
   MANAGE_CHAPTER: "/authen/manage/chapter",
   MANAGE_CONTACT: "/authen/manage/contact",
   MANAGE_BLOG: "/authen/manage/blog",
+  MANAGE_BLOG_CATEGORY: "/authen/manage/blog/category",
   MANAGE_BLOG_DETAILS: "/authen/manage/blog-details",
   MANAGE_FEEDBACK: "/authen/manage/feedback",
   MANAGE_SUPPORT: "/authen/manage/support",

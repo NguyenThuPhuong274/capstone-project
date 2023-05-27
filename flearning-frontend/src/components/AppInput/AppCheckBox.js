@@ -1,7 +1,7 @@
 const AppCheckBox = ({ value, handleChangeValue, placeholder, title }) => {
   return <>
 
-    <div className="inline-flex items-center p-0">
+    <div className="inline-flex items-center p-0 w-[150px] ">
       <label
         className="relative flex cursor-pointer items-center rounded-full p-3"
 

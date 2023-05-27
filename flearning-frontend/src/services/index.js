@@ -8,6 +8,7 @@ import lessonServices from "./lessonServices";
 import chapterServices from "./chapterServices";
 import questionServices from "./questionServices";
 import testServices from "./testServices";
+import blogCategoryServices from "./blogCategoryServices";
 
 
 export {
@@ -20,5 +21,6 @@ export {
     lessonServices,
     chapterServices,
     questionServices,
+    blogCategoryServices,
     testServices
 };

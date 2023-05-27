@@ -5,7 +5,7 @@ import HandThumbUpIcon from '@heroicons/react/24/solid/HandThumbUpIcon';
 import { Button, Card, CardContent, CardHeader, Container, Dialog, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select, Stack, SvgIcon } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import testSlice, { updateTest } from "../../../redux/testSlice";
+import blogSlice, { updateBlog } from "../../../redux/blogSlice";
 import { ACTION_TYPE } from "../../../constants/constants";
 import { Box, spacing } from "@mui/system";
 import AppTextArea from "../../../components/AppInput/AppTextArea";
@@ -18,56 +18,54 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_CONSTANTS } from "../../../constants/route.constants";
 import AppInputNumber from "../../../components/AppInput/AppInputNumber";
+import AppCheckBox from "../../../components/AppInput/AppCheckBox";
+import FileUploader from "../../../components/FileUploader";
 
-const AdminTestDetails = ({ test, courses }) => {
+const AdminBlogDetails = ({ blog, categories }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
+    const [disableSubmit, setDisableSubmit] = React.useState(false);
+    const {setIsRefreshSpecific } = blogSlice.actions;
+    const [isViewImage, setIsViewImage] = React.useState(true);
+    const [currentFile, setCurrentFile] = React.useState(null);
+    const [previewUrl, setPreviewUrl] = React.useState('');
+    const [openQuestionModal, setOpenQuestionModal] = React.useState(false);
+    const [actionType, setActionType] = React.useState(ACTION_TYPE.INSERT);
     const [currentQuestion, setCurrentQuestion] = React.useState();
-
-    const [values, setValues] = React.useState({
-        test_id: test?.test_id,
-        test_name: test?.test_name,
-        description: test?.description,
-        duration: test?.duration,
-        course_id: test?.course_id,
-        chapter_id: test?.chapter_id,
-    });
-
-    React.useEffect(() => {
-        setValues({
-            test_id: test?.test_id,
-            test_name: test?.test_name,
-            description: test?.description,
-            duration: test?.duration,
-            course_id: test?.course_id,
-            chapter_id: test?.chapter_id,
-        });
-    }, [test])
-
     const [question, setQuestion] = React.useState({
-        description: '',
+        blog_description: '',
         answer_1: '',
         answer_2: '',
         answer_3: '',
         answer_4: '',
         correct_answer: 0,
-        test_id: test?.test_id
+        blog_id: blog?.blog_id
     });
 
-    const [selectedCourse, setSelectedCourse] = React.useState();
 
-    const { setIsRefreshSpecific } = testSlice.actions;
+    const [values, setValues] = React.useState({
+        blog_avatar_url: blog?.blog_avatar_url,
+        blog_id: blog?.blog_id,
+        blog_name: blog?.blog_name,
+        blog_description: blog?.blog_description,
+        blog_category_id: blog?.blog_category_id,
+        status: blog?.status,
+    });
 
     React.useEffect(() => {
-        const course = courses.find((c) => c.course_id === values.course_id);
-        setSelectedCourse(course);
-    }, [values.course_id]);
+        setValues({
+            blog_avatar_url: blog?.blog_avatar_url,
+            blog_id: blog?.blog_id,
+            blog_name: blog?.blog_name,
+            blog_description: blog?.blog_description,
+            blog_category_id: blog?.blog_category_id,
+            status: blog?.status,
+
+        });
+    }, [blog])
 
 
-    const [openQuestionModal, setOpenQuestionModal] = React.useState(false);
-    const [actionType, setActionType] = React.useState(ACTION_TYPE.INSERT);
 
     const handleChangeValue = (key, value) => {
         setValues(prevValues => ({
@@ -83,13 +81,13 @@ const AdminTestDetails = ({ test, courses }) => {
         }));
     }
 
-    const handleUpdateTest = () => {
-        dispatch(updateTest(values));
+    const handleUpdateBlog = () => {
+        dispatch(updateBlog(values));
     }
 
     const handleSubmitQuestion = () => {
 
-        if (question.description.trim() === '') {
+        if (question.blog_description.trim() === '') {
             toast.warning("Chưa nhập mô tả câu hỏi");
             return;
         }
@@ -122,16 +120,26 @@ const AdminTestDetails = ({ test, courses }) => {
     }
 
     React.useEffect(() => {
+        if (currentFile !== null) {
+            setValues(prevValues => ({
+                ...prevValues,
+                blog_avatar_url: currentFile.url
+            }));
+            setDisableSubmit(false);
+        }
+    }, [currentFile])
+
+    React.useEffect(() => {
 
         if (openQuestionModal === false) {
             setQuestion({
-                description: '',
+                blog_description: '',
                 answer_1: '',
                 answer_2: '',
                 answer_3: '',
                 answer_4: '',
                 correct_answer: 0,
-                test_id: test?.test_id
+                blog_id: blog?.blog_id
             });
 
             setCurrentQuestion(null);
@@ -141,7 +149,7 @@ const AdminTestDetails = ({ test, courses }) => {
 
 
     const handleReturnToList = () => {
-        navigate(ROUTE_CONSTANTS.ADMIN_TEST_PAGE);
+        navigate(ROUTE_CONSTANTS.ADMIN_BLOG_PAGE);
     }
 
     React.useEffect(() => {
@@ -149,13 +157,13 @@ const AdminTestDetails = ({ test, courses }) => {
             setOpenQuestionModal(true);
             setActionType(ACTION_TYPE.UPDATE);
             setQuestion({
-                description: currentQuestion?.description,
+                blog_description: currentQuestion?.blog_description,
                 answer_1: currentQuestion?.answer_1,
                 answer_2: currentQuestion?.answer_2,
                 answer_3: currentQuestion?.answer_3,
                 answer_4: currentQuestion?.answer_4,
                 correct_answer: currentQuestion?.correct_answer,
-                test_id: test?.test_id,
+                blog_id: blog?.blog_id,
                 question_id: currentQuestion.question_id,
             })
         }
@@ -180,12 +188,12 @@ const AdminTestDetails = ({ test, courses }) => {
                                     }} >
                                         <SvgIcon sx={{ mr: 1 }}>
                                             <PlusIcon />
-                                        </SvgIcon> Thêm mới câu hỏi
+                                        </SvgIcon> Thêm mới mục 
                                     </Button>
                                 </div>
                                 <Stack direction={"column"} sx={{ overflow: "auto", height: 600 }} spacing={0}>
-                                    {test?.questions.map((question, key) => {
-                                        return <Question setCurrentQuestion={setCurrentQuestion} key={key} question={question} title={`Câu hỏi ${key + 1}`} index={key} />
+                                    {blog?.blog_details?.map((question, key) => {
+                                        return <></>;
                                     })}
                                 </Stack>
 
@@ -193,23 +201,39 @@ const AdminTestDetails = ({ test, courses }) => {
                         </CardContent>
                     </Card>
                     <Card sx={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }} className=" w-[500px] h-full flex flex-col rounded bg-white bg-clip-border text-gray-700 shadow-md">
-                        <CardHeader title={"Thông tin bài kiểm tra"} ></CardHeader>
+                        <div
+                            onMouseLeave={() => setIsViewImage(true)}
+                            onMouseEnter={() => setIsViewImage(false)}
+                            className="h-full overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
+                            <img
+                                className={`${isViewImage === false ? 'hidden' : 'block'}`}
+                                src={previewUrl !== '' && previewUrl !== undefined ? previewUrl : values.blog_avatar_url}
+                                alt="img-blur-shadow"
+
+                            />
+                            <div className={`${isViewImage === true ? 'hidden' : 'block'} pt-6` }>
+                                <FileUploader
+                                    id={"update-blog-image"}
+                                    setDisableSubmit={setDisableSubmit}
+                                    setCurrentFile={setCurrentFile}
+                                    firebaseFolderName={"course/images"} setPreviewUrl={setPreviewUrl} />
+                            </div>
+                        </div>
                         <div className="p-4 h-full">
                             <Stack spacing={2} direction={"column"} className="h-full">
-                                <AppInput value={values.test_name} title={"test_name"} handleChangeValue={handleChangeValue} placeholder={"Tên bài kiểm tra"} />
-                                <AppInputNumber value={values.duration} title={"duration"} handleChangeValue={handleChangeValue} placeholder={"Thời gian làm bài (phút)"} />
-                                <AppSelect value={values.course_id} data={courses} title={"course_id"} display={"course_name"} placeholder={"Chọn khóa học"} handleChangeValue={handleChangeValue} />
-                                <AppSelect value={values.chapter_id} data={selectedCourse?.chapters} title={"chapter_id"} display={"chapter_name"} display2={"description"} placeholder={"Chọn chương"} handleChangeValue={handleChangeValue} />
-                                <AppTextArea height={"h-[190px]"} value={values.description} title={"description"} handleChangeValue={handleChangeValue} placeholder={"Mô tả"} />
+                                <AppInput value={values.blog_name} title={"blog_name"} handleChangeValue={handleChangeValue} placeholder={"Tiêu đề"} />
+                                <AppSelect value={values.blog_category_id} data={categories} title={"blog_category_id"} display={"name"} placeholder={"Chọn loại tin tức"} handleChangeValue={handleChangeValue} />
+                                <AppCheckBox value={values?.status} title={"status"} handleChangeValue={handleChangeValue} placeholder={"Công khai"} />
+                                <AppTextArea height={"h-[120px]"} value={values.blog_description} title={"blog_description"} handleChangeValue={handleChangeValue} placeholder={"Mô tả"} />
                             </Stack>
                         </div>
                         <Stack className="m-4" direction={"row"} spacing={2} >
-                            <Button onClick={handleReturnToList} color='success' variant="contained" className='w-[150px]'>
+                            <Button disabled={disableSubmit} onClick={handleReturnToList} color='success' variant="contained" className='w-[150px]'>
                                 <SvgIcon className='mr-2' >
                                     <ArrowLeftIcon />
                                 </SvgIcon> Trở lại
                             </Button>
-                            <Button variant="contained" onClick={handleUpdateTest} className='bg-primary w-[150px]'>
+                            <Button disabled={disableSubmit} variant="contained" onClick={handleUpdateBlog} className='bg-primary w-[150px]'>
                                 <SvgIcon className="mr-2">
                                     <HandThumbUpIcon />
                                 </SvgIcon> Lưu
@@ -223,7 +247,7 @@ const AdminTestDetails = ({ test, courses }) => {
                 <DialogContent sx={{ p: 4 }}>
                     <Stack sx={{ mt: 3 }} direction={"column"} spacing={4}>
 
-                        <AppTextArea height={"h-[150px]"} value={question.description} title={"description"} handleChangeValue={handleChangeQuestionValue} placeholder={"Mô tả câu hỏi"} />
+                        <AppTextArea height={"h-[150px]"} value={question.blog_description} title={"blog_description"} handleChangeValue={handleChangeQuestionValue} placeholder={"Mô tả câu hỏi"} />
                         <Stack direction={"column"} spacing={2}>
                             <Stack direction={"row"} spacing={2}>
                                 <AppInput
@@ -268,13 +292,13 @@ const AdminTestDetails = ({ test, courses }) => {
                             </FormControl>
                         </div>
                         <Stack direction={"row"} spacing={2} className="flex flex-row justify-end w-full" >
-                            <Button color='error' variant="contained" className=' w-[150px]' onClick={() => setOpenQuestionModal(false)}>
+                            <Button disabled={disableSubmit} color='error' variant="contained" className=' w-[150px]' onClick={() => setOpenQuestionModal(false)}>
 
                                 <SvgIcon className='mr-2'>
                                     <XMarkIcon />
                                 </SvgIcon> Hủy
                             </Button>
-                            <Button onClick={handleSubmitQuestion} color='primary' variant="contained" className='w-[150px] ml-3'>
+                            <Button disabled={disableSubmit} onClick={handleSubmitQuestion} color='primary' variant="contained" className='w-[150px] ml-3'>
                                 <SvgIcon className='mr-2'>
                                     <HandThumbUpIcon />
                                 </SvgIcon> Lưu
@@ -289,4 +313,4 @@ const AdminTestDetails = ({ test, courses }) => {
 
 }
 
-export default AdminTestDetails;
+export default AdminBlogDetails;

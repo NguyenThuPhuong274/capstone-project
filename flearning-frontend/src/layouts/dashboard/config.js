@@ -38,7 +38,7 @@ export const items = [
   },
   {
     title: 'Tin tức',
-    path: '/authen/blogs',
+    path: '/authen/blog',
     icon: (
       <SvgIcon fontSize="small">
         <NewspaperIcon />

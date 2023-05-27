@@ -95,7 +95,7 @@ export const SupportTable = (props) => {
                         spacing={2}
                       >
 
-                        <Typography  sx={{overflow: "auto", textAlign: "left", height: 50, width: 200}} variant="subtitle2">
+                        <Typography sx={{ overflow: "auto", textAlign: "left", height: 50, width: 200 }} variant="subtitle2">
                           {support?.support_name}
                         </Typography>
                       </Stack>
@@ -103,10 +103,10 @@ export const SupportTable = (props) => {
 
 
                     <TableCell>
-                    <Typography sx={{overflow: "auto", height: 45}} variant="subtitle2">
-                          {support?.message}
-                        </Typography>
-                     
+                      <Typography sx={{ overflow: "auto", height: 45 }} variant="subtitle2">
+                        {support?.message}
+                      </Typography>
+
                     </TableCell>
                     <TableCell sx={{ width: 120 }} >
                       <Stack direction={"row"} spacing={1}>

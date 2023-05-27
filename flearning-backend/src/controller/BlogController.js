@@ -6,7 +6,7 @@ const BlogController = {
     getBlogs: async (req, res) => {
         let queryString = 'SELECT * FROM [Blog]'
 
-        const data = await executeNonQuery(queryString);
+        const data = await executeQuery(queryString);
 
         const handleGetBlogDetails = async (blog) => {
             queryString = `SELECT * FROM [Blog_Details] WHERE [blog_id] = '${blog.blog_id}'`;
@@ -32,6 +32,36 @@ const BlogController = {
 
         return res.json(blogs);
     },
+    getBlogById: async (req, res) => {
+        const blog = req.body;
+        let queryString = `SELECT * FROM [Blog] WHERE [blog_id] = ${blog.blog_id}`;
+
+        const data = await executeQuery(queryString);
+
+        const handleGetBlogDetails = async (blog) => {
+            queryString = `SELECT * FROM [Blog_Details] WHERE [blog_id] = '${blog.blog_id}'`;
+            const blogDetails = await executeQuery(queryString);
+            blog.blog_details = blogDetails;
+
+            return blog;
+        }
+
+        let blogs = [];
+
+        for (let i = 0; i < data.length; i++) {
+            if (data[i] !== 0) {
+                let blog = await handleGetBlogDetails(data[i]).then((response) => {
+                    console.log(" data.length: ", data.length);
+                    return response;
+                });
+                blogs.push(blog);
+            }
+        }
+
+        console.log(blogs);
+
+        return res.json(blogs[0]);
+    },
     insertBlog: async (req, res) => {
         const blog = req.body;
         console.log("blog is being inserted", blog);
@@ -46,8 +76,8 @@ const BlogController = {
                                 ('${blog.blog_avatar_url}', 
                                     '${blog.blog_category_id}', 
                                     '${blog.created_date}', 
-                                    '${blog.blog_name}', 
-                                    '${blog.blog_description}', 
+                                    N'${blog.blog_name}', 
+                                    N'${blog.blog_description}', 
                                     '${blog.status}')`;
         const data = await executeNonQuery(queryString);
         console.log(data);

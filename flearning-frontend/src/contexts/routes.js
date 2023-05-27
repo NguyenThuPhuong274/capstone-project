@@ -24,6 +24,7 @@ import SettingPage from "../pages/admin/settings";
 import AdminTestPage from "../pages/admin/test";
 import AdminTestDetailsPage from "../pages/admin/test-details";
 import ChangePasswordPage from "../pages/change-password";
+import AdminBlogDetailsPage from "../pages/admin/blog-details";
 
 export const routes = [
   {
@@ -120,6 +121,12 @@ export const routes = [
     path: ROUTE_CONSTANTS.ADMIN_BLOG_PAGE,
     isPrivate: false,
     component: <AdminBlogPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ADMIN_BLOG_DETAILS_PAGE,
+    isPrivate: false,
+    component: <AdminBlogDetailsPage />,
     exact: true,
   },
   {
