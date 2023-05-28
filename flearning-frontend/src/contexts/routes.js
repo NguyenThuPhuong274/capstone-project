@@ -27,6 +27,7 @@ import ChangePasswordPage from "../pages/change-password";
 import AdminBlogDetailsPage from "../pages/admin/blog-details";
 import PaymentPage from "../pages/user/payment";
 import PaymentResultPage from "../pages/user/payment/PaymentResultPage";
+import PaymentHistoryPage from "../pages/payment-history";
 
 export const routes = [
   {
@@ -37,7 +38,7 @@ export const routes = [
   },
   {
     path: ROUTE_CONSTANTS.CHANGE_PASSWORD_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <ChangePasswordPage />,
     exact: true,
   },
@@ -49,37 +50,43 @@ export const routes = [
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_TEST_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminTestPage />,
     exact: true,
   },
   {
+    path: ROUTE_CONSTANTS.PAYMENT_HISTORY,
+    isPrivate: true,
+    component: <PaymentHistoryPage />,
+    exact: true,
+  },
+  {
     path: ROUTE_CONSTANTS.ADMIN_TEST_DETAILS,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminTestDetailsPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.SETING_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <SettingPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.PAYMENT,
-    isPrivate: false,
+    isPrivate: true,
     component: <PaymentPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_FEEDBACK_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminFeedbackPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_SUPPORT_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminSupportPage />,
     exact: true,
   },
@@ -91,31 +98,31 @@ export const routes = [
   },
   {
     path: ROUTE_CONSTANTS.COURSE_DETAILS_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <CourseDetailPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.LESSON_VIEW_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <LessonViewPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.MY_COURSE_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <MyCoursePage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ACCOUNT_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AccountPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.PAYMENT_RESULT_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <PaymentResultPage />,
     exact: true,
   },
@@ -133,31 +140,31 @@ export const routes = [
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_BLOG_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminBlogPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_BLOG_DETAILS_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminBlogDetailsPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_COURSE_DETAILS,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminCourseDetailsPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_COURSE_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminCoursesPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_CONTACT_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminContactPage />,
     exact: true,
   },
@@ -181,7 +188,7 @@ export const routes = [
   },
   {
     path: ROUTE_CONSTANTS.FORGOT_PASSOWRD,
-    isPrivate: false,
+    isPrivate: true,
     component: <ForgotPasswordPage />,
     exact: true,
   },

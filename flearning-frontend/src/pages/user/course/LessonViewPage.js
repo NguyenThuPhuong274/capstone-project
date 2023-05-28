@@ -6,6 +6,9 @@ import { getCourseById } from "../../../redux/courseSlice";
 import { getLessonsDone } from "../../../redux/lessonSlice";
 import { getTestsDone } from "../../../redux/testSlice";
 import SmoothScrollUp from "../../../components/Common/SmoothScrollUp";
+import { getFeedbackById } from "../../../redux/feedbackSlice";
+import { ROUTE_CONSTANTS } from "../../../constants/route.constants";
+import { toast } from "react-toastify";
 
 const LessonViewPage = () => {
     const user = useSelector((state) => state.authen.user);
@@ -16,6 +19,7 @@ const LessonViewPage = () => {
     const dispatch = useDispatch();
 
     const course = useSelector((state) => state.course.specific);
+    const feedback = useSelector((state) => state.feedback.specific);
     const lessonsDone = useSelector((state) => state.lesson.lessons_done);
     const testsDone = useSelector((state) => state.test.tests_done);
 
@@ -23,15 +27,27 @@ const LessonViewPage = () => {
 
     React.useEffect(() => {
         dispatch(getCourseById({ course_id: course_id }));
+        dispatch(getFeedbackById({ course_id: course_id, email: user?.email }));
         dispatch(getLessonsDone({ email: user?.email, course_id: course_id }));
         dispatch(getTestsDone({ email: user?.email, course_id: course_id }));
     }, [isRefresh])
 
 
+    // let flag = false;
+
+    // React.useEffect(() => {
+    //     if (course.price !== 0 && (user === null || user === undefined) && flag === false) {
+    //         toast.warning("Đăng nhập để xem khóa học");
+    //         navigate(ROUTE_CONSTANTS.SIGN_IN);
+    //     }
+    //     flag = true;
+    // }, [course_id])
+
+
     return (
         <>
             <SmoothScrollUp />
-            <LessonDetails course={course} lessonsDone={lessonsDone} testsDone={testsDone} user={user} />
+            <LessonDetails course={course} lessonsDone={lessonsDone} testsDone={testsDone} user={user} feedback={feedback} />
         </>
     )
 };

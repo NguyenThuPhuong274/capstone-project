@@ -47,7 +47,7 @@ const Header = (props) => {
       <header
 
      
-        className={`w-[1520px] header top-0 left-0 z-40 flex  items-center bg-transparent ${sticky
+        className={`w-[1510px] header top-0 left-0 z-40 flex  items-center bg-transparent ${sticky
           ? "!fixed !z-[99] !bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm !transition dark:!bg-primary dark:!bg-opacity-20"
           : "absolute"
           }`}

@@ -74,6 +74,9 @@ export const ContactTable = (props) => {
                 </TableCell>
 
                 <TableCell>
+                  Nội dung
+                </TableCell>
+                <TableCell>
                   Trạng thái
                 </TableCell>
 
@@ -100,28 +103,36 @@ export const ContactTable = (props) => {
                       >
 
                         <Typography variant="subtitle2">
-                          {contact?.name}
+                          <p style={{ whiteSpace: "nowrap", width: 170, overflow: "auto" }} >
+                            {contact?.name}
+                          </p>
+
                         </Typography>
                       </Stack>
                     </TableCell>
 
                     <TableCell>
-                      {contact?.email}
+                      <p style={{ whiteSpace: "nowrap", width: 220, overflow: "auto" }} >
+                        {contact?.email}
+                      </p>
+
                     </TableCell>
 
                     <TableCell>
                       {new Date(contact?.request_date).toLocaleDateString()}
                     </TableCell>
-
+                    <TableCell>
+                      <p style={{ whiteSpace: "nowrap", width: 260, overflow: "auto" }} >
+                        {contact?.request_message}
+                      </p>
+                    </TableCell>
                     <TableCell>
                       <Chip color={contact?.status === true ? 'secondary' : 'error'} label={contact?.status === true ? 'Đã phản hồi' : 'Chưa phản hồi'} />
                     </TableCell>
                     <TableCell>
-                      <Button onClick={() => setCurrentId(contact?.contact_id)} variant="contained" className='bg-primary ' size='small'>
+                      <Button sx={{ width: 120 }} onClick={() => setCurrentId(contact?.contact_id)} variant="contained" className='bg-primary ' size='small'>
                         {contact?.status === true ? 'Chỉnh sửa' : 'Phản hồi'}
                       </Button>
-
-
                     </TableCell>
                   </TableRow>
                 );

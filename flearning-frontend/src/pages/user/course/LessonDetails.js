@@ -1,7 +1,7 @@
 
 import CourseImage from "../../../assets/images/course/course-1.png";
 import Breadcrumb from "../../../components/Common/Breadcrumb";
-import { Stack, Box, Card, CardContent, CardHeader, List, SvgIcon, Typography, AppBar, Tabs, Tab, ListItemButton, ListItemIcon, ListItemText, Divider, Button, Chip } from "@mui/material";
+import { Stack, Box, Card, CardContent, CardHeader, List, SvgIcon, Typography, AppBar, Tabs, Tab, ListItemButton, ListItemIcon, ListItemText, Divider, Button, Chip, Paper } from "@mui/material";
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
@@ -12,6 +12,7 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import QuizIcon from '@mui/icons-material/Quiz';
+import HandThumbUpIcon from '@heroicons/react/24/solid/HandThumbUpIcon';
 
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
@@ -28,6 +29,10 @@ import { useDispatch, useSelector } from "react-redux";
 import TestResultDialog from "../../../components/Test/TestResultDialog";
 import { insertTest, insertTestDone } from "../../../redux/testSlice";
 import RelatedCourse from "../../../components/Course/RelatedCourse";
+import AppTextArea from "../../../components/AppInput/AppTextArea";
+import RatingStar from "../../../components/Star";
+import { insertFeedback, updateFeedback } from "../../../redux/feedbackSlice";
+import { toast } from "react-toastify";
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -94,7 +99,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 
-const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
+const LessonDetails = ({ course, lessonsDone, testsDone, user, feedback }) => {
     const dispatch = useDispatch();
     const [expanded, setExpanded] = React.useState('panel1');
     const [currentLesson, setCurrentLesson] = React.useState(course.chapters[0]?.lessons[0]);
@@ -108,6 +113,38 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     const navigate = useNavigate();
+
+    const [feedbackValues, setFeedbackValues] = React.useState({
+        feedback_id: feedback?.feedback_id,
+        name: user?.name,
+        email: user?.email,
+        course_name: course?.course_name,
+        course_id: course?.course_id,
+        message: feedback === '' ? '' : feedback?.message,
+        star: feedback === '' ? 0 : feedback?.star,
+    });
+
+    React.useEffect(() => {
+        setFeedbackValues({
+            feedback_id: feedback?.feedback_id,
+            name: user?.name,
+            email: user?.email,
+            user_avatar_url: user?.avatar_url,
+            course_name: course?.course_name,
+            course_id: course?.course_id,
+            message: feedback === '' ? '' : feedback?.message,
+            star: feedback === '' ? 0 : feedback?.star,
+        })
+    }, [feedback, course])
+
+
+
+    const handleChangeFeedbackValues = (key, value) => {
+        setFeedbackValues(prevValues => ({
+            ...prevValues,
+            [key]: value
+        }));
+    }
 
 
     const courses = useSelector((state) => state.course.data);
@@ -206,10 +243,26 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
         window.open(url, '_blank');
     }
 
+    console.log("feedback: ", feedbackValues);
+
     const handleTestDone = () => {
         if (user) {
             dispatch(insertTestDone({ test_id: currentTest.test_id, course_id: course.course_id, email: user.email }));
             dispatch(setIsRefreshSpecific(true));
+        }
+    }
+
+    const handleSubmitFeedback = () => {
+
+        if (feedbackValues.message.trim() === '') {
+            toast.warning("Chưa ghi nội dung phản hồi");
+            return;
+        }
+
+        if (feedback === '') {
+            dispatch(insertFeedback(feedbackValues));
+        } else {
+            dispatch(updateFeedback(feedbackValues));
         }
     }
 
@@ -278,13 +331,13 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
                             onChangeIndex={handleChangeIndex}
                         >
                             <TabPanel value={value} index={0} dir={theme.direction}>
-                                <Stack direction={"column"} spacing={2} sx={{ height: 360, overflow: "auto" }}>
+                                <Stack direction={"column"} spacing={2} sx={{ height: 400, overflow: "auto" }}>
 
                                     {currentLesson?.description}
                                 </Stack>
                             </TabPanel>
                             <TabPanel value={value} index={1} dir={theme.direction}>
-                                <Stack direction={"column"} spacing={1} sx={{ height: 360, overflow: "auto" }}>
+                                <Stack direction={"column"} spacing={1} sx={{ height: 400, overflow: "auto" }}>
                                     <span>Các bạn tải tài liệu theo đường link: </span>
                                     <span onClick={() => goToLink(currentLesson?.material_url)} style={{ color: "#7c3aed", cursor: "pointer" }}  >{currentLesson?.material_url} </span>
                                 </Stack>
@@ -306,8 +359,24 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
                                 </div>
                             </TabPanel>
                             <TabPanel value={value} index={3} dir={theme.direction}>
-                                <Stack direction={"column"} spacing={2} sx={{ height: 360, overflow: "auto" }}>
-
+                                <Stack direction={"column"} spacing={0} sx={{ height: 400, overflow: "auto", p: 2, }}>
+                                    <Card sx={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;", p: 2, cursor: "pointer", height: 400 }} >
+                                        <CardHeader title="Phản hồi của bạn" className="uppercase font-bold" />
+                                        <CardContent sx={{ pt: 0 }}>
+                                            <Stack direction={"column"} spacing={1}>
+                                                <RatingStar value={feedbackValues?.star} handleChangeValue={handleChangeFeedbackValues} />
+                                                <AppTextArea height={"h-[150px]"} value={feedbackValues?.message} title={"message"} handleChangeValue={handleChangeFeedbackValues} placeholder={"Nội dung"} />
+                                            </Stack>
+                                            <div className="flex justify-end mt-3">
+                                                <Button onClick={handleSubmitFeedback} variant="contained" color="primary" className="w-[180px]" >
+                                                    <SvgIcon sx={{ mr: 1 }}>
+                                                        <HandThumbUpIcon />
+                                                    </SvgIcon>
+                                                    {feedback !== null && feedback !== undefined && feedback !== '' ? "Cập nhật" : "Gửi"}
+                                                </Button>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
                                 </Stack>
                             </TabPanel>
                         </SwipeableViews>

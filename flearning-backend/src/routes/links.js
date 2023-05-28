@@ -121,6 +121,11 @@ export const Links = [
     handleAction: FeedbackController.getFeedbacks,
   },
   {
+    route: CONSTANT_ROUTE.MANAGE_FEEDBACK + "/get/by-id",
+    method: "post",
+    handleAction: FeedbackController.getFeedbackById,
+  },
+  {
     route: CONSTANT_ROUTE.MANAGE_FEEDBACK + "/insert",
     method: "post",
     handleAction: FeedbackController.insertFeedback,

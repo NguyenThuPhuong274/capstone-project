@@ -46,7 +46,14 @@ const courseSlice = createSlice({
     },
     setIsRefresh: (state, action) => {
       state.isRefresh = true;
-    }
+    },
+    resetCourseData: (state, action) => {
+      state.data = [];
+      state.userCourses = [];
+      state.specific = null;
+      state.isRefreshSpecific = false;
+      state.isRefresh = false;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(insertCourse.fulfilled, (state, action) => {

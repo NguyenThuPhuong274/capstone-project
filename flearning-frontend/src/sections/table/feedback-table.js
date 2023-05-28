@@ -69,7 +69,7 @@ export const FeedbackTable = (props) => {
                         spacing={2}
                       >
 
-                        <Typography variant="subtitle2">
+                        <Typography sx={{width: 150}} variant="subtitle2">
                           {feedback?.name}
                         </Typography>
                       </Stack>
@@ -79,14 +79,16 @@ export const FeedbackTable = (props) => {
                       {feedback?.email}
                     </TableCell>
 
-                    <TableCell>
+                    <TableCell sx={{width: 150}}>
                       {feedback?.course_name}
                     </TableCell>
                     <TableCell>
                       {feedback?.star}
                     </TableCell>
                     <TableCell>
-                      {feedback?.message}
+                     <p style={{ whiteSpace: 'nowrap' }} className='overflow-auto w-[420px] '>
+                     {feedback?.message}
+                     </p>
                     </TableCell>
 
 

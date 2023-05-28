@@ -4,7 +4,6 @@ import {
   Routes,
   Route,
   Navigate,
-  useNavigate,
 } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { TopNav } from './layouts/dashboard/top-nav';
@@ -17,15 +16,7 @@ import React from 'react';
 import authenSlice from './redux/authenSlice';
 import { decryptToken } from './helpers/decryptToken';
 import { ROLE } from './constants/constants';
-import { ROUTE_CONSTANTS } from './constants/route.constants';
 import ErrorPage from './pages/error';
-
-const PrivateRoute = ({ element }) => {
-  const token = sessionStorage.getItem("token");
-
-  return token ? element : <Navigate to="/signin" />;
-};
-
 
 function App() {
   const dispatch = useDispatch();
@@ -46,9 +37,7 @@ function App() {
         <Route
           key={route.path}
           path={route.path}
-          element={
-            route.component
-          }
+          element={route.isPrivate && !token ? <Navigate to="/signin" /> : route.component}
           exact={route.exact}
         />
       );

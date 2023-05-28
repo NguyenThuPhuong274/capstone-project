@@ -21,6 +21,7 @@ export const ROUTE_CONSTANTS = {
     COURSE_DETAILS_PAGE: "/course-details",
     LESSON_VIEW_PAGE: "/authen/lesson-view",
     BLOG_DETAILS_PAGE: "/blog-details",
+    PAYMENT_HISTORY: "/authen/payment/history",
     CHANGE_PASSWORD_PAGE: "/authen/change-password",
     SETING_PAGE: "/authen/settings",
     ADMIN_TEST_PAGE: "/authen/test",

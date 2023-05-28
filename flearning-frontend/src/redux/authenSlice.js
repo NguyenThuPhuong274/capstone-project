@@ -52,7 +52,7 @@ const authenSlice = createSlice({
       const { user, accessToken } = action.payload;
       if (user == null) {
         const { message } = action.payload;
-        toast.success(message);
+        toast.warning(message);
       } else {
         state.user = user;
         state.token = accessToken;

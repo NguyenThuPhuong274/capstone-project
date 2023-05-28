@@ -20,7 +20,7 @@ const ContactController = {
                              VALUES ('${contact.email}', 
                                     N'${contact.name}', 
                                     '${contact.request_date}', 
-                                    '${contact.status}', 
+                                    0, 
                                     N'${contact.request_message}')`;
         const data = await executeNonQuery(queryString);
         console.log(data);

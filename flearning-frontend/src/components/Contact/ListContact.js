@@ -127,25 +127,24 @@ const ListContact = ({ data }) => {
 
 
             <Dialog maxWidth="lg" fullWidth open={isOpenModal} onClose={handleCloseModal}>
-                <DialogTitle >HỌC VIÊN "{currentContact?.name}"</DialogTitle>
-                <DialogContent sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', p: 0, pb: 2, height: 400, width: "100%" }} dividers>
+                <DialogTitle >Gửi Phản Hồi Tới Địa Chỉ Email: {currentContact?.email}</DialogTitle>
+                <DialogContent sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', p: 0, pb: 2, height: 430, width: "100%" }} dividers>
                     <Stack spacing={3} sx={{ p: 3 }} direction={"row"}>
 
-                        <Card sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', p: 0, width: "100%", height: 270 }} >
+                        <Card sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', p: 0, width: "100%", height: 320 }} >
 
-                            <CardContent  >
-                                <CardHeader title="Thông điệp" sx={{ p: 0, pb: 2 }} />
-
-                                <span>
+                            <CardHeader title="Thông điệp" sx={{pb: 0}} />
+                            <CardContent sx={{height: "84%"}}>
+                                <textarea disabled style={{width: "100%", height: "100%", borderRadius: 5, resize: "none"}}>
                                     {currentContact?.request_message}
-                                </span>
+                                </textarea>
                             </CardContent>
                         </Card>
-                        <Card sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', width: "100%", height: 270 }} >
+                        <Card sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', width: "100%", height: 320 }} >
 
+                            <CardHeader title="Phản hồi" sx={{pb: 0}} />
                             <CardContent  >
-                                <CardHeader title="Phản hồi" sx={{ p: 0, pb: 2 }} />
-                                <AppTextArea height={"h-[180px]"} value={responseMessage} handleChangeValue={handleChangeValue} placeholder={"Phản hồi của bạn"} />
+                                <AppTextArea height={"h-[230px]"} value={responseMessage} handleChangeValue={handleChangeValue} placeholder={"Nội dung"} />
 
                                 {/* <AppInput height={"h-[160px]"} value={responseMessage} handleChangeValue={handleChangeValue} placeholder={"Phản hồi của bạn"} /> */}
                             </CardContent>

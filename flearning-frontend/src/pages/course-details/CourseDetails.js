@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import CourseImage from "../../assets/images/course/course-1.png";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_CONSTANTS } from "../../constants/route.constants";
-import PayPal from "../../components/PayPal";
 import { useSelector } from "react-redux";
 import EyeIcon from "@heroicons/react/24/solid/EyeIcon";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -138,7 +137,6 @@ const CourseDetails = ({ course }) => {
 
 
 
-        <PayPal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
 }
 
