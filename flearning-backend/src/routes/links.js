@@ -232,6 +232,16 @@ export const Links = [
     method: "post",
     handleAction: PaymentController.createPayment,
   },
+  {
+    route: CONSTANT_ROUTE.MANAGE_PAYMENT + "/insert",
+    method: "post",
+    handleAction: PaymentController.insertPayment,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_PAYMENT + "/get",
+    method: "get",
+    handleAction: PaymentController.getPayments,
+  },
 
 
   {

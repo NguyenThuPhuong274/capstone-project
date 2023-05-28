@@ -23,7 +23,6 @@ const SupportPage = () => {
         description="Các câu hỏi thường gặp"
       />
       <Support data={supports} />
-      <VNPayComponent />
     </>
   );
 };

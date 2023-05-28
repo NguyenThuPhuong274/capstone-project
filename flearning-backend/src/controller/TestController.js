@@ -145,10 +145,11 @@ const TestController = {
     },
     getTestsDone: async (req, res) => {
         const user = req.body;
-        
+
+        console.log(user);
         const queryString = `SELECT [test_id] FROM [dbo].[Test_Done]
-        WHERE [email] = '${user.email}'
-        AND [course_id] = '${user.course_id}'`;
+                                    WHERE [email] = '${user.email}'
+                                    AND [course_id] = '${user.course_id}'`;
         const data = await executeQuery(queryString);
         let ids = [];
         for (let i = 0; i < data.length; i++) {

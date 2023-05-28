@@ -75,20 +75,13 @@ const CourseController = {
   },
   getUserCourses: async (req, res) => {
     const user = req.body;
-    let queryString = `SELECT * FROM [Course] where [course_id] in (SELECT [course_id] FROM [User_Course] WHERE [email] = ${user.email} )`;
+    console.log("user: ", user);
+
+    let queryString = `SELECT * FROM [Course] WHERE [course_id] in (SELECT [course_id] FROM [User_Course] WHERE [email] = '${user.email}') OR [price] = 0`;
 
     let courses = await executeQuery(queryString);
-    let newCourses = [];
-
-    for (let i = 0; i < courses.length; i++) {
-      let course = await handleGetCourse(courses[i]).then((response) => {
-        return response;
-      });
-      newCourses.push(course);
-    }
-
-    // console.log("courses", newCourses);
-    return res.json(newCourses);
+    console.log("courses", courses);
+    return res.json(courses);
   },
   getCourseById: async (req, res) => {
     const course = req.body;
@@ -133,20 +126,19 @@ const CourseController = {
   },
   insertUserCourse: async (req, res) => {
     const userCourse = req.body;
-
+    console.log(userCourse);
     const queryString = `INSERT INTO [dbo].[User_Course]
                             ([course_id]
                               ,[email]
-                              ,[enrolled_date] )
+                              ,[enrolled_date])
                         VALUES
-                            (
-                              '${userCourse.course_id}',
+                            ('${userCourse.course_id}',
                               '${userCourse.email}', 
                               '${userCourse.enrolled_date}')`;
     const data = await executeNonQuery(queryString);
     // console.log(data);
 
-    return res.json({ course: course, rowAffected: data });
+    return res.json({ rowAffected: data });
   },
   updateCourse: async (req, res) => {
     const course = req.body;

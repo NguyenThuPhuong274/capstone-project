@@ -3,7 +3,7 @@ import CourseCard from "./CourseCard";
 import Carousel from "react-material-ui-carousel";
 import React from "react";
 
-const CourseCarousel = ({ data }) => {
+const CourseCarousel = ({ data, title,paragraph  }) => {
   const totalCourse = data.length;
   let totalPage = Math.floor(totalCourse / 3);
   let pageList = [];
@@ -21,11 +21,11 @@ const CourseCarousel = ({ data }) => {
 
   }
   return (
-    <section id="pricing" className="relative z-10 py-16 md:py-20 lg:py-28">
+    <section id="pricing" className="relative z-10 ">
       <div className="container">
         <SectionTitle
-          title="CÁC KHÓA HỌC ONLINE TẠI JLEARNING"
-          paragraph="Có rất nhiều khóa học từ N1-N5 đa dạng và phong phú"
+          title={title}
+          paragraph={paragraph}
           center
           width="665px"
         />

@@ -19,8 +19,8 @@ export const getCourses = createAsyncThunk("get-courses", async () => {
   const response = await courseServices.getCourses();
   return response;
 });
-export const getUserCourses = createAsyncThunk("get-user-courses", async () => {
-  const response = await courseServices.getUserCourses();
+export const getUserCourses = createAsyncThunk("get-user-courses", async (user) => {
+  const response = await courseServices.getUserCourses(user);
   return response;
 });
 export const getCourseById = createAsyncThunk("get-course-by-id", async (course) => {
@@ -44,6 +44,9 @@ const courseSlice = createSlice({
     setIsRefreshSpecific: (state, action) => {
       state.isRefreshSpecific = action.payload;
     },
+    setIsRefresh: (state, action) => {
+      state.isRefresh = true;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(insertCourse.fulfilled, (state, action) => {
@@ -61,11 +64,12 @@ const courseSlice = createSlice({
     builder.addCase(getCourses.fulfilled, (state, action) => {
       state.data = action.payload;
       state.isRefresh = false;
-      console.log(action.payload);
+      // console.log(action.payload);
     });
     builder.addCase(getUserCourses.fulfilled, (state, action) => {
       state.userCourses = action.payload;
-      console.log(action.payload);
+      state.isRefresh = false;
+      // console.log(action.payload);
     });
     builder.addCase(getCourseById.fulfilled, (state, action) => {
       state.specific = action.payload;

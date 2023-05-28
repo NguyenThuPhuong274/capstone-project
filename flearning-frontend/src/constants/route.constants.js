@@ -26,4 +26,5 @@ export const ROUTE_CONSTANTS = {
     ADMIN_TEST_PAGE: "/authen/test",
     ADMIN_TEST_DETAILS: "/authen/test-details",
     PAYMENT: "/authen/payment",
+    PAYMENT_RESULT_PAGE: "/authen/payment/result",
 }

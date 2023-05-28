@@ -4,9 +4,11 @@ import moment from "moment";
 
 const PaymentController = {
     createPayment: async (req, res) => {
+        const payment = req.body;
+        console.log(payment);
         process.env.TZ = 'Asia/Ho_Chi_Minh';
 
-        let date = new Date();
+        let date = payment.created_date;
         let createDate = moment(date).format('YYYYMMDDHHmmss');
 
         let ipAddr = req.headers['x-forwarded-for'] ||
@@ -21,10 +23,10 @@ const PaymentController = {
         let vnpUrl = config.get('vnp_Url');
         let returnUrl = config.get('vnp_ReturnUrl');
         let orderId = moment(date).format('DDHHmmss');
-        let amount = req.body.amount;
+        let price = payment.price;
         let bankCode = req.body.bankCode;
 
-        let locale = req.body.language;
+        let locale = payment.language;
         if (locale === null || locale === '') {
             locale = 'vn';
         }
@@ -38,7 +40,7 @@ const PaymentController = {
         vnp_Params['vnp_TxnRef'] = orderId;
         vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + orderId;
         vnp_Params['vnp_OrderType'] = 'other';
-        vnp_Params['vnp_Amount'] = amount * 100;
+        vnp_Params['vnp_Amount'] = price * 100;
         vnp_Params['vnp_ReturnUrl'] = returnUrl;
         vnp_Params['vnp_IpAddr'] = ipAddr;
         vnp_Params['vnp_CreateDate'] = createDate;
@@ -57,7 +59,32 @@ const PaymentController = {
         vnp_Params['vnp_SecureHash'] = signed;
         vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
 
-        res.json({url: vnpUrl})
+        res.json({ data: payment, url: vnpUrl });
+    },
+    insertPayment: async (req, res) => {
+        const payment = req.body;
+        console.log("insert payment: ", payment);
+
+        let  querystring = `INSERT INTO [dbo].[Payment]
+                                    ([email]
+                                    ,[course_id]
+                                    ,[amount]
+                                    ,[created_date])
+                            VALUES
+                                    ('${payment.email}'
+                                    ,'${payment.course_id}'
+                                    ,'${payment.price}'
+                                    ,'${payment.created_date}')`
+        let data = await executeNonQuery(querystring);
+        console.log(data);
+        res.json({ rowEffected: data });
+    },
+    getPayments: async (req, res) => {
+        const payment = req.body;
+        const querystring = `SELECT * FROM [Payment] WHERE [email] = ${payment.email}`;
+        const data = await executeQuery(querystring);
+        console.log(data);
+        res.json(data);
     }
 }
 

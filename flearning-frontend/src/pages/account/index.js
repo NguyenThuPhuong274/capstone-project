@@ -30,7 +30,7 @@ const AccountPage = () => {
   const [previewUrl, setPreviewUrl] = React.useState(null);
   const [disableSubmit, setDisableSubmit] = React.useState(false);
   const { setUser } = authenSlice.actions;
-  console.log(user);
+
   const [values, setValues] = useState({
     name: user?.name,
     address: user?.address,

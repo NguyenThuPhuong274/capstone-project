@@ -28,7 +28,7 @@ const BlogController = {
             }
         }
 
-        console.log(blogs);
+        // console.log(blogs);
 
         return res.json(blogs);
     },

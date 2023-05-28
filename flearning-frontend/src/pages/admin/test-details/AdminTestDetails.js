@@ -22,8 +22,6 @@ import AppInputNumber from "../../../components/AppInput/AppInputNumber";
 const AdminTestDetails = ({ test, courses }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-
     const [currentQuestion, setCurrentQuestion] = React.useState();
 
     const [values, setValues] = React.useState({
@@ -33,6 +31,15 @@ const AdminTestDetails = ({ test, courses }) => {
         duration: test?.duration,
         course_id: test?.course_id,
         chapter_id: test?.chapter_id,
+    });
+    const [question, setQuestion] = React.useState({
+        description: '',
+        answer_1: '',
+        answer_2: '',
+        answer_3: '',
+        answer_4: '',
+        correct_answer: 0,
+        test_id: test?.test_id
     });
 
     React.useEffect(() => {
@@ -44,17 +51,18 @@ const AdminTestDetails = ({ test, courses }) => {
             course_id: test?.course_id,
             chapter_id: test?.chapter_id,
         });
+        setQuestion({
+            description: '',
+            answer_1: '',
+            answer_2: '',
+            answer_3: '',
+            answer_4: '',
+            correct_answer: 0,
+            test_id: test?.test_id
+        })
     }, [test])
 
-    const [question, setQuestion] = React.useState({
-        description: '',
-        answer_1: '',
-        answer_2: '',
-        answer_3: '',
-        answer_4: '',
-        correct_answer: 0,
-        test_id: test?.test_id
-    });
+
 
     const [selectedCourse, setSelectedCourse] = React.useState();
 
@@ -263,7 +271,7 @@ const AdminTestDetails = ({ test, courses }) => {
                                     <MenuItem value={1}>Câu trả lời 1</MenuItem>
                                     <MenuItem value={2}>Câu trả lời 2</MenuItem>
                                     <MenuItem value={3}>Câu trả lời 3</MenuItem>
-                                    <MenuItem value={3}>Câu trả lời 4</MenuItem>
+                                    <MenuItem value={4}>Câu trả lời 4</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>

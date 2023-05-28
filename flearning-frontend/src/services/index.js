@@ -9,6 +9,7 @@ import chapterServices from "./chapterServices";
 import questionServices from "./questionServices";
 import testServices from "./testServices";
 import blogCategoryServices from "./blogCategoryServices";
+import paymentServices from "./paymentServices";
 import blogDetailServices from "./blogDetailServices";
 
 
@@ -20,6 +21,7 @@ export {
     blogServices,
     supportServices,
     lessonServices,
+    paymentServices,
     chapterServices,
     questionServices,
     blogCategoryServices,

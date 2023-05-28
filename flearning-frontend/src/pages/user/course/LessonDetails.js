@@ -24,9 +24,10 @@ import ConfirmDialog from "../../../components/Confirm";
 import { display } from "@mui/system";
 import { insertLessonDone } from "../../../redux/lessonSlice";
 import courseSlice from "../../../redux/courseSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TestResultDialog from "../../../components/Test/TestResultDialog";
 import { insertTest, insertTestDone } from "../../../redux/testSlice";
+import RelatedCourse from "../../../components/Course/RelatedCourse";
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -107,6 +108,14 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     const navigate = useNavigate();
+
+
+    const courses = useSelector((state) => state.course.data);
+
+    React.useEffect(() => {
+        setCurrentLesson(course.chapters[0]?.lessons[0]);
+        setCurrentChapter(course.chapters[0]);
+    }, [course]);
 
     const { setIsRefreshSpecific } = courseSlice.actions;
     const handleChange = (event, newValue) => {
@@ -269,17 +278,37 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
                             onChangeIndex={handleChangeIndex}
                         >
                             <TabPanel value={value} index={0} dir={theme.direction}>
-                                {currentLesson?.description}
+                                <Stack direction={"column"} spacing={2} sx={{ height: 360, overflow: "auto" }}>
+
+                                    {currentLesson?.description}
+                                </Stack>
                             </TabPanel>
                             <TabPanel value={value} index={1} dir={theme.direction}>
-                                <span>Các bạn tải tài liệu theo đường link: </span>
-                                <Button onClick={() => goToLink(currentLesson?.material_url)} >{currentLesson?.material_url}</Button>
+                                <Stack direction={"column"} spacing={2} sx={{ height: 360, overflow: "auto" }}>
+                                    <span>Các bạn tải tài liệu theo đường link: </span>
+                                    <Button onClick={() => goToLink(currentLesson?.material_url)} >{currentLesson?.material_url}</Button>
+                                </Stack>
                             </TabPanel>
-                            <TabPanel value={value} index={2} dir={theme.direction}>
-                                Các khóa học khác
+                            <TabPanel value={value} index={2} dir={theme.direction} >
+                                <div style={{ height: 360, overflow: "auto", padding: 15 }}>
+                                    <Stack direction={"column"} spacing={2} sx={{ width: "100%" }}>
+                                        {courses.map((c, key) => {
+                                            return <RelatedCourse
+                                                key={key}
+                                                image={c.course_avatar_url}
+                                                title={c.course_name}
+                                                price={c.price}
+                                                description={c.description}
+                                                courseId={c.course_id}
+                                            />
+                                        })}
+                                    </Stack>
+                                </div>
                             </TabPanel>
                             <TabPanel value={value} index={3} dir={theme.direction}>
-                                Phản hồi 
+                                <Stack direction={"column"} spacing={2} sx={{ height: 360, overflow: "auto" }}>
+
+                                </Stack>
                             </TabPanel>
                         </SwipeableViews>
                     </div>
@@ -328,7 +357,7 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
                                 </AccordionDetails>
                             </Accordion>
                         })}
-                     
+
 
 
                     </div>

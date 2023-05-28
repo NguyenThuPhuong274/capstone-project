@@ -5,6 +5,7 @@ import React from "react";
 import { getCourseById } from "../../../redux/courseSlice";
 import { getLessonsDone } from "../../../redux/lessonSlice";
 import { getTestsDone } from "../../../redux/testSlice";
+import SmoothScrollUp from "../../../components/Common/SmoothScrollUp";
 
 const LessonViewPage = () => {
     const user = useSelector((state) => state.authen.user);
@@ -29,6 +30,7 @@ const LessonViewPage = () => {
 
     return (
         <>
+            <SmoothScrollUp />
             <LessonDetails course={course} lessonsDone={lessonsDone} testsDone={testsDone} user={user} />
         </>
     )

@@ -15,7 +15,11 @@ const Course = () => {
   }, [])
 
   return (
-    <CourseCarousel data={ courses} />
+    <CourseCarousel
+      data={courses}
+      title={"CÁC KHÓA HỌC ONLINE TẠI JLEARNING"}
+      paragraph={"Có rất nhiều khóa học từ N1-N5 đa dạng và phong phú"}
+    />
   )
 
 };

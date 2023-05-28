@@ -1,8 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTE_CONSTANTS } from "../../constants/route.constants";
+import { useSelector } from "react-redux";
+import { SvgIcon } from "@mui/material";
+import EyeIcon from "@heroicons/react/24/solid/EyeIcon";
+import InfoIcon from '@mui/icons-material/Info';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const CourseCard = ({ course }) => {
-  const isBought = false;
+  const userCourses = useSelector((state) => state.course.userCourses);
+  const courseFound = userCourses.find((c) => c.course_id === course.course_id);
+  const isBought = ((courseFound !== null && courseFound !== undefined) || course.price === 0) ? true : false;
+
   const navigate = useNavigate();
   const { price, duration, description, course_name, course_avatar_url, course_id } = course;
   const link = ROUTE_CONSTANTS.COURSE_DETAILS_PAGE + "?course_id=" + course_id;
@@ -12,14 +20,17 @@ const CourseCard = ({ course }) => {
   });
 
   const handleGoToCourse = () => {
-    if (isBought === true) {
-      navigate(ROUTE_CONSTANTS.LESSON_VIEW_PAGE);
+    navigate(link);
+  }
 
+  const handleBuyCourse = () => {
+    if (isBought) {
+      navigate(ROUTE_CONSTANTS.LESSON_VIEW_PAGE + "?course_id=" + course.course_id);
     } else {
-
-      navigate(link);
+      navigate(ROUTE_CONSTANTS.PAYMENT + "?course_id=" + course.course_id);
     }
   }
+
   return (
     <div className="w-full h-full">
       <div
@@ -57,17 +68,30 @@ const CourseCard = ({ course }) => {
         <div className="mb-1 mt-7 border-b flex row border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">
 
           {isBought === true ? <>
-            <button onClick={() => handleGoToCourse()} className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-              Vào học
+            <button onClick={() => handleGoToCourse()} className="flex w-full mr-3 bg-cteal items-center justify-center rounded-md p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+              <SvgIcon sx={{ mr: 1 }}>
+                <InfoIcon />
+              </SvgIcon> Chi tiết
+            </button>
+            <button onClick={() => handleBuyCourse()} className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+              <SvgIcon sx={{ mr: 1 }}>
+                <EyeIcon />
+              </SvgIcon>   Vào học
             </button>
           </> :
 
             <>
               <button onClick={() => handleGoToCourse()} className="flex w-full mr-3 bg-cteal items-center justify-center rounded-md p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-                Chi tiết
+                <SvgIcon sx={{ mr: 1 }}>
+                  <InfoIcon />
+                </SvgIcon> Chi tiết
               </button>
-              <button className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-                Mua khóa học
+              <button
+                onClick={() => handleBuyCourse()}
+                className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                <SvgIcon >
+                  <AttachMoneyIcon />
+                </SvgIcon>   Mua 
               </button></>
           }
 

@@ -25,6 +25,8 @@ import AdminTestPage from "../pages/admin/test";
 import AdminTestDetailsPage from "../pages/admin/test-details";
 import ChangePasswordPage from "../pages/change-password";
 import AdminBlogDetailsPage from "../pages/admin/blog-details";
+import PaymentPage from "../pages/user/payment";
+import PaymentResultPage from "../pages/user/payment/PaymentResultPage";
 
 export const routes = [
   {
@@ -61,6 +63,12 @@ export const routes = [
     path: ROUTE_CONSTANTS.SETING_PAGE,
     isPrivate: false,
     component: <SettingPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.PAYMENT,
+    isPrivate: false,
+    component: <PaymentPage />,
     exact: true,
   },
   {
@@ -103,6 +111,12 @@ export const routes = [
     path: ROUTE_CONSTANTS.ACCOUNT_PAGE,
     isPrivate: false,
     component: <AccountPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.PAYMENT_RESULT_PAGE,
+    isPrivate: false,
+    component: <PaymentResultPage />,
     exact: true,
   },
   {
