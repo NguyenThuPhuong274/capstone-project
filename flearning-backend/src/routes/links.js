@@ -11,6 +11,7 @@ import BlogDetailsController from "../controller/BlogDetailsController";
 import TestController from "../controller/TestController";
 import QuestionController from "../controller/QuestionController";
 import BlogCategoryController from "../controller/BlogCategoryController";
+import PaymentController from "../controller/PaymentController";
 export const Links = [
   {
     route: CONSTANT_ROUTE.SIGN_IN,
@@ -225,6 +226,11 @@ export const Links = [
     route: CONSTANT_ROUTE.MANAGE_BLOG_DETAILS + "/delete",
     method: "post",
     handleAction: BlogDetailsController.deleteBlogDetails,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_PAYMENT + "/create",
+    method: "post",
+    handleAction: PaymentController.createPayment,
   },
 
 

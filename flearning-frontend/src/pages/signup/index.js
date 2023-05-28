@@ -7,6 +7,7 @@ import { APP_CONSTANTS, SIGNIN_CONSTANTS, SIGNUP_CONSTANTS } from "../../constan
 import { ROUTE_CONSTANTS } from "../../constants/route.constants";
 import GoogleLogin from "react-google-login";
 import { Link, useNavigate } from "react-router-dom";
+import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
 
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -55,6 +56,8 @@ const SignupPage = () => {
 
   return (
     <>
+        <SmoothScrollUp />
+
       <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">

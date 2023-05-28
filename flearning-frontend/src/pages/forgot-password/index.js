@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
+import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
 
 
 const ForgotPasswordPage = () => {
@@ -25,6 +26,8 @@ const ForgotPasswordPage = () => {
 
   return (
     <>
+        <SmoothScrollUp />
+
       <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
         <div className="container">
        

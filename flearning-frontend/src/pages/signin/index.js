@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import GoogleLogin from 'react-google-login';
 import { Link, useNavigate } from "react-router-dom";
+import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
 
 
 const SigninPage = () => {
@@ -47,6 +48,8 @@ const navigate = useNavigate();
 
   return (
     <>
+        <SmoothScrollUp />
+
       <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
         <div className="container">
        

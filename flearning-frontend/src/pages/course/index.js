@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CourseList from "./CourseList";
 import React from "react";
 import { getCourses } from "../../redux/courseSlice";
+import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
 
 const CoursePage = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,8 @@ const CoursePage = () => {
 
   return (
     <>
+        <SmoothScrollUp />
+
       <CourseList data={courses} />
     </>
   );

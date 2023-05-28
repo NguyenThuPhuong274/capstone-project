@@ -19,6 +19,7 @@ import { decryptToken } from '../../helpers/decryptToken';
 import AppInputNumber from '../../components/AppInput/AppInputNumber';
 import AppTextArea from '../../components/AppInput/AppTextArea';
 import AppInputPhone from '../../components/AppInput/AppInputPhone';
+import SmoothScrollUp from '../../components/Common/SmoothScrollUp';
 
 
 
@@ -65,7 +66,9 @@ const AccountPage = () => {
     }));
   };
 
-  return <>
+  return <>   
+   <SmoothScrollUp />
+
     <Breadcrumb
       pageName="Thông tin cá nhân"
       description="Cập nhật thông tin cá nhân của bạn"

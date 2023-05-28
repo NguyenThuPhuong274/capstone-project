@@ -3,6 +3,8 @@ import Breadcrumb from "../../components/Common/Breadcrumb";
 import Support from "../../components/Support";
 import React from "react";
 import { getSupports } from "../../redux/supportSlice";
+import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
+import VNPayComponent from "../../components/VNPayment";
 
 const SupportPage = () => {
 
@@ -15,13 +17,16 @@ const SupportPage = () => {
 
   return (
     <>
+    <SmoothScrollUp />
       <Breadcrumb
         pageName="Hỗ trợ"
         description="Các câu hỏi thường gặp"
       />
       <Support data={supports} />
+      <VNPayComponent />
     </>
   );
 };
 
 export default SupportPage;
+

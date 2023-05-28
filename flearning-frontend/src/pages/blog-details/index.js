@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBlogById, getBlogs } from "../../redux/blogSlice";
 import React from "react";
 import { getBlogCategories } from "../../redux/blogCategorySlice";
+import ScrollUp from "../../components/Common/ScrollUp";
+import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
+import { scrollToTop } from "../../components/ScrollToTop";
 
 const BlogDetailsPage = () => {
   const navigate = useNavigate();
@@ -22,21 +25,23 @@ const BlogDetailsPage = () => {
   const blogs = useSelector((state) => state.blog.data);
   const blog = useSelector((state) => state.blog.specific);
 
-  const relatedBlogs = blogs?.filter((b) => (b.blog_category_id === blog?.blog_category_id) && ( b.blog_id !== blog.blog_id));
-  
+  const relatedBlogs = blogs?.filter((b) => (b.blog_category_id === blog?.blog_category_id) && (b.blog_id !== blog.blog_id));
+
   React.useEffect(() => {
     dispatch(getBlogs());
     dispatch(getBlogCategories());
   }, []);
-  
+
   React.useEffect(() => {
     if (blog_id === null || blog_id === '') {
       navigate(ROUTE_CONSTANTS.ERROR_PAGE);
     } else {
       dispatch(getBlogById({ blog_id: blog_id }));
     }
+    scrollToTop();
+
   }, [blog_id]);
-  
+
 
   return (
     <>

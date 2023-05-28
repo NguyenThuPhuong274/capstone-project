@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import authenSlice, { changePassword } from '../../redux/authenSlice';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_CONSTANTS } from '../../constants/route.constants';
+import SmoothScrollUp from '../../components/Common/SmoothScrollUp';
 
 
 const ChangePasswordPage = () => {
@@ -43,6 +44,8 @@ const ChangePasswordPage = () => {
 
     return (
         <>
+            <SmoothScrollUp />
+
             <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
                 <div className="container">
 

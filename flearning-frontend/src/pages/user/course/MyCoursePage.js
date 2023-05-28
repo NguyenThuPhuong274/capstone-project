@@ -1,10 +1,13 @@
 import Breadcrumb from "../../../components/Common/Breadcrumb";
+import SmoothScrollUp from "../../../components/Common/SmoothScrollUp";
 import CourseCard from "../../../components/Course/CourseCard";
 import coursesData from "../../../components/Course/coursesData";
 
 const MyCoursePage = () => {
   return (
     <>
+      <SmoothScrollUp />
+
       <Breadcrumb
         pageName="Khóa học của tôi"
         description="Các khóa học của bạn"
