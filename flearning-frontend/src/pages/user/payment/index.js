@@ -7,6 +7,7 @@ import React from "react";
 import Breadcrumb from "../../../components/Common/Breadcrumb";
 import SectionTitle from "../../../components/Common/SectionTitle";
 import SmoothScrollUp from "../../../components/Common/SmoothScrollUp";
+import paymentSlice from "../../../redux/paymentSlice";
 
 const PaymentPage = () => {
     const user = (useSelector((state) => state.authen.user));
@@ -15,6 +16,8 @@ const PaymentPage = () => {
     const params = new URLSearchParams(location.search);
     const course_id = params.get('course_id');
     const dispatch = useDispatch();
+    const { resetPayment } = paymentSlice.actions;
+    const course = useSelector((state) => state.course.specific);
 
     React.useEffect(() => {
         if (course_id === null || course_id === '') {
@@ -22,17 +25,24 @@ const PaymentPage = () => {
         }
     }, [course_id]);
 
-    const course = useSelector((state) => state.course.specific);
 
     React.useEffect(() => {
         dispatch(getCourseById({ course_id: course_id }));
     }, [course_id]);
 
 
+    const payment = useSelector((state) => state.payment.data);
+
+    React.useEffect(() => {
+        if (payment !== null) {
+            dispatch(resetPayment());
+        }
+    }, [payment]);
+
 
     return (
         <>
-        <SmoothScrollUp />
+            <SmoothScrollUp />
             <Breadcrumb
                 pageName="Mua khóa học"
                 description="Xác nhận mua khóa học"

@@ -8,7 +8,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const CourseCard = ({ course }) => {
   const userCourses = useSelector((state) => state.course.userCourses);
-  const courseFound = userCourses.find((c) => c.course_id === course.course_id);
+  const courseFound = userCourses?.find((c) => c.course_id === course.course_id);
   const isBought = ((courseFound !== null && courseFound !== undefined) || course.price === 0) ? true : false;
 
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const CourseCard = ({ course }) => {
           </Link> */}
         </div>
         <Link to={link} className="relative block h-[230px] w-full mb-5">
-          <img src={course_avatar_url} className="object-fill w-full h-[230px]" alt="image" />
+          <img src={course_avatar_url} className="object-fill w-full h-[230px] rounded" alt="image" />
         </Link>
         <h3>
           <Link

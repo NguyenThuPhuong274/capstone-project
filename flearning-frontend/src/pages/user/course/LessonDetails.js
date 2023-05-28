@@ -1,7 +1,7 @@
 
 import CourseImage from "../../../assets/images/course/course-1.png";
 import Breadcrumb from "../../../components/Common/Breadcrumb";
-import { Stack, Box, Card, CardContent, CardHeader, List, SvgIcon, Typography, AppBar, Tabs, Tab, ListItemButton, ListItemIcon, ListItemText, Divider, Button } from "@mui/material";
+import { Stack, Box, Card, CardContent, CardHeader, List, SvgIcon, Typography, AppBar, Tabs, Tab, ListItemButton, ListItemIcon, ListItemText, Divider, Button, Chip } from "@mui/material";
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
@@ -284,9 +284,9 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user }) => {
                                 </Stack>
                             </TabPanel>
                             <TabPanel value={value} index={1} dir={theme.direction}>
-                                <Stack direction={"column"} spacing={2} sx={{ height: 360, overflow: "auto" }}>
+                                <Stack direction={"column"} spacing={1} sx={{ height: 360, overflow: "auto" }}>
                                     <span>Các bạn tải tài liệu theo đường link: </span>
-                                    <Button onClick={() => goToLink(currentLesson?.material_url)} >{currentLesson?.material_url}</Button>
+                                    <span onClick={() => goToLink(currentLesson?.material_url)} style={{ color: "#7c3aed", cursor: "pointer" }}  >{currentLesson?.material_url} </span>
                                 </Stack>
                             </TabPanel>
                             <TabPanel value={value} index={2} dir={theme.direction} >
