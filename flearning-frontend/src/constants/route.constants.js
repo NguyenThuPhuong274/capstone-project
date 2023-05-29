@@ -1,5 +1,5 @@
 export const ROUTE_CONSTANTS = {
-    DOMAIN: "localhost:3000",
+    DOMAIN: "http://localhost:3000",
     HOME_PAGE: "/",
     SIGN_IN: "/signin",
     SIGN_UP: "/signup",
@@ -16,6 +16,7 @@ export const ROUTE_CONSTANTS = {
     BLOG_DETAILS_PAGE: "/blog-details",
     PAYMENT_HISTORY: "/authen/payment/history",
     CHANGE_PASSWORD_PAGE: "/authen/change-password",
+    NEW_PASSWORD_PAGE: "/new-password",
     SETING_PAGE: "/authen/settings",
     PAYMENT: "/authen/payment",
     PAYMENT_RESULT_PAGE: "/authen/payment/result",

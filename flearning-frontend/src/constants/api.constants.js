@@ -19,4 +19,5 @@ export const API  = {
     MANAGE_QUESTION: process.env.REACT_APP_MANAGE_QUESTION,
     MANAGE_PAYMENT: process.env.REACT_APP_MANAGE_PAYMENT,
     DASHBOARD: process.env.REACT_APP_DASHBOARD,
+    MAIL: process.env.REACT_APP_MAIL,
 }

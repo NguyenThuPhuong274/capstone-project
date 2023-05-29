@@ -105,6 +105,10 @@ const Question = ({ question, title, index, setCurrentQuestion }) => {
                                     disabled={true}
                                     value={`Câu trả lời ${question.correct_answer}`}
                                     placeholder={"Đáp án đúng"} />
+                        <AppInput
+                                    disabled={true}
+                                    value={`${question.explaination}`}
+                                    placeholder={"Giải thích"} />
                     </Stack>
 
                 </AccordionDetails>

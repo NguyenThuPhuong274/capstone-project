@@ -38,7 +38,7 @@ export const OverviewBudget = (props) => {
             </SvgIcon>
           </Avatar>
         </Stack>
-        {difference && (
+        {/* {difference && (
           <Stack
             alignItems="center"
             direction="row"
@@ -70,7 +70,7 @@ export const OverviewBudget = (props) => {
               So với tháng trước
             </Typography>
           </Stack>
-        )}
+        )} */}
       </CardContent>
     </Card>
   );

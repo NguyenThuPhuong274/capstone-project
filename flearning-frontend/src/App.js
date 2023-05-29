@@ -5,7 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { TopNav } from './layouts/dashboard/top-nav';
 import Header from './components/Header';
 import { SideNav } from './layouts/dashboard/side-nav';
@@ -13,23 +13,12 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import { routes } from './contexts/routes';
 import React from 'react';
-import authenSlice from './redux/authenSlice';
-import { decryptToken } from './helpers/decryptToken';
 import { ROLE } from './constants/constants';
 import ErrorPage from './pages/error';
 
 function App() {
-  const dispatch = useDispatch();
-  const { setUser } = authenSlice.actions;
   let token = useSelector((state) => state.authen.token);
   let user = useSelector((state) => state.authen.user);
-  // if (token === null) {
-  //   token = sessionStorage.getItem("token");
-  //   if (token) {
-  //     user = decryptToken(token);
-  //     dispatch(setUser(user));
-  //   }
-  // } 
 
   const renderRoute = () => {
     return routes.map((route) => {

@@ -30,7 +30,7 @@ export const CourseOverView = (props) => {
             >
              Khóa học
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h5">
               {value}
             </Typography>
           </Stack>
@@ -46,12 +46,7 @@ export const CourseOverView = (props) => {
             </SvgIcon>
           </Avatar>
         </Stack>
-        <Box sx={{ mt: 3 }}>
-          <LinearProgress
-            value={value}
-            variant="determinate"
-          />
-        </Box>
+      
       </CardContent>
     </Card>
   );

@@ -28,20 +28,7 @@ const ContactController = {
         return res.json({ contact: contact, rowAffected: data });
     },
     updateContact: async (req, res) => {
-        const contact = req.body;
-        // console.log(req.body);
-
-        const queryString = `UPDATE [dbo].[Contact]
-                 SET [response_date] = '${contact.response_date}'
-                    ,[status] =  '${contact.status}'
-                    ,[response_message] =   N'${contact.response_message}'
-                 WHERE [contact_id] =  ${contact.contact_id}`;
-        const data = await executeNonQuery(queryString);
-
-        return res.json({
-            contact_id: contact.contact_id,
-            rowAffected: data,
-        })
+       
     }
 };
 

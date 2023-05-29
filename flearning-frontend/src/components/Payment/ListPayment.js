@@ -20,14 +20,17 @@ const ListPayment = ({ data, user, courses }) => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [searchTerm, setSearchTerm] = React.useState({ value: '' });
 
-    const [currentPayment, setCurrentPayment] = React.useState(null);
-    const [currentCourse, setCurrentCourse] = React.useState(null);
-    console.log(data);
+   
 
     React.useEffect(() => {
         setPayments(data);
         setPaymentsPagination(payments?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
     }, [data])
+
+
+    const [currentPayment, setCurrentPayment] = React.useState(null);
+    const [currentCourse, setCurrentCourse] = React.useState(null);
+    console.log(data);
 
     React.useEffect(() => {
 
@@ -255,7 +258,7 @@ const ListPayment = ({ data, user, courses }) => {
                                             <CardHeader title="Thông tin cá nhân" />
                                             <CardContent>
                                                 <Stack direction={"column"} spacing={3}>
-                                                    <p>Họ và tên: {user.name}</p>
+                                                    <p>Họ và tên: {currentPayment?.name}</p>
                                                     <p>Email: {currentPayment?.email}</p>
                                                     <p>Sđt: {currentPayment?.phone}</p>
                                                     <p>Địa chỉ: {currentPayment?.address}</p>

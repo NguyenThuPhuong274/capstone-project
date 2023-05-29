@@ -1,9 +1,11 @@
-import { AppBar, Button, Dialog, DialogContent, IconButton, List, Toolbar, Typography } from "@mui/material"
+import { AppBar, Button, Dialog, DialogContent, IconButton, List, SvgIcon, Toolbar, Typography } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import React from "react";
 import ConfirmDialog from "../Confirm";
 import QuestionCard from "../QuestionCard";
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Stack } from "@mui/system";
 const Transition = React.forwardRef(function Transition(
     props,
@@ -14,7 +16,7 @@ const Transition = React.forwardRef(function Transition(
 
 
 
-const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers, handleTestDone}) => {
+const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers, handleTestDone }) => {
     const [openReturnConfirm, setOpenReturnConfirm] = React.useState(false);
     const [openSubmitConfirm, setOpenSubmitConfirm] = React.useState(false);
     const [countdown, setCountdown] = React.useState(test?.duration * 60);
@@ -107,7 +109,7 @@ const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers
                         onClick={handleOpenConfirm}
                         aria-label="close"
                     >
-                        <CloseIcon />
+                        <ArrowBackIcon />
                     </IconButton>
                     <div className="flex justify-between items-center w-full" >
                         <Typography sx={{ cursor: "pointer" }} onClick={handleOpenConfirm} variant="h6" component="div">
@@ -122,7 +124,10 @@ const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers
                             </Typography>
                         </Stack>
                         <Button color="inherit" onClick={() => setOpenSubmitConfirm(true)}>
-                            Nộp bài
+
+                            <SvgIcon sx={{ mr: 1 }}>
+                                <ThumbUpAltIcon />
+                            </SvgIcon> Nộp bài
                         </Button> </div>
                 </Toolbar>
             </AppBar>
@@ -149,7 +154,12 @@ const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers
 
                     </Stack>
                     <div className="flex justify-center w-full" >
-                        <Button className="w-[300px] h-[50px]" variant="contained" onClick={() => setOpenSubmitConfirm(true)} >Nộp Bài</Button>
+                        <Button className="w-[300px] h-[50px]" variant="contained" onClick={() => setOpenSubmitConfirm(true)} >
+                            <SvgIcon sx={{ mr: 1 }}>
+                                <ThumbUpAltIcon />
+                            </SvgIcon> Nộp bài
+
+                        </Button>
                     </div>
                 </Stack>
             </div>

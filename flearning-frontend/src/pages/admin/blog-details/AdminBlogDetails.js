@@ -212,7 +212,7 @@ const AdminBlogDetails = ({ blog, categories }) => {
                                         </SvgIcon> Thêm mới mục
                                     </Button>
                                 </div>
-                                <Stack direction={"column"} sx={{ overflow: "auto", height: 600 }} spacing={0}>
+                                <Stack direction={"column"} sx={{ overflow: "auto", height: 520 }} spacing={0}>
                                     {blog?.blog_details?.map((blogDetail, key) => {
                                         return <><BlogDetails index={key} blogDetail={blogDetail} setCurrentBlogDetail={setCurrentBlogDetail} /></>;
                                     })}

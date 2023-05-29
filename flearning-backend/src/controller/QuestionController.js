@@ -19,6 +19,7 @@ const QuestionController = {
                               ,[answer_3]
                               ,[answer_4]
                               ,[correct_answer]
+                              ,[explaination]
                               ,[test_id])
                         VALUES
                             (N'${question.description}'
@@ -27,6 +28,7 @@ const QuestionController = {
                               ,N'${question.answer_3}'
                               ,N'${question.answer_4}' 
                               ,'${question.correct_answer}' 
+                              ,N'${question.explaination}' 
                               ,'${question.test_id}')`;
         const data = await executeNonQuery(queryString);
         // console.log(data);
@@ -44,6 +46,7 @@ const QuestionController = {
                     ,[answer_3] = N'${question.answer_3}'
                     ,[answer_4] = N'${question.answer_4}'
                     ,[correct_answer] = '${question.correct_answer}'
+                    ,[explaination] = N'${question.explaination}'
                     ,[test_id] = '${question.test_id}'
                  WHERE [question_id] =  ${question.question_id}`;
         const data = await executeNonQuery(queryString);

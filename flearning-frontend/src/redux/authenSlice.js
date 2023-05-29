@@ -29,6 +29,7 @@ const authenSlice = createSlice({
   initialState: {
     user: null,
     token: null,
+    email: null,
     createAccountStatus: false,
   },
   reducers: {
@@ -69,9 +70,18 @@ const authenSlice = createSlice({
       }
       toast.success("Tạo tài khoản thành công");
       console.log("create account successfully", action.payload);
-    }) .addCase(changePassword.fulfilled, (state, action) => {
-        toast.success("Thay đổi mật khẩu thành công");
-      });
+    }).addCase(changePassword.fulfilled, (state, action) => {
+      toast.success("Thay đổi mật khẩu thành công");
+    }).addCase(forgotPassword.fulfilled, (state, action) => {
+      const { status, email } = action.payload;
+      if (status === true) {
+        state.email = email;
+        toast.success("Yêu cầu thành công");
+      } else {
+        toast.warning("Email không tồn tại");
+      }
+
+    });
   },
 });
 

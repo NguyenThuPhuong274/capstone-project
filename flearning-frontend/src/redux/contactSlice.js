@@ -33,13 +33,11 @@ const contactSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(insertContact.fulfilled, (state, action) => {
       state.isRefresh = true;
-      console.log("Send message successfully", action.payload);
       toast.success("Gửi thông điệp thành công");
 
     });
     builder.addCase(updateContact.fulfilled, (state, action) => {
       state.isRefresh = true;
-      console.log("Send message successfully", action.payload);
       toast.success("Phản hồi thông điệp thành công");
 
     });

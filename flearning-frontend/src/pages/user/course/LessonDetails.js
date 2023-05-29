@@ -1,7 +1,6 @@
 
-import CourseImage from "../../../assets/images/course/course-1.png";
 import Breadcrumb from "../../../components/Common/Breadcrumb";
-import { Stack, Box, Card, CardContent, CardHeader, List, SvgIcon, Typography, AppBar, Tabs, Tab, ListItemButton, ListItemIcon, ListItemText, Divider, Button, Chip, Paper } from "@mui/material";
+import { Stack, Box, Card, CardContent, CardHeader, List, SvgIcon, Typography, AppBar, Tabs, Tab, ListItemButton, ListItemIcon, ListItemText, Divider, Button } from "@mui/material";
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
@@ -13,21 +12,20 @@ import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import QuizIcon from '@mui/icons-material/Quiz';
 import HandThumbUpIcon from '@heroicons/react/24/solid/HandThumbUpIcon';
+import ThumbUpAlt from '@mui/icons-material/ThumbUpAlt';
 
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 
 import ReactPlayer from 'react-player'
-import { Link, useNavigate } from "react-router-dom";
-import { ROUTE_CONSTANTS } from "../../../constants/route.constants";
+import { useNavigate } from "react-router-dom";
 import TestDialog from "../../../components/Test";
 import ConfirmDialog from "../../../components/Confirm";
-import { display } from "@mui/system";
 import { insertLessonDone } from "../../../redux/lessonSlice";
 import courseSlice from "../../../redux/courseSlice";
 import { useDispatch, useSelector } from "react-redux";
 import TestResultDialog from "../../../components/Test/TestResultDialog";
-import { insertTest, insertTestDone } from "../../../redux/testSlice";
+import { insertTestDone } from "../../../redux/testSlice";
 import RelatedCourse from "../../../components/Course/RelatedCourse";
 import AppTextArea from "../../../components/AppInput/AppTextArea";
 import RatingStar from "../../../components/Star";
@@ -282,7 +280,11 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user, feedback }) => {
                                         <Typography>{"Thời gian làm bài: " + currentTest?.duration + " phút"}</Typography>
                                         <Typography>{"Số câu hỏi: " + currentTest?.questions.length}</Typography>
                                         <div className="flex flex-row justify-center w-full">
-                                            <Button sx={{ width: 300 }} variant="contained" color="warning" onClick={() => setOpenTestModal(true)}>Làm bài</Button>
+                                            <Button sx={{ width: 300 }} variant="contained" color="warning" onClick={() => setOpenTestModal(true)}>
+                                                <SvgIcon sx={{ mr: 1 }}>
+                                                    <ThumbUpAlt />
+                                                </SvgIcon>  Làm bài
+                                            </Button>
                                         </div>
                                     </Stack>
                                 </div>
@@ -386,7 +388,7 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user, feedback }) => {
             <Card sx={{ pt: 2, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }} className="w-[700px]">
                 <CardHeader title="Danh sách chương" />
                 <CardContent>
-                    <div className=" overflow-auto max-h-[500px]">
+                    <div className=" overflow-auto max-h-[950px]">
                         {course?.chapters.map((chapter) => {
                             return <Accordion expanded={expanded === 'panel' + chapter.chapter_id} onChange={handleChangeAccordion('panel' + chapter.chapter_id)}>
                                 <AccordionSummary aria-controls={"panel1d-" + chapter.chapter_id + "content"} id={"panel" + chapter.chapter_id + "d-header"}>

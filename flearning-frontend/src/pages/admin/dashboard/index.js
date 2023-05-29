@@ -19,6 +19,7 @@ const DashboardPage = () => {
   const dispatch = useDispatch();
   const { setCurrentPage } = userSlice.actions;
 
+  const user = useSelector((state) => state.authen.user);
   React.useEffect(() => {
     dispatch(setCurrentPage("Tổng quan"));
   }, [])
@@ -30,7 +31,7 @@ const DashboardPage = () => {
 
   React.useEffect(() => {
     dispatch(getData());
-  }, [])
+  }, [user])
 
   return <>
     <SmoothScrollUp />

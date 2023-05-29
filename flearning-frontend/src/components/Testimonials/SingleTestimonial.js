@@ -1,4 +1,5 @@
 import RatingStar from "../Star";
+import DefaultAvatar from "../../assets/images/avatar_default.jpeg";
 
 const starIcon = (
   <svg width="18" height="16" viewBox="0 0 18 16" className="fill-current">
@@ -32,7 +33,7 @@ const SingleTestimonial = ({ testimonial }) => {
         </p>
         <div className="flex items-center">
           <div className="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
-            <img src={user_avatar_url} alt={name} fill />
+            <img src={user_avatar_url === '' ? DefaultAvatar : user_avatar_url} alt={name} fill />
           </div>
           <div className="w-full">
             <h5 className="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">

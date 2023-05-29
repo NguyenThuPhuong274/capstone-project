@@ -1,7 +1,6 @@
 import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon';
 import BookOpenIcon from '@heroicons/react/24/solid/BookOpenIcon';
 import QuestionMarkCircleIcon from '@heroicons/react/24/solid/QuestionMarkCircleIcon';
-import CogIcon from '@heroicons/react/24/solid/CogIcon';
 import FaceSmileIcon from '@heroicons/react/24/solid/FaceSmileIcon';
 import NewspaperIcon from '@heroicons/react/24/solid/NewspaperIcon';
 import PhoneIcon from '@heroicons/react/24/solid/PhoneIcon';
@@ -83,15 +82,15 @@ export const items = [
       </SvgIcon>
     )
   },
-  {
-    title: 'Cài đặt',
-    path: '/authen/settings',
-    icon: (
-      <SvgIcon fontSize="small">
-        <CogIcon />
-      </SvgIcon>
-    )
-  },
+  // {
+  //   title: 'Cài đặt',
+  //   path: '/authen/settings',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <CogIcon />
+  //     </SvgIcon>
+  //   )
+  // },
 
 
 ];

@@ -1,9 +1,7 @@
-import { format } from 'date-fns';
 import React from 'react';
 import {
   Box,
   Card,
-  Checkbox,
   Stack,
   Table,
   TableBody,
@@ -18,6 +16,7 @@ import {
 } from '@mui/material';
 import ReplyIcon from '@mui/icons-material/Reply';
 import { Scrollbar } from '../../components/ScrollBar';
+import PencilIcon from '@heroicons/react/24/solid/PencilIcon';
 
 export const ContactTable = (props) => {
   const {
@@ -132,12 +131,12 @@ export const ContactTable = (props) => {
                       <Chip color={contact?.status === true ? 'secondary' : 'error'} label={contact?.status === true ? 'Đã phản hồi' : 'Chưa phản hồi'} />
                     </TableCell>
                     <TableCell>
-                      <Button size="small" sx={{ width: 120 }} onClick={() => setCurrentId(contact?.contact_id)} variant="contained" className='bg-primary '>
+                      <Button size="small" sx={{ width: 140 }} onClick={() => setCurrentId(contact?.contact_id)} variant="contained" className='bg-primary '>
 
-                      <SvgIcon sx={{mr: 1}}>
-                          <ReplyIcon />
+                        <SvgIcon sx={{ mr: 1 }}>
+                          {contact?.status === true ? <PencilIcon /> : <ReplyIcon />}
                         </SvgIcon>  {contact?.status === true ? 'Chỉnh sửa' : 'Phản hồi'}
-                       
+
                       </Button>
                     </TableCell>
                   </TableRow>

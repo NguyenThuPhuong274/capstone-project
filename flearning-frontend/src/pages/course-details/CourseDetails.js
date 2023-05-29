@@ -51,16 +51,16 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 const CourseDetails = ({ course }) => {
     const userCourses = useSelector((state) => state.course.userCourses);
-    const courseFound = userCourses.find((c) => c.course_id === course.course_id);
-    const isBought = ((courseFound !== null && courseFound !== undefined) || course.price === 0) ? true : false;
+    const courseFound = userCourses?.find((c) => c.course_id === course?.course_id);
+    const isBought = ((courseFound !== null && courseFound !== undefined) || course?.price === 0) ? true : false;
 
     const navigate = useNavigate();
     const handleClick = () => {
         // setIsOpen(true);
         if (isBought === true) {
-            navigate(ROUTE_CONSTANTS.LESSON_VIEW_PAGE + "?course_id=" + course.course_id);
+            navigate(ROUTE_CONSTANTS.LESSON_VIEW_PAGE + "?course_id=" + course?.course_id);
         } else {
-            navigate(ROUTE_CONSTANTS.PAYMENT + "?course_id=" + course.course_id);
+            navigate(ROUTE_CONSTANTS.PAYMENT + "?course_id=" + course?.course_id);
         }
     }
 

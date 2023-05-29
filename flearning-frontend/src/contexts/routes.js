@@ -1,6 +1,6 @@
- 
+
 import { ROUTE_CONSTANTS } from "../constants/route.constants";
-import {HomePage} from "../pages";
+import { HomePage } from "../pages";
 import SigninPage from "../pages/signin";
 import SignupPage from "../pages/signup";
 import ForgotPasswordPage from "../pages/forgot-password";
@@ -29,12 +29,19 @@ import PaymentPage from "../pages/user/payment";
 import PaymentResultPage from "../pages/user/payment/PaymentResultPage";
 import PaymentHistoryPage from "../pages/payment-history";
 import AdminInvoicePage from "../pages/admin/invoice";
+import NewPasswordPage from "../pages/create-new-password";
 
 export const routes = [
   {
     path: ROUTE_CONSTANTS.HOME_PAGE,
     isPrivate: false,
     component: <HomePage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.NEW_PASSWORD_PAGE,
+    isPrivate: false,
+    component: <NewPasswordPage />,
     exact: true,
   },
   {
@@ -195,7 +202,7 @@ export const routes = [
   },
   {
     path: ROUTE_CONSTANTS.FORGOT_PASSOWRD,
-    isPrivate: true,
+    isPrivate: false,
     component: <ForgotPasswordPage />,
     exact: true,
   },

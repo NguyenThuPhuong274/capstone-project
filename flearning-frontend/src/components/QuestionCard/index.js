@@ -1,7 +1,7 @@
 import { Card, Stack, CardContent, Typography, Button } from "@mui/material";
 import React from "react";
 
-const QuestionCard = ({ question, index, totalQuestion, handleSetValue, answers }) => {
+const QuestionCard = ({ question, index, totalQuestion, handleSetValue, answers, showExplaination }) => {
     const questionNumber = index + 1;
     const [answer, setAnswer] = React.useState(answers ? answers[index] : 0);
     const handleChooseAnswer = (value) => {
@@ -23,7 +23,8 @@ const QuestionCard = ({ question, index, totalQuestion, handleSetValue, answers 
                         </> : <></>}
                         <Typography>{questionNumber + "/" + totalQuestion}</Typography>
                     </div>
-                    <Typography className="overflow-auto h-[100px]" >{question.description}</Typography>
+                    <Typography className="overflow-auto h-[40px]" >{question.description}</Typography>
+                   {showExplaination === true && question.explaination.trim() !== '' ?  <Typography className="overflow-auto h-[40px] text-red-600" >{"* Giải thích: " +  question.explaination}</Typography> : <></>}
                     <Stack direction={"column"} spacing={3}>
                         <Stack direction={"row"} spacing={3}>
                             <Button disabled={answers ? true : false} onClick={() => handleChooseAnswer(1)} className="w-full h-[50px]" variant={answer === 1 ? "contained" : "outlined"}>{question.answer_1}</Button>

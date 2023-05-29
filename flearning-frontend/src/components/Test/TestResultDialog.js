@@ -1,8 +1,10 @@
-import { AppBar, Button, Dialog, DialogContent, IconButton, List, Toolbar, Typography } from "@mui/material"
+import { AppBar, Button, Dialog, DialogContent, IconButton, List, SvgIcon, Toolbar, Typography } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import React from "react";
 import ConfirmDialog from "../Confirm";
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import RecyclingIcon from '@mui/icons-material/Recycling';
 import QuestionCard from "../QuestionCard";
 import { Stack } from "@mui/system";
 const Transition = React.forwardRef(function Transition(
@@ -14,13 +16,13 @@ const Transition = React.forwardRef(function Transition(
 
 
 
-const TestResultDialog = ({isOpen, setIsOpen, setIsOpenTest, test, answers}) => {
+const TestResultDialog = ({ isOpen, setIsOpen, setIsOpenTest, test, answers }) => {
 
     const getCorrectAnswer = () => {
         let count = 0;
         const questions = test.questions;
-        for(let i = 0; i < questions.length; i++) {
-            if(answers[i] !== undefined && questions[i].correct_answer === answers[i]) {
+        for (let i = 0; i < questions.length; i++) {
+            if (answers[i] !== undefined && questions[i].correct_answer === answers[i]) {
                 count++;
             }
         }
@@ -64,11 +66,11 @@ const TestResultDialog = ({isOpen, setIsOpen, setIsOpenTest, test, answers}) => 
                         </Typography>
                         <Stack className="w-[120px] mr-[50px]" spacing={0} direction={"column"}>
                             <Typography className="w-full text-center"  >
-                               {" Kết quả: " + getCorrectAnswer() }
+                                {" Kết quả: " + getCorrectAnswer()}
                             </Typography>
-                           
+
                         </Stack>
-                     </div>
+                    </div>
                 </Toolbar>
             </AppBar>
 
@@ -84,6 +86,7 @@ const TestResultDialog = ({isOpen, setIsOpen, setIsOpenTest, test, answers}) => 
                                         index={key}
                                         totalQuestion={test?.questions.length}
                                         answers={answers}
+                                        showExplaination={true}
                                     />
                                 </div>
                             );
@@ -94,17 +97,28 @@ const TestResultDialog = ({isOpen, setIsOpen, setIsOpenTest, test, answers}) => 
 
                     </Stack>
                     <Stack direction={"row"} spacing={2} className="flex justify-center w-full" >
-                        <Button color="primary" className="w-[300px] h-[50px]" variant="contained" onClick={handleReturn} >Quay trở lại khóa học</Button>
-                        <Button color="error" className="w-[300px] h-[50px]" variant="contained" onClick={handleRetake} >Làm lại</Button>
+                        <Button color="primary" className="w-[300px] h-[50px]" variant="contained" onClick={handleReturn} >
+
+                            <SvgIcon sx={{ mr: 1 }}>
+                                <KeyboardReturnIcon />
+                            </SvgIcon> Quay trở lại khóa học
+                        </Button>
+                        <Button color="error" className="w-[300px] h-[50px]" variant="contained" onClick={handleRetake} >
+
+                            <SvgIcon sx={{ mr: 1 }}>
+                                <RecyclingIcon />
+                            </SvgIcon> Làm lại
+                        </Button>
+
                     </Stack>
                 </Stack>
             </div>
 
         </Dialog>
 
-        
 
-      
+
+
     </>
 }
 

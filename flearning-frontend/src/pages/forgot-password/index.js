@@ -7,6 +7,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
 import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
+import { validateEmail } from "../../helpers/validation";
 
 
 const ForgotPasswordPage = () => {
@@ -16,12 +17,22 @@ const ForgotPasswordPage = () => {
  
 
   const handleForgotPassword = () => {
-    if(email == "") {
+    if(email.trim() == "") {
       toast.warning('Nhập email của bạn!');
-    } else {
-      console.log("email: " + email);
-      dispatch(forgotPassword({ email: email}));
+
+      return;
+    } 
+
+    if(validateEmail(email) === false) {
+      toast.warning('Email không hợp lệ');
+      return;
     }
+
+    dispatch(forgotPassword({ 
+      email: email, 
+      subject: 'Thay Đổi Mật Khẩu Tài Khoản JLearning',
+      link:  ROUTE_CONSTANTS.DOMAIN + ROUTE_CONSTANTS.NEW_PASSWORD_PAGE,
+    }));
   };
 
   return (

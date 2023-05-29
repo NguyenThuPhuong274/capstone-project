@@ -1,22 +1,23 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {  useState } from 'react';
 import {
     Box, Button, CardContent, Card, Container, Stack, Dialog, DialogTitle
-    , DialogContent, Divider, CardHeader, SvgIcon
+    , DialogContent, CardHeader
 } from '@mui/material';
 import { ContactTable } from '../../sections/table/contact-table';
 import AppInput from '../../components/AppInput/AppInput';
 import AppTextArea from '../AppInput/AppTextArea';
+import { useDispatch } from 'react-redux';
+import { updateContact } from '../../redux/contactSlice';
 
 
 const ListContact = ({ data }) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
     const [contacts, setContacts] = useState(data);
-
+    const dispatch = useDispatch();
     const [contactsPagination, setContactsPagination] = useState(contacts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [currentContact, setCurrentContact] = useState();
-    const [requestMessage, setRequestMessage] = useState("");
     const [responseMessage, setResponseMessage] = useState("");
     const [searchTerm, setSearchTerm] = React.useState({ value: '' });
 
@@ -34,7 +35,7 @@ const ListContact = ({ data }) => {
         setContactsPagination(contacts.slice(value * rowsPerPage, value * rowsPerPage + rowsPerPage));
     }
 
-    const handleChangeValue = (value) => {
+    const handleChangeValue = (key, value) => {
         setResponseMessage(value);
     }
     const handleChangeSearchTerm = (key, value) => {
@@ -43,6 +44,10 @@ const ListContact = ({ data }) => {
             [key]: value
         });
     }
+
+    React.useEffect(() => {
+        setResponseMessage(currentContact?.response_message ? currentContact?.response_message : '');
+    }, [currentContact])
 
     const handleRowsPerPageChange = (event) => {
         setPage(0);
@@ -73,6 +78,23 @@ const ListContact = ({ data }) => {
         setSearchTerm({
             value: ''
         });
+    }
+
+    const hanldeSubmit = () => {
+        const details = {
+            email: currentContact?.email,
+            subject: "Phản Hồi Thắc Mắc Từ JLEARNING website",
+            contact_id: currentContact?.contact_id,
+            name: currentContact?.name,
+            status: 1,
+            question: currentContact?.request_message,
+            response_date: new Date(),
+            answer: responseMessage,
+        }
+        dispatch(updateContact(details));
+        setIsOpenModal(false);
+        setCurrentContact(null);
+        setResponseMessage('');
     }
     return (
         <>
@@ -108,6 +130,7 @@ const ListContact = ({ data }) => {
                             rowsPerPage={rowsPerPage}
                             setIsOpenModal={setIsOpenModal}
                             isOpenModal={isOpenModal}
+
                             setCurrentContact={setCurrentContact}
                         /> : <>
 
@@ -133,20 +156,18 @@ const ListContact = ({ data }) => {
 
                         <Card sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', p: 0, width: "100%", height: 320 }} >
 
-                            <CardHeader title="Thông điệp" sx={{pb: 0}} />
-                            <CardContent sx={{height: "84%"}}>
-                                <textarea disabled style={{width: "100%", height: "100%", borderRadius: 5, resize: "none"}}>
+                            <CardHeader title="Thông điệp" sx={{ pb: 0 }} />
+                            <CardContent sx={{ height: "84%" }}>
+                                <textarea disabled style={{ width: "100%", height: "100%", borderRadius: 5, resize: "none" }}>
                                     {currentContact?.request_message}
                                 </textarea>
                             </CardContent>
                         </Card>
                         <Card sx={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;', width: "100%", height: 320 }} >
 
-                            <CardHeader title="Phản hồi" sx={{pb: 0}} />
+                            <CardHeader title="Phản hồi" sx={{ pb: 0 }} />
                             <CardContent  >
-                                <AppTextArea height={"h-[230px]"} value={responseMessage} handleChangeValue={handleChangeValue} placeholder={"Nội dung"} />
-
-                                {/* <AppInput height={"h-[160px]"} value={responseMessage} handleChangeValue={handleChangeValue} placeholder={"Phản hồi của bạn"} /> */}
+                                <AppTextArea height={"h-[230px]"} value={responseMessage} title={"responseMessage"} handleChangeValue={handleChangeValue} placeholder={"Nội dung"} />
                             </CardContent>
                         </Card>
                     </Stack>
@@ -154,7 +175,10 @@ const ListContact = ({ data }) => {
                         <Button variant="contained" sx={{ mr: 2 }} title='Hủy' className='bg-cteal' onClick={handleCloseModal}>
                             Hủy
                         </Button>
-                        <Button variant="contained" title={currentContact?.email != null ? 'Gửi phản hồi tới ' + currentContact?.email : 'Gửi phản hồi'} className='bg-primary'>
+                        <Button
+
+                            onClick={hanldeSubmit}
+                            variant="contained" title={currentContact?.email != null ? 'Gửi phản hồi tới ' + currentContact?.email : 'Gửi phản hồi'} className='bg-primary'>
                             Gửi
                         </Button>
                     </div>

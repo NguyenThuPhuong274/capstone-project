@@ -38,6 +38,7 @@ const AdminTestDetails = ({ test, courses }) => {
         answer_2: '',
         answer_3: '',
         answer_4: '',
+        explaination: '',
         correct_answer: 0,
         test_id: test?.test_id
     });
@@ -57,6 +58,7 @@ const AdminTestDetails = ({ test, courses }) => {
             answer_2: '',
             answer_3: '',
             answer_4: '',
+            explaination: '',
             correct_answer: 0,
             test_id: test?.test_id
         })
@@ -138,6 +140,7 @@ const AdminTestDetails = ({ test, courses }) => {
                 answer_2: '',
                 answer_3: '',
                 answer_4: '',
+                explaination: '',
                 correct_answer: 0,
                 test_id: test?.test_id
             });
@@ -162,6 +165,7 @@ const AdminTestDetails = ({ test, courses }) => {
                 answer_2: currentQuestion?.answer_2,
                 answer_3: currentQuestion?.answer_3,
                 answer_4: currentQuestion?.answer_4,
+                explaination: currentQuestion?.explaination,
                 correct_answer: currentQuestion?.correct_answer,
                 test_id: test?.test_id,
                 question_id: currentQuestion.question_id,
@@ -179,7 +183,7 @@ const AdminTestDetails = ({ test, courses }) => {
                 }}>
                 <Container maxWidth="xl" sx={{ display: "flex", flexDirection: "row", height: 620 }}>
                     <Card className="w-full h-full mr-4" sx={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
-                        <CardContent>
+                        <CardContent sx={{pb: 200}}>
                             <Stack direction={"column"} spacing={2}>
                                 <div >
                                     <Button variant="contained" className='bg-primary' onClick={() => {
@@ -191,7 +195,7 @@ const AdminTestDetails = ({ test, courses }) => {
                                         </SvgIcon> Thêm mới câu hỏi
                                     </Button>
                                 </div>
-                                <Stack direction={"column"} sx={{ overflow: "auto", height: 600 }} spacing={0}>
+                                <Stack direction={"column"} sx={{ overflow: "auto", height: 520 }} spacing={0}>
                                     {test?.questions.map((question, key) => {
                                         return <Question setCurrentQuestion={setCurrentQuestion} key={key} question={question} title={`Câu hỏi ${key + 1}`} index={key} />
                                     })}
@@ -229,9 +233,13 @@ const AdminTestDetails = ({ test, courses }) => {
             <Dialog open={openQuestionModal} fullWidth maxWidth="md" >
                 <DialogTitle sx={{ textTransform: "uppercase" }}>Thêm mới câu hỏi</DialogTitle>
                 <DialogContent sx={{ p: 4 }}>
-                    <Stack sx={{ mt: 3 }} direction={"column"} spacing={4}>
+                    <Stack sx={{ mt: 3 }} direction={"column"} spacing={3}>
 
-                        <AppTextArea height={"h-[150px]"} value={question.description} title={"description"} handleChangeValue={handleChangeQuestionValue} placeholder={"Mô tả câu hỏi"} />
+                        <Stack direction={"column"} spacing={2}>
+                            <AppInput value={question.description} title={"description"} handleChangeValue={handleChangeQuestionValue} placeholder={"Nội dung câu hỏi"} />
+                            <AppInput  value={question.explaination} title={"explaination"} handleChangeValue={handleChangeQuestionValue} placeholder={"Giải thích"} />
+                        </Stack>
+
                         <Stack direction={"column"} spacing={2}>
                             <Stack direction={"row"} spacing={2}>
                                 <AppInput

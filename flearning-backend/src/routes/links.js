@@ -13,6 +13,7 @@ import QuestionController from "../controller/QuestionController";
 import BlogCategoryController from "../controller/BlogCategoryController";
 import PaymentController from "../controller/PaymentController";
 import DashboardController from "../controller/DashboardController";
+import MailController from "../controller/MailController";
 export const Links = [
   {
     route: CONSTANT_ROUTE.SIGN_IN,
@@ -257,6 +258,16 @@ export const Links = [
     route: CONSTANT_ROUTE.DASHBOARD + "/get",
     method: "get",
     handleAction: DashboardController.getData,
+  },
+  {
+    route: CONSTANT_ROUTE.MAIL + "/send",
+    method: "post",
+    handleAction: MailController.sendMail,
+  },
+  {
+    route: CONSTANT_ROUTE.MAIL + "/send/forgot-password",
+    method: "post",
+    handleAction: MailController.sendMailForgotPassword,
   },
 
 

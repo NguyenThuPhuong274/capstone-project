@@ -132,7 +132,7 @@ const AdminCourseDetails = ({ course }) => {
                                 </SvgIcon> Thêm mới chương
                             </Button>
                         </div>
-                        <Stack direction={"column"} sx={{ overflow: "auto", height: 500 }} spacing={0}>
+                        <Stack direction={"column"} sx={{ overflow: "auto", height: 520 }} spacing={0}>
                             {course?.chapters.map((chapter, key) => {
                                 return (
                                     <div key={key}>

@@ -21,7 +21,7 @@ export const OverviewNews = (props) => {
             >
              Tin Tức
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h5">
               {value}
             </Typography>
           </Stack>
