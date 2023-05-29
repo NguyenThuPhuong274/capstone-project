@@ -1,4 +1,4 @@
-import ListBulletIcon from '@heroicons/react/24/solid/ListBulletIcon';
+import BookOpenIcon from '@heroicons/react/24/solid/BookOpenIcon';
 import {
   Avatar,
   Box,
@@ -10,7 +10,7 @@ import {
   Typography
 } from '@mui/material';
 
-export const OverviewTasksProgress = (props) => {
+export const CourseOverView = (props) => {
   const { value, sx } = props;
 
   return (
@@ -28,10 +28,10 @@ export const OverviewTasksProgress = (props) => {
               gutterBottom
               variant="overline"
             >
-              Task Progress
+             Khóa học
             </Typography>
             <Typography variant="h4">
-              {value}%
+              {value}
             </Typography>
           </Stack>
           <Avatar
@@ -42,7 +42,7 @@ export const OverviewTasksProgress = (props) => {
             }}
           >
             <SvgIcon>
-              <ListBulletIcon />
+              <BookOpenIcon />
             </SvgIcon>
           </Avatar>
         </Stack>

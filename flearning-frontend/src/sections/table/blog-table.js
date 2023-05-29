@@ -132,13 +132,13 @@ export const BlogTable = (props) => {
                       <Chip color={blog?.status === true ? 'success' : 'error'} label={blog?.status === true ? 'Công khai' : 'Khóa'} />
                     </TableCell>
                     <TableCell sx={{ width: 200 }}>
-                      <Button onClick={() => handleEditBlog(blog?.blog_id)} sx={{ mr: 1 }} variant="contained" className='bg-primary' >
+                      <Button size="small"  onClick={() => handleEditBlog(blog?.blog_id)} sx={{ mr: 1 }} variant="contained" className='bg-primary' >
 
                         <SvgIcon  >
                           <PencilIcon />
                         </SvgIcon>
                       </Button>
-                      <Button onClick={() => handleDeleteBlog(blog?.blog_id)} variant="contained" className='bg-pink-500' >
+                      <Button size="small"  onClick={() => handleDeleteBlog(blog?.blog_id)} variant="contained" className='bg-pink-500' >
                         <SvgIcon  >
                           <TrashIcon />
                         </SvgIcon>

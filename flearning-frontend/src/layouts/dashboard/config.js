@@ -6,6 +6,7 @@ import FaceSmileIcon from '@heroicons/react/24/solid/FaceSmileIcon';
 import NewspaperIcon from '@heroicons/react/24/solid/NewspaperIcon';
 import PhoneIcon from '@heroicons/react/24/solid/PhoneIcon';
 import UserIcon from '@heroicons/react/24/solid/UserIcon';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import { SvgIcon } from '@mui/material';
 
 export const items = [
@@ -27,12 +28,22 @@ export const items = [
       </SvgIcon>
     )
   },
+
   {
     title: 'Bài kiểm tra',
     path: '/authen/test',
     icon: (
       <SvgIcon fontSize="small">
         <QuestionMarkCircleIcon />
+      </SvgIcon>
+    )
+  },
+  {
+    title: 'Hóa đơn',
+    path: '/authen/invoices',
+    icon: (
+      <SvgIcon fontSize="small">
+        <ReceiptLongIcon />
       </SvgIcon>
     )
   },
@@ -81,6 +92,6 @@ export const items = [
       </SvgIcon>
     )
   },
-  
-  
+
+
 ];

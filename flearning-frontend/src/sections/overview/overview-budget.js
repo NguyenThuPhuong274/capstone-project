@@ -7,7 +7,7 @@ export const OverviewBudget = (props) => {
   const { difference, positive = false, sx, value } = props;
 
   return (
-    <Card sx={sx}>
+    <Card sx={sx} >
       <CardContent>
         <Stack
           alignItems="flex-start"
@@ -20,10 +20,10 @@ export const OverviewBudget = (props) => {
               color="text.secondary"
               variant="overline"
             >
-              Budget
+              Tổng doanh thu
             </Typography>
-            <Typography variant="h4">
-              {value}
+            <Typography variant="h5">
+              {new Intl.NumberFormat('vi-VN').format(Number(value)) + '₫'}
             </Typography>
           </Stack>
           <Avatar
@@ -67,7 +67,7 @@ export const OverviewBudget = (props) => {
               color="text.secondary"
               variant="caption"
             >
-              Since last month
+              So với tháng trước
             </Typography>
           </Stack>
         )}

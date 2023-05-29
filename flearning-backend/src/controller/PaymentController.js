@@ -71,6 +71,7 @@ const PaymentController = {
                                     ,[course_name]
                                     ,[phone]
                                     ,[address]
+                                    ,[name]
                                     ,[amount]
                                     ,[created_date])
                             VALUES
@@ -79,15 +80,21 @@ const PaymentController = {
                                     ,N'${payment.course_name}'
                                     ,N'${payment.phone}'
                                     ,N'${payment.address}'
+                                    ,N'${payment.name}'
                                     ,'${payment.price}'
                                     ,'${payment.created_date}')`
         let data = await executeNonQuery(querystring);
         // console.log(data);
         res.json({ rowEffected: data });
     },
-    getPayments: async (req, res) => {
+    getPaymentByUser: async (req, res) => {
         const payment = req.body;
         const querystring = `SELECT * FROM [Payment] WHERE [email] = '${payment.email}'`;
+        const data = await executeQuery(querystring);
+        res.json(data);
+    },
+    getAllPayments: async (req, res) => {
+        const querystring = `SELECT * FROM [Payment]`;
         const data = await executeQuery(querystring);
         res.json(data);
     }

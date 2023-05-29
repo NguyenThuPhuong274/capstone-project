@@ -16,6 +16,7 @@ import questionSlice from "./questionSlice";
 import blogCategorySlice from "./blogCategorySlice";
 import blogDetailSlice from "./blogDetailSlice";
 import paymentSlice from "./paymentSlice";
+import dashboardSlice from "./dashboardSlice";
 
 const persistConfig = {
   key: "root",
@@ -37,6 +38,7 @@ const rootReducers = combineReducers({
   blogCategory: blogCategorySlice.reducer,
   blogDetails : blogDetailSlice.reducer,
   payment : paymentSlice.reducer,
+  dashboard : dashboardSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

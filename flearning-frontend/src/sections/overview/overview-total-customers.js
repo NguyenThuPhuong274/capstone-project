@@ -20,9 +20,9 @@ export const OverviewTotalCustomers = (props) => {
               color="text.secondary"
               variant="overline"
             >
-              Total Customers
+              Học viên
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h5">
               {value}
             </Typography>
           </Stack>
@@ -67,7 +67,7 @@ export const OverviewTotalCustomers = (props) => {
               color="text.secondary"
               variant="caption"
             >
-              Since last month
+              So với tháng trước
             </Typography>
           </Stack>
         )}

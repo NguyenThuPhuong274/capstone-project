@@ -13,8 +13,10 @@ import {
   TableRow,
   Button,
   Chip,
-  Typography
+  Typography,
+  SvgIcon
 } from '@mui/material';
+import ReplyIcon from '@mui/icons-material/Reply';
 import { Scrollbar } from '../../components/ScrollBar';
 
 export const ContactTable = (props) => {
@@ -130,8 +132,12 @@ export const ContactTable = (props) => {
                       <Chip color={contact?.status === true ? 'secondary' : 'error'} label={contact?.status === true ? 'Đã phản hồi' : 'Chưa phản hồi'} />
                     </TableCell>
                     <TableCell>
-                      <Button sx={{ width: 120 }} onClick={() => setCurrentId(contact?.contact_id)} variant="contained" className='bg-primary ' size='small'>
-                        {contact?.status === true ? 'Chỉnh sửa' : 'Phản hồi'}
+                      <Button size="small" sx={{ width: 120 }} onClick={() => setCurrentId(contact?.contact_id)} variant="contained" className='bg-primary '>
+
+                      <SvgIcon sx={{mr: 1}}>
+                          <ReplyIcon />
+                        </SvgIcon>  {contact?.status === true ? 'Chỉnh sửa' : 'Phản hồi'}
+                       
                       </Button>
                     </TableCell>
                   </TableRow>

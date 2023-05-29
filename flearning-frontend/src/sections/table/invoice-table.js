@@ -20,7 +20,7 @@ import EyeIcon from '@heroicons/react/24/solid/EyeIcon';
 
 import { Scrollbar } from '../../components/ScrollBar';
 
-export const PaymentTable = (props) => {
+export const InvoiceTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -31,8 +31,10 @@ export const PaymentTable = (props) => {
     user,
     courses,
     setIsOpenModal,
-    setCurrentPayment
+    setCurrentInvoice
   } = props;
+
+
   const getInvoiceId = (id) => {
     const idStr = new String(id);
 
@@ -42,6 +44,7 @@ export const PaymentTable = (props) => {
     return result + id;
 
   }
+
   return (<>
     <Card sx={{ height: 450, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}   >
       <Scrollbar>
@@ -51,6 +54,9 @@ export const PaymentTable = (props) => {
               <TableRow>
                 <TableCell>
                   Mã hóa đơn
+                </TableCell>
+                <TableCell>
+                  Người mua
                 </TableCell>
                 <TableCell>
                   Khóa học
@@ -70,44 +76,42 @@ export const PaymentTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((payment) => {
+              {items.map((invoice) => {
 
 
                 return (
                   <TableRow
                     hover
-                    key={payment?.payment_id}
+                    key={invoice?.payment_id}
                   >
                     <TableCell>
-                      {getInvoiceId(payment?.payment_id)}
+                      {getInvoiceId(invoice?.payment_id)}
+                    </TableCell>
+                    <TableCell>
+                      {invoice?.name}
                     </TableCell>
                     <TableCell>
                       <Typography sx={{ width: 150 }} variant="subtitle2">
-                        {courses?.find((c) => c.course_id === payment.course_id).course_name}
+                        {courses?.find((c) => c.course_id === invoice.course_id).course_name}
                       </Typography>
                     </TableCell>
-
-
-
-
                     <TableCell>
-                      {new Intl.NumberFormat('vi-VN').format(Number(payment?.amount)) + '₫'}
+                      {new Intl.NumberFormat('vi-VN').format(Number(invoice?.amount)) + '₫'}
                     </TableCell>
                     <TableCell>
-                      {new Date(payment?.created_date).toLocaleDateString()}
+                      {new Date(invoice?.created_date).toLocaleDateString()}
                     </TableCell>
-                    <TableCell sx={{ width: 200 }}>
+                    <TableCell sx={{ width: 150 }}>
                       <Chip color='success' label={"Đã thanh toán"} />
                     </TableCell>
                     <TableCell sx={{ width: 150 }}>
-                      <Button   size="small" color='primary' variant='contained' onClick={() => {
+                      <Button  size='small' color='primary' variant='contained' onClick={() => {
                         setIsOpenModal(true);
-                        setCurrentPayment(payment);
-                       
+                        setCurrentInvoice(invoice);
                       }}>
-                        <SvgIcon sx={{ mr: 1 }}>
+                        <SvgIcon >
                           <EyeIcon />
-                        </SvgIcon> Xem 
+                        </SvgIcon>
                       </Button>
                     </TableCell>
 

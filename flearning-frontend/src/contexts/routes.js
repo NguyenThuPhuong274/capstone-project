@@ -28,6 +28,7 @@ import AdminBlogDetailsPage from "../pages/admin/blog-details";
 import PaymentPage from "../pages/user/payment";
 import PaymentResultPage from "../pages/user/payment/PaymentResultPage";
 import PaymentHistoryPage from "../pages/payment-history";
+import AdminInvoicePage from "../pages/admin/invoice";
 
 export const routes = [
   {
@@ -124,6 +125,12 @@ export const routes = [
     path: ROUTE_CONSTANTS.PAYMENT_RESULT_PAGE,
     isPrivate: true,
     component: <PaymentResultPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ADMIN_INVOICE_PAGE,
+    isPrivate: true,
+    component: <AdminInvoicePage />,
     exact: true,
   },
   {

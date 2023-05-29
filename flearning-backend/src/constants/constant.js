@@ -19,4 +19,5 @@ export const CONSTANT_ROUTE = {
   MANAGE_TEST: "/authen/manage/test",
   MANAGE_QUESTION: "/authen/manage/question",
   MANAGE_PAYMENT: "/authen/payment",
+  DASHBOARD: "/authen/dashboard",
 };

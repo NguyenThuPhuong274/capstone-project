@@ -3,19 +3,19 @@ import Breadcrumb from "../../components/Common/Breadcrumb";
 import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
 import Contact from "../../components/Contact";
 import React from "react";
-import { getPayments } from "../../redux/paymentSlice";
+import { getPaymentsByUser } from "../../redux/paymentSlice";
 import ListPayment from "../../components/Payment/ListPayment";
 
 const PaymentHistoryPage = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.authen.user);
-    const payments = useSelector((state) => state.payment.list);
+    const payments = useSelector((state) => state.payment.paymentByUsers);
     const isRefresh = useSelector((state) => state.payment.isRefresh);
     const courses = useSelector((state) => state.course.data);
 
 
     React.useEffect(() => {
-        dispatch(getPayments({ email: user?.email }));
+        dispatch(getPaymentsByUser({ email: user?.email }));
     }, [isRefresh]);
 
     console.log(payments);

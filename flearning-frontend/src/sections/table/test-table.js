@@ -127,13 +127,13 @@ export const TestTable = (props) => {
                      <Typography sx={{overflow: "auto", width: 300}}> {test?.description}</Typography>
                     </TableCell>
                     <TableCell sx={{ width: 200 }}>
-                      <Button onClick={() => handleEditTest(test?.test_id)} sx={{ mr: 1 }} variant="contained" className='bg-primary' >
+                      <Button size="small" onClick={() => handleEditTest(test?.test_id)} sx={{ mr: 1 }} variant="contained" className='bg-primary' >
 
                         <SvgIcon  >
                           <PencilIcon />
                         </SvgIcon>
                       </Button>
-                      <Button onClick={() => handleDeleteTest(test?.test_id)} variant="contained" className='bg-pink-500' >
+                      <Button size="small"  onClick={() => handleDeleteTest(test?.test_id)} variant="contained" className='bg-pink-500' >
                         <SvgIcon  >
                           <TrashIcon />
                         </SvgIcon>

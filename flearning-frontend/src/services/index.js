@@ -11,6 +11,7 @@ import testServices from "./testServices";
 import blogCategoryServices from "./blogCategoryServices";
 import paymentServices from "./paymentServices";
 import blogDetailServices from "./blogDetailServices";
+import dashboardServices from "./dashboardServices";
 
 
 export {
@@ -26,5 +27,6 @@ export {
     questionServices,
     blogCategoryServices,
     blogDetailServices,
+    dashboardServices,
     testServices
 };

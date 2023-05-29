@@ -10,8 +10,12 @@ import axios from "axios";
     const response = await axios.post(API.MANAGE_PAYMENT + "/insert", payment);
     return response.data;
   },
-  getPayments: async (payment) => {
-    const response = await axios.post(API.MANAGE_PAYMENT + "/get", payment);
+  getPaymentsByUser: async (payment) => {
+    const response = await axios.post(API.MANAGE_PAYMENT + "/get/by-user", payment);
+    return response.data;
+  },
+  getAllPayments: async () => {
+    const response = await axios.get(API.MANAGE_PAYMENT + "/get");
     return response.data;
   },
  

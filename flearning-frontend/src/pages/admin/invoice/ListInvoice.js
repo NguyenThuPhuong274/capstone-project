@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react';
 import {
     Button, Card, CardContent, CardHeader, Chip, Container, Dialog, DialogContent, DialogTitle, Divider, Grid, Stack, SvgIcon, Typography
 } from '@mui/material';
-import { PaymentTable } from '../../sections/table/payment-table';
-import AppInput from '../../components/AppInput/AppInput';
+import { InvoiceTable } from '../../../sections/table/invoice-table';
+import AppInput from '../../../components/AppInput/AppInput';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import BookIcon from '@mui/icons-material/Book';
@@ -11,48 +11,48 @@ import AlarmIcon from '@mui/icons-material/Alarm';
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import { Box } from '@mui/system';
 
-const ListPayment = ({ data, user, courses }) => {
+const ListInvoice = ({ data, user, courses }) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [page, setPage] = useState(0);
-    const [payments, setPayments] = useState(data);
+    const [invoices, setInvoices] = useState(data);
 
-    const [paymentsPagination, setPaymentsPagination] = useState(payments?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
+    const [invoicesPagination, setInvoicesPagination] = useState(invoices?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [searchTerm, setSearchTerm] = React.useState({ value: '' });
 
-    const [currentPayment, setCurrentPayment] = React.useState(null);
+    const [currentInvoice, setCurrentInvoice] = React.useState(null);
     const [currentCourse, setCurrentCourse] = React.useState(null);
     console.log(data);
 
     React.useEffect(() => {
-        setPayments(data);
-        setPaymentsPagination(payments?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
+        setInvoices(data);
+        setInvoicesPagination(invoices?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
     }, [data])
 
     React.useEffect(() => {
 
-        if (currentPayment === null) {
+        if (currentInvoice === null) {
             setCurrentCourse(null);
         } else {
-            setCurrentCourse(courses.find((c) => c.course_id === currentPayment.course_id));
+            setCurrentCourse(courses.find((c) => c.course_id === currentInvoice.course_id));
         }
 
-    }, [currentPayment])
+    }, [currentInvoice])
 
 
 
     const handleCloseModal = () => {
         setIsOpenModal(false);
-        setCurrentPayment(null);
+        setCurrentInvoice(null);
 
     }
 
-
+   
 
     const handlePageChange = useCallback(
         (value) => {
             setPage(value);
-            setPaymentsPagination(payments?.slice(value * rowsPerPage, value * rowsPerPage + rowsPerPage))
+            setInvoicesPagination(invoices?.slice(value * rowsPerPage, value * rowsPerPage + rowsPerPage))
         },
         []
     );
@@ -71,24 +71,24 @@ const ListPayment = ({ data, user, courses }) => {
             setRowsPerPage(event.target.value);
 
             let endIndex = rowsPerPage;
-            if (payments?.length < endIndex) endIndex = payments?.length;
+            if (invoices?.length < endIndex) endIndex = invoices?.length;
 
 
-            setPaymentsPagination(payments?.slice(0, endIndex))
+            setInvoicesPagination(invoices?.slice(0, endIndex))
         },
         []
     );
 
     React.useEffect(() => {
-        const result = data?.filter((payment) => payment?.course_name?.toLowerCase().includes(searchTerm?.value.toLowerCase()));
-        setPayments(result);
+        const result = data?.filter((invoice) => invoice?.course_name?.toLowerCase().includes(searchTerm?.value.toLowerCase()));
+        setInvoices(result);
         setPage(0);
         setRowsPerPage(5);
 
         let endIndex = 5;
         if (result.length < endIndex) endIndex = result.length;
 
-        setPaymentsPagination(result.slice(0, endIndex))
+        setInvoicesPagination(result?.slice(0, endIndex))
     }, [searchTerm.value])
 
 
@@ -97,15 +97,7 @@ const ListPayment = ({ data, user, courses }) => {
             value: ''
         });
     }
-    const getInvoiceId = (id) => {
-        const idStr = new String(id);
 
-        let str = "#00000";
-        const result = str.slice(0, str.length - idStr.length);
-        console.log(result);
-        return result + id;
-
-    }
 
 
     const getTotalLesson = () => {
@@ -120,16 +112,24 @@ const ListPayment = ({ data, user, courses }) => {
     }
 
 
+    const getInvoiceId = (id) => {
+        const idStr = new String(id);
+    
+        let str = "#00000";
+        const result = str.slice(0, str.length - idStr.length);
+        console.log(result);
+        return result + id;
+    
+      }
     return (
         <>
 
             <Box
-
+className='ml-72'
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    p: 5,
-                    mb: 10
+                   
                 }}
             >
                 <Container maxWidth="xl">
@@ -137,7 +137,7 @@ const ListPayment = ({ data, user, courses }) => {
                         <Card sx={{ p: 2, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}>
                             <Stack direction={"row"} spacing={2}>
                                 <div className="w-96 ">
-                                    <AppInput value={searchTerm.value} handleChangeValue={handleChangeSearchTerm} placeholder={"Tìm kiếm lịch sử giao dịch"} title={"value"} />
+                                    <AppInput value={searchTerm.value} handleChangeValue={handleChangeSearchTerm} placeholder={"Tìm kiếm hóa đơn"} title={"value"} />
                                 </div>
                                 {searchTerm.value != '' ? <Button
                                     onClick={handleClearSearch}
@@ -146,9 +146,9 @@ const ListPayment = ({ data, user, courses }) => {
                                 </Button> : <></>}
                             </Stack>
                         </Card>
-                        {payments?.length > 0 ? <PaymentTable
-                            count={payments?.length}
-                            items={paymentsPagination}
+                        {invoices?.length > 0 ? <InvoiceTable
+                            count={invoices?.length}
+                            items={invoicesPagination}
                             onPageChange={handlePageChange}
                             onRowsPerPageChange={handleRowsPerPageChange}
                             page={page}
@@ -156,7 +156,7 @@ const ListPayment = ({ data, user, courses }) => {
                             user={user}
                             courses={courses}
                             setIsOpenModal={setIsOpenModal}
-                            setCurrentPayment={setCurrentPayment}
+                            setCurrentInvoice={setCurrentInvoice}
                         /> : <>
 
                             <Card sx={{ p: 2, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;", height: 525 }}>
@@ -177,10 +177,10 @@ const ListPayment = ({ data, user, courses }) => {
                 <DialogTitle >
                     <div className='flex justify-between'>
                         <p>
-                            Hóa Đơn {getInvoiceId(currentPayment?.payment_id)}
+                        Hóa Đơn {getInvoiceId(currentInvoice?.payment_id)}
                         </p>
                         <p className='text-body-color'>
-                            Ngày tạo:  {new Date(currentPayment?.created_date).toLocaleDateString()}
+                            Ngày tạo:  {new Date(currentInvoice?.created_date).toLocaleDateString()}
                         </p>
 
                     </div>
@@ -255,13 +255,13 @@ const ListPayment = ({ data, user, courses }) => {
                                             <CardHeader title="Thông tin cá nhân" />
                                             <CardContent>
                                                 <Stack direction={"column"} spacing={3}>
-                                                    <p>Họ và tên: {user.name}</p>
-                                                    <p>Email: {currentPayment?.email}</p>
-                                                    <p>Sđt: {currentPayment?.phone}</p>
-                                                    <p>Địa chỉ: {currentPayment?.address}</p>
+                                                    <p>Họ và tên: {currentInvoice?.name}</p>
+                                                    <p>Email: {currentInvoice?.email}</p>
+                                                    <p>Sđt: {currentInvoice?.phone}</p>
+                                                    <p>Địa chỉ: {currentInvoice?.address}</p>
                                                     <p>
-                                                        {"Trạng thái giao dịch:   "}
-                                                        <Chip color="success" variant='filled' sx={{ width: 150 }} label={"Đã thanh toán"} />
+                                                        <span>{"Trạng thái giao dịch:"}</span>
+                                                        <Chip color="primary" variant='filled' sx={{ml: 3, width: 150 }} label={"Đã thanh toán"} />
 
                                                     </p>
                                                 </Stack>
@@ -293,4 +293,4 @@ const ListPayment = ({ data, user, courses }) => {
 };
 
 
-export default ListPayment;
+export default ListInvoice;

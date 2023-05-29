@@ -11,8 +11,12 @@ export const insertPayment = createAsyncThunk("insert-payment", async (payment) 
     const response = await paymentServices.insertPayment(payment);
     return response;
 });
-export const getPayments = createAsyncThunk("get-payment", async (payment) => {
-    const response = await paymentServices.getPayments(payment);
+export const getPaymentsByUser = createAsyncThunk("get-payment-by-user", async (payment) => {
+    const response = await paymentServices.getPaymentsByUser(payment);
+    return response;
+});
+export const getAllPayments = createAsyncThunk("get-all-payment", async () => {
+    const response = await paymentServices.getAllPayments();
     return response;
 });
 
@@ -21,7 +25,8 @@ const paymentSlice = createSlice({
     name: "payment",
     initialState: {
         data: null,
-        list: [],
+        paymentByUsers: [],
+        allPayments: [],
         url: '',
         isRefresh: false,
     },
@@ -46,8 +51,12 @@ const paymentSlice = createSlice({
             state.status = 0;
             state.isRefresh = true;
         });
-        builder.addCase(getPayments.fulfilled, (state, action) => {
-            state.list = action.payload;
+        builder.addCase(getPaymentsByUser.fulfilled, (state, action) => {
+            state.paymentByUsers = action.payload;
+            state.isRefresh = false;
+        });
+        builder.addCase(getAllPayments.fulfilled, (state, action) => {
+            state.allPayments = action.payload;
             state.isRefresh = false;
         });
     },

@@ -12,6 +12,7 @@ import TestController from "../controller/TestController";
 import QuestionController from "../controller/QuestionController";
 import BlogCategoryController from "../controller/BlogCategoryController";
 import PaymentController from "../controller/PaymentController";
+import DashboardController from "../controller/DashboardController";
 export const Links = [
   {
     route: CONSTANT_ROUTE.SIGN_IN,
@@ -244,8 +245,18 @@ export const Links = [
   },
   {
     route: CONSTANT_ROUTE.MANAGE_PAYMENT + "/get",
+    method: "get",
+    handleAction: PaymentController.getAllPayments,
+  },
+  {
+    route: CONSTANT_ROUTE.MANAGE_PAYMENT + "/get/by-user",
     method: "post",
-    handleAction: PaymentController.getPayments,
+    handleAction: PaymentController.getPaymentByUser,
+  },
+  {
+    route: CONSTANT_ROUTE.DASHBOARD + "/get",
+    method: "get",
+    handleAction: DashboardController.getData,
   },
 
 

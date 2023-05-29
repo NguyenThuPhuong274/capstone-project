@@ -6,6 +6,7 @@ import {
   Card,
   CardActions,
   CardHeader,
+  Chip,
   Divider,
   SvgIcon,
   Table,
@@ -14,78 +15,101 @@ import {
   TableHead,
   TableRow
 } from '@mui/material';
-import {Scrollbar} from '../../components/ScrollBar';
+import { Scrollbar } from '../../components/ScrollBar';
+import EyeIcon from '@heroicons/react/24/solid/EyeIcon';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE_CONSTANTS } from '../../constants/route.constants';
 
 export const OverviewLatestOrders = (props) => {
-  const { orders = [], sx } = props;
+  const navigate = useNavigate();
+  const { payments = [], sx } = props;
+  const getInvoiceId = (id) => {
+    const idStr = new String(id);
 
+    let str = "#00000";
+    const result = str.slice(0, str.length - idStr.length);
+    console.log(result);
+    return result + id;
+
+  }
   return (
-    <Card sx={sx}>
-      <CardHeader title="Latest Orders" />
-      <Scrollbar sx={{ flexGrow: 1 }}>
-        <Box sx={{ minWidth: 800 }}>
-          <Table>
+    <>
+      <Card sx={sx}>
+        <CardHeader title="10 Giao Dịch Mới Nhất" />
+        <Box sx={{ minWidth: 800, maxHeight: 450, overflow: "auto" }}>
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>
-                  Order
+                  Hóa đơn
                 </TableCell>
                 <TableCell>
-                  Customer
+                  Người mua
                 </TableCell>
                 <TableCell sortDirection="desc">
-                  Date
+                  Ngày tạo
                 </TableCell>
                 <TableCell>
-                  Status
+                  Trạng thái
+                </TableCell>
+                <TableCell>
+                  Hành động
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {orders.map((order) => {
-                const createdAt = format(order.createdAt, 'dd/MM/yyyy');
+            <TableBody  >
+              {payments.map((payment) => {
 
                 return (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={payment.payment_id}
                   >
+
                     <TableCell>
-                      {order.ref}
+                      {getInvoiceId(payment.payment_id)}
                     </TableCell>
                     <TableCell>
-                      {order.customer.name}
+                      {payment.name}
                     </TableCell>
-                    <TableCell>
-                      {createdAt}
+                    <TableCell sx={{ width: 200 }}>
+                      {new Date(payment.created_date).toLocaleDateString()}
                     </TableCell>
-                    <TableCell>
-                      {/* <SeverityPill color={statusMap[order.status]}>
-                        {order.status}
-                      </SeverityPill> */}
+                    <TableCell sx={{ width: 200 }}>
+                      <Chip color='success' variant='conatined' label="Đã thanh toán" />
                     </TableCell>
+                    <TableCell sx={{ width: 150 }} >
+                      <Button variant='contained' color='primary' size='small' >
+                        <SvgIcon>
+                          <EyeIcon />
+                        </SvgIcon>
+                      </Button>
+                    </TableCell>
+
                   </TableRow>
                 );
               })}
             </TableBody>
           </Table>
         </Box>
-      </Scrollbar>
-      <Divider />
-      <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <Button
-          color="inherit"
-          endIcon={(
-            <SvgIcon fontSize="small">
-              <ArrowRightIcon />
-            </SvgIcon>
-          )}
-          size="small"
-          variant="text"
-        >
-          View all
-        </Button>
-      </CardActions>
-    </Card>
+        <Divider />
+        <CardActions sx={{ justifyContent: 'flex-end' }}>
+          <Button
+            color="inherit"
+            endIcon={(
+              <SvgIcon fontSize="small">
+                <ArrowRightIcon />
+              </SvgIcon>
+            )}
+            size="small"
+            variant="text"
+            onClick={() => navigate(ROUTE_CONSTANTS.ADMIN_INVOICE_PAGE)}
+          >
+            Xem tất cả
+          </Button>
+        </CardActions>
+      </Card>
+
+    </>
   );
 };

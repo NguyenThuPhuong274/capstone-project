@@ -11,7 +11,7 @@ const AdminContactPage = () => {
   
   const { setCurrentPage } = userSlice.actions;
   React.useEffect(() => {
-    dispatch(setCurrentPage("Quản lý liên hệ"));
+    dispatch(setCurrentPage("Liên Hệ Của Học Viên"));
   }, [])
 
   React.useEffect(() => {
