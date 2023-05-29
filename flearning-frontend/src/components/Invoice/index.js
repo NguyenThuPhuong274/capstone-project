@@ -13,12 +13,13 @@ import AlarmIcon from '@mui/icons-material/Alarm';
 import React from "react";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTE_CONSTANTS } from "../../constants/route.constants";
-import { createPayment } from "../../redux/paymentSlice";
+import paymentSlice, { createPayment } from "../../redux/paymentSlice";
+import { toast } from "react-toastify";
 
-const Invoice = ({ user, course }) => {
-
+const Invoice = ({ course }) => {
+    const user = (useSelector((state) => state.authen.user));
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -35,11 +36,12 @@ const Invoice = ({ user, course }) => {
 
     const [values, setValues] = React.useState({
         name: user?.name,
-        address: user?.address,
+        address: user?.address ? user?.address : '',
         year_of_birth: user?.year_of_birth ? user?.year_of_birth : 1990,
-        phone: user?.phone,
+        phone: user?.phone ? user?.phone : '',
         email: user?.email,
         course_id: course?.course_id,
+        course_name: course?.course_name,
         price: course?.price,
         created_date: new Date(),
     });
@@ -47,25 +49,60 @@ const Invoice = ({ user, course }) => {
     React.useEffect(() => {
         setValues({
             name: user?.name,
-            address: user?.address,
+            address: user?.address ? user?.address : '',
             year_of_birth: user?.year_of_birth ? user?.year_of_birth : 1990,
-            phone: user?.phone,
+            phone: user?.phone ? user?.phone : '',
             email: user?.email,
             course_id: course?.course_id,
+            course_name: course?.course_name,
             price: course?.price,
             created_date: new Date(),
         });
     }, [course])
 
+    const { resetPayment } = paymentSlice.actions;
     const paymentUrl = useSelector((state) => state.payment.url);
+
+    const goToPayment = localStorage.getItem("goToPayment");
+    if (goToPayment > 0) {
+        dispatch(resetPayment());
+    }
 
     React.useEffect(() => {
         if (paymentUrl !== null && paymentUrl !== '' && paymentUrl !== undefined) {
             window.location.href = paymentUrl;
+
+            if (!goToPayment) {
+                localStorage.setItem("goToPayment", 1);
+            } else {
+                localStorage.setItem("goToPayment", parseInt(goToPayment) + 1);
+            }
         }
-    }, [paymentUrl]);
+    }, [paymentUrl, goToPayment]);
 
     const handlePayment = async () => {
+        if (values.name.trim() === '') {
+            toast.warning("Chưa nhập tên");
+            return;
+        }
+
+        if (values.phone.trim() === '') {
+            toast.warning("Chưa nhập số điện thoại");
+            return;
+        }
+
+        if (values.phone.trim().length !== 10) {
+            toast.warning("Số điện thoại không hợp lệ");
+            return;
+        }
+
+
+        if (values.address.trim() === '') {
+            toast.warning("Chưa nhập địa chỉ");
+            return;
+        }
+
+
         const paymentDetails = {
             ...values,
             bankCode: '', // Optional bank code
@@ -124,7 +161,7 @@ const Invoice = ({ user, course }) => {
                                             <SvgIcon color="primary">
                                                 <BookIcon />
                                             </SvgIcon>
-                                            <div>{course?.course_name}</div>
+                                            <div className="block text-base font-medium text-black">{course?.course_name}</div>
                                         </Stack>
                                     </Typography>
                                     <Typography>

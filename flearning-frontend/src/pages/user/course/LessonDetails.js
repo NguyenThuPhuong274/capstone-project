@@ -102,8 +102,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 const LessonDetails = ({ course, lessonsDone, testsDone, user, feedback }) => {
     const dispatch = useDispatch();
     const [expanded, setExpanded] = React.useState('panel1');
-    const [currentLesson, setCurrentLesson] = React.useState(course.chapters[0]?.lessons[0]);
-    const [currentChapter, setCurrentChapter] = React.useState(course.chapters[0]);
+    const [currentLesson, setCurrentLesson] = React.useState(course?.chapters[0]?.lessons[0]);
+    const [currentChapter, setCurrentChapter] = React.useState(course?.chapters[0]);
     const [currentTest, setCurrentTest] = React.useState(null);
     const [openTestModal, setOpenTestModal] = React.useState(false);
     const [isOpenTest, setIsOpenTest] = React.useState(false);
@@ -150,8 +150,8 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user, feedback }) => {
     const courses = useSelector((state) => state.course.data);
 
     React.useEffect(() => {
-        setCurrentLesson(course.chapters[0]?.lessons[0]);
-        setCurrentChapter(course.chapters[0]);
+        setCurrentLesson(course?.chapters[0]?.lessons[0]);
+        setCurrentChapter(course?.chapters[0]);
     }, [course]);
 
     const { setIsRefreshSpecific } = courseSlice.actions;
@@ -172,8 +172,8 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user, feedback }) => {
     const handleChangeLesson = (lesson) => {
         setCurrentTest(null);
         setIsShowTest(false);
-        const chapters = course.chapters;
-        const chapterIndex = chapters.findIndex(function (chapter) {
+        const chapters = course?.chapters;
+        const chapterIndex = chapters?.findIndex(function (chapter) {
             return chapter.lessons.includes(lesson);
         });
 
@@ -189,12 +189,12 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user, feedback }) => {
                 dispatch(setIsRefreshSpecific(true));
             }
         }
-        const chapters = course.chapters;
-        const chapterIndex = chapters.findIndex(function (chapter) {
+        const chapters = course?.chapters;
+        const chapterIndex = chapters?.findIndex(function (chapter) {
             return chapter.chapter_id === currentChapter.chapter_id;
         });
 
-        const lessons = course.chapters[chapterIndex]?.lessons;
+        const lessons = course?.chapters[chapterIndex]?.lessons;
         const lessonIndex = lessons.findIndex(function (lesson) {
             return lesson.lesson_id === currentLesson.lesson_id;
         });

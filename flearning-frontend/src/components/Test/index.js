@@ -136,7 +136,7 @@ const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers
                                 <div key={"question-" + key}>
                                     <QuestionCard
                                         question={question}
-                                        index={key + 1}
+                                        index={key}
                                         totalQuestion={test?.questions.length}
                                         handleSetValue={handleSetValue}
                                     />

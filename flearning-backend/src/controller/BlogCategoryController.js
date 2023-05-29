@@ -7,7 +7,7 @@ const BlogCategoryController = {
         let queryString = 'SELECT * FROM [Blog_Category]'
 
         const data = await executeQuery(queryString);
-        console.log(data);
+        // console.log(data);
         return res.json(data);
     },
     insertBlogCategory: async (req, res) => {
@@ -17,7 +17,7 @@ const BlogCategoryController = {
                         VALUES
                                 ('${blogCategory.name}')`;
         const data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ rowAffected: data });
     },
@@ -27,7 +27,7 @@ const BlogCategoryController = {
                                 SET [name] = '${blogCategory.name}'
                             WHERE [blog_category_id] = '${blogCategory.blog_category_id}'`
         const data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ blogCategory: blogCategory, rowAffected: data });
     },
@@ -46,7 +46,7 @@ const BlogCategoryController = {
         queryString = `DELETE FROM [Blog_Category]
                             WHERE [blog_category_id] = '${blogCategory.blog_category_id}'`
         data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ blogCategory: blogCategory, rowAffected: data });
     }

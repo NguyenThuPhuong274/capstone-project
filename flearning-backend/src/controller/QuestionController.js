@@ -11,7 +11,7 @@ const QuestionController = {
     },
     insertQuestion: async (req, res) => {
         const question = req.body;
-        console.log("question is being inserted", question);
+        // console.log("question is being inserted", question);
         let queryString = `INSERT INTO [dbo].[Question]
                             ([description]
                               ,[answer_1]
@@ -29,13 +29,13 @@ const QuestionController = {
                               ,'${question.correct_answer}' 
                               ,'${question.test_id}')`;
         const data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ question: question, rowAffected: data });
     },
     updateQuestion: async (req, res) => {
         const question = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Question]
                  SET [description] = N'${question.description}'
@@ -55,7 +55,7 @@ const QuestionController = {
     },
     deleteQuestion: async (req, res) => {
         const question = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         const queryString = `DELETE FROM [Question] WHERE [question_id] =  ${question.question_id}`;
         const data = await executeNonQuery(queryString);

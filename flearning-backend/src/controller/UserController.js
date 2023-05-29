@@ -5,17 +5,17 @@ const dbp = DBProvider();
 const UserController = {
   getUser: async (req, res) => {
     let user = req.body;
-    console.log("user detail", user);
+    // console.log("user detail", user);
     const queryString = `SELECT * FROM [Account] WHERE [email] = '${user.email}' AND [password] = '${user.password}'`;
     const data = await executeQuery(queryString);
-    console.log("user return", data);
+    // console.log("user return", data);
     if (data.length > 0) {
       user = data[0];
 
       const accessToken = jwt.sign(user, "secretKey", {
         expiresIn: "20m",
       });
-      console.log(user);
+      // console.log(user);
       return res.json({ user: user, accessToken: accessToken });
     } else {
       return res.json({ message: "Tài khoản hoặc mật khẩu không chính xác" });
@@ -31,7 +31,7 @@ const UserController = {
   },
   insertUser: async (req, res) => {
     const user = req.body;
-    console.log(user);
+    // console.log(user);
     const queryString = `INSERT INTO [dbo].[Account]
                           ([email]
                           ,[password]
@@ -43,13 +43,13 @@ const UserController = {
                                   '2')`;
     const data = await executeNonQuery(queryString);
 
-    console.log(data);
+    // console.log(data);
 
     return res.json({ user: user, rowAffected: data });
   },
   updateUserInfo: async (req, res) => {
     const user = req.body;
-    console.log("user is being updated", user);
+    // console.log("user is being updated", user);
     const queryString = `UPDATE [dbo].[Account]
                           SET [phone] = '${user.phone}'
                             ,[name] = N'${user.name}'
@@ -60,20 +60,20 @@ const UserController = {
                         WHERE [email] = '${user.email}'`;
     const data = await executeNonQuery(queryString);
 
-    console.log(data);
+    // console.log(data);
 
     return res.json({ user: user, rowAffected: data });
   },
 
   changePassword: async (req, res) => {
     const user = req.body;
-    console.log("user is being updated", user);
+    // console.log("user is being updated", user);
     const queryString = `UPDATE [dbo].[Account]
                           SET [password] = '${user.password}'
                         WHERE [email] = '${user.email}'`;
     const data = await executeNonQuery(queryString);
 
-    console.log(data);
+    // console.log(data);
 
     return res.json({ user: user, rowAffected: data });
   },

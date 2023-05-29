@@ -38,7 +38,7 @@ const CourseCarousel = ({ data, title,paragraph  }) => {
             navButtonsAlwaysInvisible
             interval={10000}
             index={currentPage - 1}
-            className="h-[700px]"
+            className="h-[670px]"
           >
             {pageList.map((pageNumber) => {
 

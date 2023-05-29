@@ -7,16 +7,13 @@ import React from "react";
 import Breadcrumb from "../../../components/Common/Breadcrumb";
 import SectionTitle from "../../../components/Common/SectionTitle";
 import SmoothScrollUp from "../../../components/Common/SmoothScrollUp";
-import paymentSlice from "../../../redux/paymentSlice";
 
 const PaymentPage = () => {
-    const user = (useSelector((state) => state.authen.user));
     const navigate = useNavigate();
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const course_id = params.get('course_id');
     const dispatch = useDispatch();
-    const { resetPayment } = paymentSlice.actions;
     const course = useSelector((state) => state.course.specific);
 
     React.useEffect(() => {
@@ -31,14 +28,7 @@ const PaymentPage = () => {
     }, [course_id]);
 
 
-    const payment = useSelector((state) => state.payment.data);
-
-    React.useEffect(() => {
-        if (payment !== null) {
-            dispatch(resetPayment());
-        }
-    }, [payment]);
-
+   
 
     return (
         <>
@@ -47,8 +37,8 @@ const PaymentPage = () => {
                 pageName="Mua khóa học"
                 description="Xác nhận mua khóa học"
             />
-            <SectionTitle title={"Hóa Đơn"} center paragraph={"Ngày mua: " + new Date().toLocaleDateString()} mb="70px" />
-            <Invoice course={course} user={user} />
+            <SectionTitle title={"Hóa Đơn"} center paragraph={"Ngày tạo: " + new Date().toLocaleDateString()} mb="70px" />
+            <Invoice course={course} />
         </>
     )
 }

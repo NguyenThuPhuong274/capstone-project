@@ -20,13 +20,11 @@ const PaymentResultPage = () => {
     const payment = useSelector((state) => state.payment.data);
 
     let flag = paymentStatus;
-
     React.useEffect(() => {
         if (flag === true && payment !== null) {
             if (paymentStatus === true) {
                 dispatch(insertPayment(payment));
                 dispatch(insertUserCourse({ email: payment.email, course_id: payment.course_id, enrolled_date: payment.created_date }));
-
                 dispatch(setIsRefresh());
                 flag = false;
             }

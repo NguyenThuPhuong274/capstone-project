@@ -31,26 +31,26 @@ const AdminCourseDetails = ({ course }) => {
     const [disableSubmit, setDisableSubmit] = React.useState(false);
 
     const [values, setValues] = React.useState({
-        course_id: course.course_id,
-        course_avatar_url: course.course_avatar_url,
-        course_name: course.course_name,
-        description: course.description,
-        duration: String(course.duration),
-        price: String(course.price),
-        status: course.status,
+        course_id: course?.course_id,
+        course_avatar_url: course?.course_avatar_url,
+        course_name: course?.course_name,
+        description: course?.description,
+        duration: String(course?.duration),
+        price: String(course?.price),
+        status: course?.status,
     });
 
 
 
     React.useEffect(() => {
         setValues({
-            course_id: course.course_id,
-            course_avatar_url: course.course_avatar_url,
-            course_name: course.course_name,
-            description: course.description,
-            duration: String(course.duration),
-            price: String(course.price),
-            status: course.status,
+            course_id: course?.course_id,
+            course_avatar_url: course?.course_avatar_url,
+            course_name: course?.course_name,
+            description: course?.description,
+            duration: String(course?.duration),
+            price: String(course?.price),
+            status: course?.status,
         });
     }, [course])
 
@@ -133,7 +133,7 @@ const AdminCourseDetails = ({ course }) => {
                             </Button>
                         </div>
                         <Stack direction={"column"} sx={{ overflow: "auto", height: 500 }} spacing={0}>
-                            {course.chapters.map((chapter, key) => {
+                            {course?.chapters.map((chapter, key) => {
                                 return (
                                     <div key={key}>
                                         <CourseChapter  setCurrentChapter={setCurrentChapter} setActionTypeChapter={setActionTypeChapter} setIsAddChapter={setIsAddChapter} chapter={chapter} />
@@ -142,7 +142,7 @@ const AdminCourseDetails = ({ course }) => {
                             })}
                         </Stack>
 
-                        <CourseChapterModal currentChapter={currentChapter} setCurrentChapter={setCurrentChapter} actionTypeChapter={actionTypeChapter} courseId={course.course_id} isOpenModal={isAddChapter} handleCloseModal={handleCloseAddModal} />
+                        <CourseChapterModal currentChapter={currentChapter} setCurrentChapter={setCurrentChapter} actionTypeChapter={actionTypeChapter} courseId={course?.course_id} isOpenModal={isAddChapter} handleCloseModal={handleCloseAddModal} />
                     </Stack>
                 </CardContent>
             </Card>

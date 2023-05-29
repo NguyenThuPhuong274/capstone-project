@@ -4,14 +4,14 @@ const FeedbackController = {
     getFeedbacks: async (req, res) => {
         const queryString = "SELECT * FROM [Feedback]";
         const data = await executeQuery(queryString);
-        console.log(data);
+        // console.log(data);
         return res.json(data);
     },
     getFeedbackById: async (req, res) => {
         const feedback = req.body;
         const queryString = `SELECT * FROM [Feedback] WHERE [course_id] = '${feedback.course_id}' AND [email] = '${feedback.email}'`;
         const data = await executeQuery(queryString);
-        console.log("feedback: ", data[0]);
+        // console.log("feedback: ", data[0]);
         return res.json(data[0]);
     },
     insertFeedback: async (req, res) => {
@@ -35,13 +35,13 @@ const FeedbackController = {
                               '${feedback.user_avatar_url}', 
                                '${feedback.star}')`;
         const data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ feedback: feedback, rowAffected: data });
     },
     updateFeedback: async (req, res) => {
         const feedback = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Feedback]
                  SET [message] =  N'${feedback.message}'

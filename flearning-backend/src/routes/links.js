@@ -244,7 +244,7 @@ export const Links = [
   },
   {
     route: CONSTANT_ROUTE.MANAGE_PAYMENT + "/get",
-    method: "get",
+    method: "post",
     handleAction: PaymentController.getPayments,
   },
 

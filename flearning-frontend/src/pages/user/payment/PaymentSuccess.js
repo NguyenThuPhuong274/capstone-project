@@ -15,7 +15,7 @@ const PaymentSuccess = () => {
               <div className="mx-auto max-w-[530px] text-center">
                 <div className="mx-auto mb-9 text-center">
                 
-                  <div class="circle-icon animate-pulse">
+                  <div className="circle-icon animate-pulse">
                   <SvgIcon color="success" sx={{ fontSize: "200px" }}>
                     <CheckCircleOutlineIcon />
                   </SvgIcon>

@@ -4,7 +4,6 @@ import Support from "../../components/Support";
 import React from "react";
 import { getSupports } from "../../redux/supportSlice";
 import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
-import VNPayComponent from "../../components/VNPayment";
 
 const SupportPage = () => {
 

@@ -68,22 +68,27 @@ const PaymentController = {
         let  querystring = `INSERT INTO [dbo].[Payment]
                                     ([email]
                                     ,[course_id]
+                                    ,[course_name]
+                                    ,[phone]
+                                    ,[address]
                                     ,[amount]
                                     ,[created_date])
                             VALUES
                                     ('${payment.email}'
                                     ,'${payment.course_id}'
+                                    ,N'${payment.course_name}'
+                                    ,N'${payment.phone}'
+                                    ,N'${payment.address}'
                                     ,'${payment.price}'
                                     ,'${payment.created_date}')`
         let data = await executeNonQuery(querystring);
-        console.log(data);
+        // console.log(data);
         res.json({ rowEffected: data });
     },
     getPayments: async (req, res) => {
         const payment = req.body;
-        const querystring = `SELECT * FROM [Payment] WHERE [email] = ${payment.email}`;
+        const querystring = `SELECT * FROM [Payment] WHERE [email] = '${payment.email}'`;
         const data = await executeQuery(querystring);
-        console.log(data);
         res.json(data);
     }
 }

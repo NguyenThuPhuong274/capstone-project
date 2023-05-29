@@ -80,7 +80,7 @@ const CourseController = {
     let queryString = `SELECT * FROM [Course] WHERE [course_id] in (SELECT [course_id] FROM [User_Course] WHERE [email] = '${user.email}') OR [price] = 0`;
 
     let courses = await executeQuery(queryString);
-    console.log("courses", courses);
+    // console.log("courses", courses);
     return res.json(courses);
   },
   getCourseById: async (req, res) => {
@@ -98,9 +98,9 @@ const CourseController = {
   },
   insertCourse: async (req, res) => {
     const course = req.body;
-    console.log("course is being inserted", course);
+    // console.log("course is being inserted", course);
     const price = parseFloat(course.price.replace("₫", "").replace(".", ""));
-    console.log(price);
+    // console.log(price);
     const duration = parseInt(course.duration);
     let queryString = `INSERT INTO [dbo].[Course]
                             ([course_name]
@@ -144,7 +144,6 @@ const CourseController = {
     const course = req.body;
     // console.log(req.body);
     const price = parseFloat(course.price.replace(/\./g, "").replace("₫", ""));
-    console.log(price);
     const duration = parseInt(course.duration);
     const queryString = `UPDATE [dbo].[Course]
                  SET [course_name] = N'${course.course_name}'

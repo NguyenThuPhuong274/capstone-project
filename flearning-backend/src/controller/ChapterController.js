@@ -5,7 +5,7 @@ const LessonController = {
 
     insertChapter: async (req, res) => {
         const chapter = req.body;
-        console.log("chapter is being inserted", chapter);
+        // console.log("chapter is being inserted", chapter);
         let queryString = `INSERT INTO [dbo].[Chapter]
                             ([chapter_name]
                               ,[description]
@@ -16,13 +16,13 @@ const LessonController = {
                               N'${chapter.description}', 
                               '${chapter.course_id}')`;
         const data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ chapter: chapter, rowAffected: data });
     },
     updateChapter: async (req, res) => {
         const chapter = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Chapter]
                  SET [chapter_name] =  N'${chapter.chapter_name}'
@@ -37,7 +37,7 @@ const LessonController = {
     },
     deleteChapter: async (req, res) => {
         const chapter = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         let queryString = `DELETE FROM [Lesson_Done] WHERE [chapter_id] = '${chapter.chapter_id}'`;
         let data = await executeNonQuery(queryString);

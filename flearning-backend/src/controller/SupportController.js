@@ -18,13 +18,13 @@ const SupportController = {
                             (N'${support.support_name}',
                               N'${support.message}')`;
         const data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ support: support, rowAffected: data });
     },
     updateSupport: async (req, res) => {
         const support = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Support]
                  SET [support_name] = N'${support.support_name}'
@@ -39,7 +39,7 @@ const SupportController = {
     },
     deleteSupport: async (req, res) => {
         const support = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         const queryString = `DELETE FROM [Support] WHERE [support_id] =  ${support.support_id}`;
         const data = await executeNonQuery(queryString);

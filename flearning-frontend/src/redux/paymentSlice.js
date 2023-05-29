@@ -23,33 +23,33 @@ const paymentSlice = createSlice({
         data: null,
         list: [],
         url: '',
-        status: false
+        isRefresh: false,
     },
     reducers: {
         resetPayment: (state, action) => {
             state.data = null;
             state.url = '';
-            state.status = false;
-        }
+            state.go_to_payment = 0;
+            localStorage.removeItem("goToPayment");
+        },
+
     },
     extraReducers: (builder) => {
-
         builder.addCase(createPayment.fulfilled, (state, action) => {
             const { data, url } = action.payload;
             state.url = url;
             state.data = data;
-            // toast.success("Tạo thanh toán thành công");
         });
         builder.addCase(insertPayment.fulfilled, (state, action) => {
             state.data = null;
             state.url = '';
-            state.status = true;
+            state.status = 0;
+            state.isRefresh = true;
         });
-
         builder.addCase(getPayments.fulfilled, (state, action) => {
             state.list = action.payload;
+            state.isRefresh = false;
         });
-
     },
 });
 

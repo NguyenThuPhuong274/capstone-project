@@ -5,7 +5,7 @@ const ContactController = {
     getContacts: async (req, res) => {
         const queryString = "SELECT * FROM [Contact]";
         const data = await executeQuery(queryString);
-        console.log("contacts: ", data);
+        // console.log("contacts: ", data);
         return res.json(data);
     },
     insertContact: async (req, res) => {
@@ -23,13 +23,13 @@ const ContactController = {
                                     0, 
                                     N'${contact.request_message}')`;
         const data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ contact: contact, rowAffected: data });
     },
     updateContact: async (req, res) => {
         const contact = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         const queryString = `UPDATE [dbo].[Contact]
                  SET [response_date] = '${contact.response_date}'

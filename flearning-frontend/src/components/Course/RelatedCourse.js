@@ -42,7 +42,7 @@ const RelatedCourse = ({
                                 <SvgIcon color="primary">
                                     <InfoIcon />
                                 </SvgIcon>
-                                <div> {description}</div>
+                                <div className="leading-snug "> {description}</div>
                             </Stack>
                         </p>
                         <p className="text-xs font-medium text-body-color">
@@ -51,7 +51,7 @@ const RelatedCourse = ({
                                 <SvgIcon color="primary">
                                     <AttachMoneyIcon />
                                 </SvgIcon>
-                                <div>
+                                <div className="leading-snug">
                                     {new Intl.NumberFormat('vi-VN').format(Number(price)) + '₫'}
                                 </div>
                             </Stack>

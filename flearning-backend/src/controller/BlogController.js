@@ -21,7 +21,7 @@ const BlogController = {
         for (let i = 0; i < data.length; i++) {
             if (data[i] !== 0) {
                 let blog = await handleGetBlogDetails(data[i]).then((response) => {
-                    console.log(" data.length: ", data.length);
+                    // console.log(" data.length: ", data.length);
                     return response;
                 });
                 blogs.push(blog);
@@ -52,14 +52,14 @@ const BlogController = {
         for (let i = 0; i < data.length; i++) {
             if (data[i] !== 0) {
                 let blog = await handleGetBlogDetails(data[i]).then((response) => {
-                    console.log(" data.length: ", data.length);
+                    // console.log(" data.length: ", data.length);
                     return response;
                 });
                 blogs.push(blog);
             }
         }
 
-        console.log(blogs);
+        // console.log(blogs);
 
         return res.json(blogs[0]);
     },
@@ -81,7 +81,7 @@ const BlogController = {
                                     N'${blog.blog_description}', 
                                     '${blog.status}')`;
         const data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ blog: blog, rowAffected: data });
     },
@@ -95,7 +95,7 @@ const BlogController = {
                                 ,[status] =  '${blog.status}'
                             WHERE [blog_id] = '${blog.blog_id}'`
         const data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ blog: blog, rowAffected: data });
     },
@@ -109,7 +109,7 @@ const BlogController = {
         queryString = `DELETE FROM [Blog]
                             WHERE [blog_id] = '${blog.blog_id}'`
         data = await executeNonQuery(queryString);
-        console.log(data);
+        // console.log(data);
 
         return res.json({ blog: blog, rowAffected: data });
     }
