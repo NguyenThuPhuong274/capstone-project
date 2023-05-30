@@ -27,13 +27,13 @@ const QuestionCard = ({ question, index, totalQuestion, handleSetValue, answers,
                    {showExplaination === true && question.explaination.trim() !== '' ?  <Typography className="overflow-auto h-[40px] text-red-600" >{"* Giải thích: " +  question.explaination}</Typography> : <></>}
                     <Stack direction={"column"} spacing={3}>
                         <Stack direction={"row"} spacing={3}>
-                            <Button disabled={answers ? true : false} onClick={() => handleChooseAnswer(1)} className="w-full h-[50px]" variant={answer === 1 ? "contained" : "outlined"}>{question.answer_1}</Button>
-                            <Button disabled={answers ? true : false} onClick={() => handleChooseAnswer(2)} className="w-full h-[50px]" variant={answer === 2 ? "contained" : "outlined"}>{question.answer_2}</Button>
+                            <Button sx={{textTransform: "unset"}} disabled={answers ? true : false} onClick={() => handleChooseAnswer(1)} className="w-full h-[50px]" variant={answer === 1 ? "contained" : "outlined"}>{question.answer_1}</Button>
+                            <Button sx={{textTransform: "unset"}} disabled={answers ? true : false} onClick={() => handleChooseAnswer(2)} className="w-full h-[50px]" variant={answer === 2 ? "contained" : "outlined"}>{question.answer_2}</Button>
 
                         </Stack>
                         <Stack direction={"row"} spacing={3}>
-                            <Button disabled={answers ? true : false} onClick={() => handleChooseAnswer(3)} className="w-full h-[50px]" variant={answer === 3 ? "contained" : "outlined"}>{question.answer_3}</Button>
-                            <Button disabled={answers ? true : false} onClick={() => handleChooseAnswer(4)} className="w-full h-[50px]" variant={answer === 4 ? "contained" : "outlined"}>{question.answer_4}</Button>
+                            <Button sx={{textTransform: "unset"}} disabled={answers ? true : false} onClick={() => handleChooseAnswer(3)} className="w-full h-[50px]" variant={answer === 3 ? "contained" : "outlined"}>{question.answer_3}</Button>
+                            <Button sx={{textTransform: "unset"}} disabled={answers ? true : false} onClick={() => handleChooseAnswer(4)} className="w-full h-[50px]" variant={answer === 4 ? "contained" : "outlined"}>{question.answer_4}</Button>
 
                         </Stack>
                     </Stack>

@@ -51,7 +51,7 @@ const blogCategorySlice = createSlice({
         builder.addCase(getBlogCategories.fulfilled, (state, action) => {
             state.data = action.payload;
             state.isRefresh = false;
-            console.log(action.payload);
+            // console.log(action.payload);
         });
 
 

@@ -244,7 +244,7 @@ const LessonDetails = ({ course, lessonsDone, testsDone, user, feedback }) => {
     console.log("feedback: ", feedbackValues);
 
     const handleTestDone = () => {
-        if (user) {
+        if (user && !testsDone.includes(currentTest?.test_id)) {
             dispatch(insertTestDone({ test_id: currentTest.test_id, course_id: course.course_id, email: user.email }));
             dispatch(setIsRefreshSpecific(true));
         }

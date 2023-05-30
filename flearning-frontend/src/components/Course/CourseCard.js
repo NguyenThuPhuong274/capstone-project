@@ -1,14 +1,98 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTE_CONSTANTS } from "../../constants/route.constants";
-import { useSelector } from "react-redux";
-import { SvgIcon } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, CircularProgress, SvgIcon, Typography } from "@mui/material";
 import EyeIcon from "@heroicons/react/24/solid/EyeIcon";
 import InfoIcon from '@mui/icons-material/Info';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { getLessonsDone } from "../../redux/lessonSlice";
+import { getTestsDone } from "../../redux/testSlice";
+import React from "react";
+
+
+function CircularProgressWithLabel(
+  props
+) {
+  return (
+    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+      <CircularProgress variant="determinate" {...props} />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography
+          variant="caption"
+          component="div"
+          color="text.secondary"
+        >{`${Math.round(props.value)}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
 
 const CourseCard = ({ course }) => {
   const userCourses = useSelector((state) => state.course.userCourses);
   const courseFound = userCourses?.find((c) => c.course_id === course.course_id);
+const dispatch = useDispatch();
+  const lessonsDone = useSelector((state) => state.lesson.lessons_done);
+  const testsDone = useSelector((state) => state.test.tests_done);
+  const user = useSelector((state) => state.authen.user);
+
+  React.useEffect(() => {
+    dispatch(getLessonsDone({ email: user?.email, course_id: course.course_id }));
+    dispatch(getTestsDone({ email: user?.email, course_id: course.course_id }));
+  }, [])
+
+
+  const getTestProgress = () => {
+    const totalTest = course?.tests?.length;
+    const currentTotalTest = testsDone?.length;
+
+    return currentTotalTest + "/" + totalTest;
+  }
+
+
+
+  const getLessonProgress = () => {
+    let totalLessons = 0;
+
+    const chapters = course?.chapter;
+    for (let i = 0; i < chapters.length; i++) {
+      totalLessons += chapters[i]?.lessons.length;
+    }
+
+    return lessonsDone.length + "/" + totalLessons;
+  }
+
+
+  const getProgress = () => {
+    let totalProgress = 0;
+
+    const chapters = course?.chapters;
+    for (let i = 0; i < chapters?.length; i++) {
+      totalProgress += chapters[i]?.lessons.length;
+    }
+
+    if(course?.tests) {
+      totalProgress += course?.tests?.length;
+    }
+
+    const currentProgress = lessonsDone.length + testsDone.length;
+
+console.log(course);
+    return Math.floor(currentProgress / totalProgress);
+  }
+
+
   const isBought = ((courseFound !== null && courseFound !== undefined) || course.price === 0) ? true : false;
 
   const navigate = useNavigate();
@@ -43,6 +127,7 @@ const CourseCard = ({ course }) => {
               <>
                 <span className="amount">{formattedPrice}</span>
                 <span className="time text-lg text-body-color"> / {duration} tháng</span>
+                <CircularProgressWithLabel value={getProgress()} />
               </>}
           </h3>
           {/* <Link to={link}
@@ -91,7 +176,7 @@ const CourseCard = ({ course }) => {
                 className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
                 <SvgIcon >
                   <AttachMoneyIcon />
-                </SvgIcon>   Mua 
+                </SvgIcon>   Mua
               </button></>
           }
 

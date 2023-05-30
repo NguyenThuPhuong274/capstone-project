@@ -69,7 +69,7 @@ const lessonSlice = createSlice({
             state.isRefresh = false;
         });
         builder.addCase(getLessonsDone.fulfilled, (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.lessons_done = action.payload;
         });
     },

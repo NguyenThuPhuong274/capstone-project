@@ -19,23 +19,37 @@ const Transition = React.forwardRef(function Transition(
 const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers, handleTestDone }) => {
     const [openReturnConfirm, setOpenReturnConfirm] = React.useState(false);
     const [openSubmitConfirm, setOpenSubmitConfirm] = React.useState(false);
+    const [isTimeOut, setOpenTimeOut] = React.useState(false);
     const [countdown, setCountdown] = React.useState(test?.duration * 60);
 
     const [answers, setAnswers] = React.useState([]);
 
     React.useEffect(() => {
-        const intervalId = setInterval(() => {
-            setCountdown(countdown => countdown - 1);
-        }, 1000);
+        if (isOpen === true) {
+            const intervalId = setInterval(() => {
+                setCountdown(countdown => countdown - 1);
+            }, 1000);
 
-        return () => clearInterval(intervalId);
-    }, []);
+            return () => clearInterval(intervalId);
+        }
+    }, [isOpen]);
 
     React.useEffect(() => {
         if (countdown === 0) {
-            // Do something when the countdown is over
-        }
+            setOpenTimeOut(true);
+            setCountdown(0);
+        } 
     }, [countdown]);
+
+    const handleCloseTimeout = (value) => {
+        setOpenTimeOut(false);
+        setIsOpen(false);
+
+        setTestAnswers(answers);
+        setOpenTestResult(true);
+
+        handleTestDone();
+    }
 
     React.useEffect(() => {
         setCountdown(test?.duration * 60);
@@ -43,6 +57,7 @@ const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers
     }, [isOpen]);
 
     const formatTime = (seconds) => {
+      if(seconds >= 0) {
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
         const secs = seconds % 60;
@@ -50,6 +65,9 @@ const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers
         return [hours, minutes, secs]
             .map(time => time.toString().padStart(2, '0'))
             .join(':');
+      } else {
+        return "00:00:00";
+      }
     };
 
     const handleConfirmReturnAction = (value) => {
@@ -175,6 +193,13 @@ const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers
             isOpen={openSubmitConfirm}
             title={"Nộp bài kiểm tra"}
             description={"Bài kiểm tra sẽ được nộp? Bạn có muốn tiếp tục?"} handleAction={handleConfirmSubmitAction} />
+
+        <ConfirmDialog
+            isOpen={isTimeOut}
+            closeText="OK"
+            title={"Hết thời gian"}
+            disableClose={true}
+            description={"Thời gian làm bài đã kết thúc!"} handleAction={handleCloseTimeout} />
     </>
 }
 

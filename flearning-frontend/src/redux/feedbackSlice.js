@@ -50,7 +50,7 @@ const feedbackSlice = createSlice({
     });
     builder.addCase(getFeedbackById.fulfilled, (state, action) => {
       state.specific = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
       state.isRefresh = false;
     });
   },

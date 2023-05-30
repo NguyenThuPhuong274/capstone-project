@@ -89,9 +89,9 @@ const ListPayment = ({ data, user, courses }) => {
         setRowsPerPage(5);
 
         let endIndex = 5;
-        if (result.length < endIndex) endIndex = result.length;
+        if (result?.length < endIndex) endIndex = result?.length;
 
-        setPaymentsPagination(result.slice(0, endIndex))
+        setPaymentsPagination(result?.slice(0, endIndex))
     }, [searchTerm.value])
 
 
@@ -104,7 +104,7 @@ const ListPayment = ({ data, user, courses }) => {
         const idStr = new String(id);
 
         let str = "#00000";
-        const result = str.slice(0, str.length - idStr.length);
+        const result = str.slice(0, str?.length - idStr?.length);
         console.log(result);
         return result + id;
 
@@ -115,8 +115,8 @@ const ListPayment = ({ data, user, courses }) => {
         let count = 0;
         if (currentCourse !== null) {
             const chapters = currentCourse?.chapters;
-            for (let i = 0; i < chapters.length; i++) {
-                count += chapters[i].lessons.length;
+            for (let i = 0; i < chapters?.length; i++) {
+                count += chapters[i].lessons?.length;
             }
         }
         return count;

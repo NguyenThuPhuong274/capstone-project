@@ -1,7 +1,7 @@
 import { Dialog, Stack, DialogContent, DialogContentText, DialogTitle, Button, SvgIcon } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import ThumbUpAlt from '@mui/icons-material/ThumbUpAlt';
-const ConfirmDialog = ({ isOpen, title, description, handleAction }) => {
+const ConfirmDialog = ({ isOpen, title, description, handleAction, disableClose, closeText }) => {
 
     return <>
         <Dialog open={isOpen} >
@@ -12,17 +12,22 @@ const ConfirmDialog = ({ isOpen, title, description, handleAction }) => {
                         {description}
                     </DialogContentText>
                     <Stack direction={"row"} spacing={2}>
-                        <Button onClick={() => handleAction(false)} variant="contained" className="w-full absolute bottom-0" color="error" >
 
-                            <SvgIcon sx={{ mr: 1 }}>
-                                <CloseIcon />
-                            </SvgIcon> Hủy
-                        </Button>
+
+                        {disableClose === true ? <></> :
+                            <Button onClick={() => handleAction(false)} variant="contained" className="w-full absolute bottom-0" color="error" >
+
+                                <SvgIcon sx={{ mr: 1 }}>
+                                    <CloseIcon />
+                                </SvgIcon> Hủy
+                            </Button>}
+
+
                         <Button onClick={() => handleAction(true)} variant="contained" className="w-full absolute bottom-0" color="primary" >
 
                             <SvgIcon sx={{ mr: 1 }}>
                                 <ThumbUpAlt />
-                            </SvgIcon>  Tiếp tục
+                            </SvgIcon> {closeText ? closeText : " Tiếp tục" } 
                         </Button>
                     </Stack>
                 </Stack>

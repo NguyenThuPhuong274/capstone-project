@@ -60,7 +60,7 @@ const blogSlice = createSlice({
         builder.addCase(getBlogs.fulfilled, (state, action) => {
             state.data = action.payload;
             state.isRefresh = false;
-            console.log(action.payload);
+            // console.log(action.payload);
         });
         builder.addCase(getBlogById.fulfilled, (state, action) => {
             state.specific = action.payload;
